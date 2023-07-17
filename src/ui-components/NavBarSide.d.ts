@@ -5,7 +5,6 @@
  **************************************************************************/
 
 import * as React from "react";
-import { User } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { LogoWithTextProps } from "./LogoWithText";
 import { ButtonProps, FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
@@ -23,8 +22,7 @@ export declare type NavBarSideOverridesProps = {
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type NavBarSideProps = React.PropsWithChildren<Partial<FlexProps> & {
-    user?: User;
-    frame437?: React.ReactNode;
+    children?: React.ReactNode;
 } & {
     overrides?: NavBarSideOverridesProps | undefined | null;
 }>;

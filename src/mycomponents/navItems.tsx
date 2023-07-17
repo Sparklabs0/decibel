@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { BiHomeCircle, BiUserCircle, BiMessageSquareDetail } from 'react-icons/bi';
+import {  BiSolidDashboard } from 'react-icons/bi';
+import { BsPencilSquare } from 'react-icons/bs';
+import { FaNoteSticky } from 'react-icons/fa6';
+import { SiAudiomack } from 'react-icons/si';
 import styles from '../styles/NavItems.module.css';
+import { useTheme } from '@aws-amplify/ui-react';
 
 const NavItems = () => {
   const [hoverIndex, setHoverIndex] = useState(-1);
   const router = useRouter();
+  const  { tokens } = useTheme();
 
   const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: <BiHomeCircle /> },
-    { name: 'Profile', path: '/profile', icon: <BiUserCircle /> },
-    { name: 'Messages', path: '/messages', icon: <BiMessageSquareDetail /> },
+    { name: 'Dashboard', path: '/dashboard', icon: <BiSolidDashboard /> },
+    { name: 'Net Notes', path: '/new-notes', icon: <BsPencilSquare /> },
+    { name: 'Notes', path: '/notes', icon: <FaNoteSticky /> },
+    { name: 'Audio Files', path: '/audio-files', icon: <SiAudiomack />}
   ];
 
   return (

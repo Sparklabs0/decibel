@@ -6,11 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { getOverrideProps, useAuth } from "@aws-amplify/ui-react/internal";
 import LogoWithText from "./LogoWithText";
 import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
-  const { user, frame437, overrides, ...rest } = props;
+  const { children, overrides, ...rest } = props;
+  const authAttributes = useAuth().user?.attributes ?? {};
   return (
     <Flex
       gap="10px"
@@ -81,7 +82,7 @@ export default function NavBarSide(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            children={frame437}
+            children={children}
             {...getOverrideProps(overrides, "Frame 437")}
           ></View>
         </Flex>
@@ -141,7 +142,7 @@ export default function NavBarSide(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={user?.name}
+                children={authAttributes["name"]}
                 {...getOverrideProps(overrides, "Wesley Peck")}
               ></Text>
             </Flex>
