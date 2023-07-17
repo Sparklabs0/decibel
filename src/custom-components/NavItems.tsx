@@ -6,6 +6,7 @@ import { BsPencilSquare } from 'react-icons/bs';
 import { FaNoteSticky } from 'react-icons/fa6';
 import { SiAudiomack } from 'react-icons/si';
 import styles from '../styles/NavItems.module.css';
+import Link from 'next/link';
 
 const NavItems = () => {
   const [hoverIndex, setHoverIndex] = useState(-1);
@@ -22,7 +23,7 @@ const NavItems = () => {
   return (
     <div className={styles.navList}>
       {navItems.map((item, index) => (
-        <a
+        <Link
           key={item.name}
           href={item.path}
           className={`${styles.navItem} ${
@@ -33,7 +34,7 @@ const NavItems = () => {
         >
           <div className={styles.icon}>{item.icon}</div>
           <span>{item.name}</span>
-        </a>
+        </Link>
       ))}
     </div>
   );

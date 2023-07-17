@@ -25,8 +25,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <AmplifyProvider theme={studioTheme}>
       <Authenticator.Provider>
-        getLayout(
-        <Component {...pageProps} />)
+        {getLayout(<Component {...pageProps} />)}
       </Authenticator.Provider>
     </AmplifyProvider>
   );

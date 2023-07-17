@@ -17,6 +17,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+
 export default withAuthenticator(Layout, {
   loginMechanisms: ['email'],
   signUpAttributes: ['name', 'email'],
