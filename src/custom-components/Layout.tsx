@@ -10,13 +10,14 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.layout}>
       <div className={styles.navbar}>
-        <NavBarSide  children={<NavItems/>} />
+        <NavBarSide>
+          <NavItems />
+        </NavBarSide>
       </div>
       <div className={styles.content}>{children}</div>
     </div>
   );
 }
-
 
 export default withAuthenticator(Layout, {
   loginMechanisms: ['email'],
