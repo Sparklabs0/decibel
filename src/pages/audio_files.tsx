@@ -1,12 +1,12 @@
-import Layout from '@/custom-components/Layout';
-import React from 'react';
+import Layout from "@/custom-components/Layout";
+import React, { ReactElement } from "react";
 
 function AudioFiles() {
-  return (
-    <Layout>
-      <div>Audio Files</div>
-    </Layout>
-  );
+  return <div>Audio Files</div>;
 }
+
+AudioFiles.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
 
 export default AudioFiles;

@@ -14,9 +14,9 @@ const NavItems = () => {
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: <BiSolidDashboard /> },
-    { name: 'Net Notes', path: '/new-notes', icon: <BsPencilSquare /> },
+    { name: 'Net Notes', path: '/new_notes', icon: <BsPencilSquare /> },
     { name: 'Notes', path: '/notes', icon: <FaNoteSticky /> },
-    { name: 'Audio Files', path: '/audio-files', icon: <SiAudiomack /> },
+    { name: 'Audio Files', path: '/audio_files', icon: <SiAudiomack /> },
   ];
 
   return (

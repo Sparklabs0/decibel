@@ -1,12 +1,12 @@
-import Layout from '@/custom-components/Layout';
-import React from 'react';
+import Layout from "@/custom-components/Layout";
+import React, { ReactElement } from "react";
 
 function NewNotes() {
-  return (
-    <Layout>
-      <div>New Notes</div>
-    </Layout>
-  );
+  return <div>New Notes</div>;
 }
+
+NewNotes.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
 
 export default NewNotes;
