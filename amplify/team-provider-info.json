@@ -10,6 +10,11 @@
       "StackName": "amplify-hackathon-dev-155222",
       "StackId": "arn:aws:cloudformation:ap-south-1:615300157430:stack/amplify-hackathon-dev-155222/a7e5b1e0-23c2-11ee-8855-0223640e7e62",
       "AmplifyAppId": "d1hscxk0vegy6q"
+    },
+    "categories": {
+      "auth": {
+        "hackathon": {}
+      }
     }
   }
 }
