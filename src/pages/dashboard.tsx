@@ -1,4 +1,4 @@
-import Layout from '@/mycomponents/Layout';
+import Layout from '@/custom-components/Layout';
 // import NavItems from '@/mycomponents/NavItems';
 import NavBarSide from '@/ui-components/NavBarSide';
 import {

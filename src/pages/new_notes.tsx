@@ -1,4 +1,4 @@
-import Layout from '@/mycomponents/Layout';
+import Layout from '@/custom-components/Layout';
 import React from 'react';
 
 function NewNotes() {
