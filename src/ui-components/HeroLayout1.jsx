@@ -183,6 +183,7 @@ export default function HeroLayout1(props) {
             size="large"
             isDisabled={false}
             variation="primary"
+            nav="Default"
             children="Get started"
             {...getOverrideProps(overrides, "Button")}
           ></Button>

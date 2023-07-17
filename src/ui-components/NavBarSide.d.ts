@@ -5,44 +5,27 @@
  **************************************************************************/
 
 import * as React from "react";
+import { User } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { LogoWithTextProps } from "./LogoWithText";
-import { MyIconProps } from "./MyIcon";
-import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NavBarSideOverridesProps = {
     NavBarSide?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767087"?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767088"?: PrimitiveOverrideProps<FlexProps>;
     LogoWithText?: LogoWithTextProps;
-    "Frame 414"?: PrimitiveOverrideProps<FlexProps>;
-    "Frame 322"?: PrimitiveOverrideProps<FlexProps>;
-    icon39443712?: PrimitiveOverrideProps<FlexProps>;
-    MyIcon39443713?: MyIconProps;
-    label29767099?: PrimitiveOverrideProps<TextProps>;
-    Section?: PrimitiveOverrideProps<FlexProps>;
-    label29767101?: PrimitiveOverrideProps<TextProps>;
-    link29767107?: PrimitiveOverrideProps<FlexProps>;
-    icon39433565?: PrimitiveOverrideProps<FlexProps>;
-    MyIcon39433566?: MyIconProps;
-    label29767110?: PrimitiveOverrideProps<TextProps>;
-    link29767103?: PrimitiveOverrideProps<FlexProps>;
-    icon39433519?: PrimitiveOverrideProps<FlexProps>;
-    MyIcon39433520?: MyIconProps;
-    label29767106?: PrimitiveOverrideProps<TextProps>;
-    link29767111?: PrimitiveOverrideProps<FlexProps>;
-    icon39433544?: PrimitiveOverrideProps<FlexProps>;
-    MyIcon39433545?: MyIconProps;
-    label29767114?: PrimitiveOverrideProps<TextProps>;
-    "Frame 32129767135"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 437"?: PrimitiveOverrideProps<ViewProps>;
     "Frame 416"?: PrimitiveOverrideProps<FlexProps>;
     "Frame 415"?: PrimitiveOverrideProps<FlexProps>;
-    "Rectangle 1163"?: PrimitiveOverrideProps<ImageProps>;
     "Frame 32129767140"?: PrimitiveOverrideProps<FlexProps>;
     "Wesley Peck"?: PrimitiveOverrideProps<TextProps>;
-    MyIcon39173440?: MyIconProps;
+    Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type NavBarSideProps = React.PropsWithChildren<Partial<FlexProps> & {
+    user?: User;
+    frame437?: React.ReactNode;
+} & {
     overrides?: NavBarSideOverridesProps | undefined | null;
 }>;
 export default function NavBarSide(props: NavBarSideProps): React.ReactElement;

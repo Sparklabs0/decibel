@@ -1,0 +1,31 @@
+.navList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .navItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+  }
+  
+  .navItem .icon {
+    margin-right: 10px;
+  }
+  
+  .navItem:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .active {
+    color: #0070f3;
+  }
+  
+  .hovered {
+    background-color: #e0e0e0;
+  }
+  

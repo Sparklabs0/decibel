@@ -74,6 +74,7 @@ export default function DataRow(props) {
         size="small"
         isDisabled={false}
         variation="link"
+        nav="Default"
         children="Edit"
         {...getOverrideProps(overrides, "Button")}
       ></Button>

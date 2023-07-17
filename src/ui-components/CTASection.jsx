@@ -150,6 +150,7 @@ export default function CTASection(props) {
             size="default"
             isDisabled={false}
             variation="primary"
+            nav="Default"
             children="Sign me up"
             {...getOverrideProps(overrides, "Button")}
           ></Button>

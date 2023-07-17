@@ -5,19 +5,35 @@
  **************************************************************************/
 
 import * as React from "react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, PasswordFieldProps, TextFieldProps, TextProps } from "@aws-amplify/ui-react";
+export declare type ValidationResponse = {
+    hasError: boolean;
+    errorMessage?: string;
+};
+export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type SignUpInputValues = {
+    email?: string;
+    name?: string;
+};
+export declare type SignUpValidationValues = {
+    email?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
+};
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type SignupOverridesProps = {
-    Signup?: PrimitiveOverrideProps<FlexProps>;
-    "Signup To continue to Aperturs"?: PrimitiveOverrideProps<TextProps>;
-    "Frame 428"?: PrimitiveOverrideProps<FlexProps>;
-    TextField38635514?: PrimitiveOverrideProps<TextFieldProps>;
-    TextField38635516?: PrimitiveOverrideProps<TextFieldProps>;
-    PasswordField?: PrimitiveOverrideProps<PasswordFieldProps>;
-    Button?: PrimitiveOverrideProps<ButtonProps>;
+export declare type SignUpOverridesProps = {
+    SignUpGrid?: PrimitiveOverrideProps<GridProps>;
+    email?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type SignupProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: SignupOverridesProps | undefined | null;
-}>;
-export default function Signup(props: SignupProps): React.ReactElement;
+export declare type SignUpProps = React.PropsWithChildren<{
+    overrides?: SignUpOverridesProps | undefined | null;
+} & {
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: SignUpInputValues) => SignUpInputValues;
+    onSuccess?: (fields: SignUpInputValues) => void;
+    onError?: (fields: SignUpInputValues, errorMessage: string) => void;
+    onChange?: (fields: SignUpInputValues) => SignUpInputValues;
+    onValidate?: SignUpValidationValues;
+} & React.CSSProperties>;
+export default function SignUp(props: SignUpProps): React.ReactElement;

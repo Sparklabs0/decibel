@@ -6,120 +6,187 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Button,
-  Flex,
-  PasswordField,
-  Text,
-  TextField,
-} from "@aws-amplify/ui-react";
-export default function Signup(props) {
-  const { overrides, ...rest } = props;
+import { User } from "../models";
+import { fetchByPath, validateField } from "./utils";
+import { DataStore } from "aws-amplify";
+export default function SignUp(props) {
+  const {
+    clearOnSuccess = true,
+    onSuccess,
+    onError,
+    onSubmit,
+    onValidate,
+    onChange,
+    overrides,
+    ...rest
+  } = props;
+  const initialValues = {
+    email: "",
+    name: "",
+  };
+  const [email, setEmail] = React.useState(initialValues.email);
+  const [name, setName] = React.useState(initialValues.name);
+  const [errors, setErrors] = React.useState({});
+  const resetStateValues = () => {
+    setEmail(initialValues.email);
+    setName(initialValues.name);
+    setErrors({});
+  };
+  const validations = {
+    email: [{ type: "Required" }, { type: "Email" }],
+    name: [{ type: "Required" }],
+  };
+  const runValidationTasks = async (
+    fieldName,
+    currentValue,
+    getDisplayValue
+  ) => {
+    const value =
+      currentValue && getDisplayValue
+        ? getDisplayValue(currentValue)
+        : currentValue;
+    let validationResponse = validateField(value, validations[fieldName]);
+    const customValidator = fetchByPath(onValidate, fieldName);
+    if (customValidator) {
+      validationResponse = await customValidator(value, validationResponse);
+    }
+    setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
+    return validationResponse;
+  };
   return (
-    <Flex
-      gap="24px"
-      direction="column"
-      width="807px"
-      height="unset"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      position="relative"
-      boxShadow="0px 13px 16px rgba(0, 0.16388893127441406, 0.49166667461395264, 0.07999999821186066)"
-      borderRadius="10px"
-      padding="58px 48px 58px 48px"
-      backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "Signup")}
+    <Grid
+      as="form"
+      rowGap="15px"
+      columnGap="15px"
+      padding="20px"
+      onSubmit={async (event) => {
+        event.preventDefault();
+        let modelFields = {
+          email,
+          name,
+        };
+        const validationResponses = await Promise.all(
+          Object.keys(validations).reduce((promises, fieldName) => {
+            if (Array.isArray(modelFields[fieldName])) {
+              promises.push(
+                ...modelFields[fieldName].map((item) =>
+                  runValidationTasks(fieldName, item)
+                )
+              );
+              return promises;
+            }
+            promises.push(
+              runValidationTasks(fieldName, modelFields[fieldName])
+            );
+            return promises;
+          }, [])
+        );
+        if (validationResponses.some((r) => r.hasError)) {
+          return;
+        }
+        if (onSubmit) {
+          modelFields = onSubmit(modelFields);
+        }
+        try {
+          Object.entries(modelFields).forEach(([key, value]) => {
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
+            }
+          });
+          await DataStore.save(new User(modelFields));
+          if (onSuccess) {
+            onSuccess(modelFields);
+          }
+          if (clearOnSuccess) {
+            resetStateValues();
+          }
+        } catch (err) {
+          if (onError) {
+            onError(modelFields, err.message);
+          }
+        }
+      }}
+      {...getOverrideProps(overrides, "SignUp")}
       {...rest}
     >
-      <Text
-        fontFamily="Inter"
-        fontSize="20px"
-        fontWeight="400"
-        color="rgba(0,0,0,1)"
-        lineHeight="30px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="unset"
-        height="unset"
-        gap="unset"
-        alignItems="unset"
-        shrink="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Signup To continue to Aperturs"
-        {...getOverrideProps(overrides, "Signup To continue to Aperturs")}
-      ></Text>
-      <Flex
-        gap="24px"
-        direction="row"
-        width="unset"
-        height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        shrink="0"
-        alignSelf="stretch"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 428")}
-      >
-        <TextField
-          width="unset"
-          height="unset"
-          label="Full name"
-          grow="1"
-          shrink="1"
-          basis="0"
-          placeholder=""
-          size="default"
-          isDisabled={false}
-          labelHidden={false}
-          variation="default"
-          {...getOverrideProps(overrides, "TextField38635514")}
-        ></TextField>
-      </Flex>
       <TextField
-        width="unset"
-        height="unset"
-        label="Email address"
-        shrink="0"
-        alignSelf="stretch"
-        placeholder=""
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "TextField38635516")}
+        label="Email"
+        isRequired={true}
+        isReadOnly={false}
+        value={email}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email: value,
+              name,
+            };
+            const result = onChange(modelFields);
+            value = result?.email ?? value;
+          }
+          if (errors.email?.hasError) {
+            runValidationTasks("email", value);
+          }
+          setEmail(value);
+        }}
+        onBlur={() => runValidationTasks("email", email)}
+        errorMessage={errors.email?.errorMessage}
+        hasError={errors.email?.hasError}
+        {...getOverrideProps(overrides, "email")}
       ></TextField>
-      <PasswordField
-        width="unset"
-        height="unset"
-        label="Password"
-        shrink="0"
-        alignSelf="stretch"
-        placeholder=""
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        hideShowPassword={false}
-        {...getOverrideProps(overrides, "PasswordField")}
-      ></PasswordField>
-      <Button
-        width="unset"
-        height="unset"
-        shrink="0"
-        alignSelf="stretch"
-        boxShadow="0px 1px 2px rgba(0.007604166865348816, 0.10645833611488342, 0.30416667461395264, 0.05000000074505806)"
-        size="large"
-        isDisabled={false}
-        variation="primary"
-        children="SignUp"
-        {...getOverrideProps(overrides, "Button")}
-      ></Button>
-    </Flex>
+      <TextField
+        label="Name"
+        isRequired={true}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              name: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
+      ></TextField>
+      <Flex
+        justifyContent="space-between"
+        {...getOverrideProps(overrides, "CTAFlex")}
+      >
+        <Button
+          children="Clear"
+          type="reset"
+          onClick={(event) => {
+            event.preventDefault();
+            resetStateValues();
+          }}
+          {...getOverrideProps(overrides, "ClearButton")}
+        ></Button>
+        <Flex
+          gap="15px"
+          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
+        >
+          <Button
+            children="Submit"
+            type="submit"
+            variation="primary"
+            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, "SubmitButton")}
+          ></Button>
+        </Flex>
+      </Flex>
+    </Grid>
   );
 }

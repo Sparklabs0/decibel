@@ -152,6 +152,7 @@ export default function ProfileCard(props) {
         size="large"
         isDisabled={false}
         variation="primary"
+        nav="Default"
         children="View Profile"
         {...getOverrideProps(overrides, "Button")}
       ></Button>

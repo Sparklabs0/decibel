@@ -55,6 +55,7 @@ export default function Filters(props) {
         size="small"
         isDisabled={false}
         variation="default"
+        nav="Default"
         children="Clear"
         {...getOverrideProps(overrides, "Button")}
       ></Button>

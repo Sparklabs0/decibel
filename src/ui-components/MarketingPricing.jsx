@@ -429,6 +429,7 @@ export default function MarketingPricing(props) {
             size="large"
             isDisabled={false}
             variation="primary"
+            nav="Default"
             children="Get started"
             {...getOverrideProps(overrides, "Button29766686")}
           ></Button>
@@ -744,6 +745,7 @@ export default function MarketingPricing(props) {
             size="large"
             isDisabled={false}
             variation="primary"
+            nav="Default"
             children="Get started"
             {...getOverrideProps(overrides, "Button39393408")}
           ></Button>
@@ -1059,6 +1061,7 @@ export default function MarketingPricing(props) {
             size="large"
             isDisabled={false}
             variation="primary"
+            nav="Default"
             children="Get started"
             {...getOverrideProps(overrides, "Button39393624")}
           ></Button>

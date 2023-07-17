@@ -120,6 +120,7 @@ export default function ContactUs(props) {
         size="large"
         isDisabled={false}
         variation="primary"
+        nav="Default"
         children="Send message"
         {...getOverrideProps(overrides, "Button")}
       ></Button>

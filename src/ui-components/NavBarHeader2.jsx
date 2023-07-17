@@ -182,6 +182,7 @@ export default function NavBarHeader2(props) {
           size="default"
           isDisabled={false}
           variation="link"
+          nav="Default"
           children="Log in"
           {...getOverrideProps(overrides, "Button39493466")}
         ></Button>
@@ -192,6 +193,7 @@ export default function NavBarHeader2(props) {
           size="default"
           isDisabled={false}
           variation="primary"
+          nav="Default"
           children="Sign up"
           {...getOverrideProps(overrides, "Button39493467")}
         ></Button>

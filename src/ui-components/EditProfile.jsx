@@ -197,6 +197,7 @@ export default function EditProfile(props) {
           size="default"
           isDisabled={false}
           variation="primary"
+          nav="Default"
           children="Save"
           {...getOverrideProps(overrides, "Button")}
         ></Button>

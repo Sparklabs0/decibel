@@ -123,6 +123,7 @@ export default function MarketingFooter(props) {
             size="default"
             isDisabled={false}
             variation="default"
+            nav="Default"
             children="Subscribe"
             {...getOverrideProps(overrides, "Button")}
           ></Button>
