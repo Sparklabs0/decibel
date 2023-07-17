@@ -1,25 +1,20 @@
-import Layout from '@/mycomponents/layout';
-import NavItems from '@/mycomponents/navItems';
+import Layout from '@/mycomponents/Layout';
+// import NavItems from '@/mycomponents/NavItems';
 import NavBarSide from '@/ui-components/NavBarSide';
-import { withAuthenticator,WithAuthenticatorProps } from '@aws-amplify/ui-react'
-import React from 'react'
+import {
+  withAuthenticator,
+  WithAuthenticatorProps,
+} from '@aws-amplify/ui-react';
+import React from 'react';
 
-
-
-
-function Dashboard({user,signOut}:WithAuthenticatorProps) {
+function Dashboard({ user, signOut }: WithAuthenticatorProps) {
   return (
     <Layout>
-    <div>
-     <h1>Hello {user?.username}</h1>
-    </div>
+      <div>
+        <h1>Hello {user?.username}</h1>
+      </div>
     </Layout>
-  )
+  );
 }
 
-
-
-export default withAuthenticator(Dashboard,{
-    loginMechanisms: ['email'],
-    signUpAttributes: ['name','email'],
-})
+export default Dashboard;

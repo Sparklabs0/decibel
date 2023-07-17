@@ -1,26 +1,22 @@
-import { NavBarSide } from '@/ui-components'
-import React from 'react'
-import NavItems from './navItems'
-import { Flex, View, useTheme, withAuthenticator } from '@aws-amplify/ui-react'
-
+import { NavBarSide } from '@/ui-components';
+import { Flex, useTheme, View, withAuthenticator } from '@aws-amplify/ui-react';
+import React from 'react';
 // Layout.tsx
-
 import styles from '../styles/Layout.module.css';
+// import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.layout}>
       <div className={styles.navbar}>
-        <NavBarSide children={<NavItems />} />
+        <NavBarSide />
       </div>
       <div className={styles.content}>{children}</div>
     </div>
   );
 }
 
-
-
-export default withAuthenticator(Layout,{
+export default withAuthenticator(Layout, {
   loginMechanisms: ['email'],
-  signUpAttributes: ['name','email'],
-})
+  signUpAttributes: ['name', 'email'],
+});

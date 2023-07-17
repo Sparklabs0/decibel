@@ -1,12 +1,12 @@
 import Layout from '@/mycomponents/Layout';
 import React from 'react';
 
-function Notes() {
+function NewNotes() {
   return (
     <Layout>
-      <div>Notes</div>
+      <div>New Notes</div>
     </Layout>
   );
 }
 
-export default Notes;
+export default NewNotes;

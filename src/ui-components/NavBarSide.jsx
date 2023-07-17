@@ -6,12 +6,17 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps, useAuth } from "@aws-amplify/ui-react/internal";
+import {
+  getOverrideProps,
+  useAuth,
+  useAuthSignOutAction,
+} from "@aws-amplify/ui-react/internal";
 import LogoWithText from "./LogoWithText";
 import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};
+  const buttonOnClick = useAuthSignOutAction({ global: false });
   return (
     <Flex
       gap="10px"
@@ -156,6 +161,9 @@ export default function NavBarSide(props) {
             variation="primary"
             nav="Default"
             children="Sign Out"
+            onClick={() => {
+              buttonOnClick();
+            }}
             {...getOverrideProps(overrides, "Button")}
           ></Button>
         </Flex>

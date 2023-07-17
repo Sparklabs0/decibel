@@ -1,12 +1,12 @@
 import Layout from '@/mycomponents/Layout';
 import React from 'react';
 
-function Notes() {
+function AudioFiles() {
   return (
     <Layout>
-      <div>Notes</div>
+      <div>Audio Files</div>
     </Layout>
   );
 }
 
-export default Notes;
+export default AudioFiles;
