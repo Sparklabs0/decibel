@@ -2,14 +2,14 @@ import '@/styles/globals.css';
 import { studioTheme } from '@/ui-components/';
 import { AmplifyProvider, Authenticator, View } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import awsExports from '../aws-exports';
 import '../styles/globals.css';
 
-Auth.configure({ ...awsExports, ssr: true });
+Amplify.configure({ ...awsExports, ssr: true });
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
