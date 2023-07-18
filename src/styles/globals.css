@@ -1,6 +1,8 @@
 :root [data-amplify-theme] {
   --max-width: 1100px;
-  --border-radius: 12px;
+  --border-radius-large: 12px;
+  --border-radius-medium: 8px;
+  --border-radius-small: 4px;
   --font-family: 'Inter', sans-serif;
 
   --foreground-rgb: 0, 0, 0;

@@ -14,6 +14,9 @@ function Layout({ children }: { children: React.ReactNode }) {
               height: '100vh',
               borderRadius: '0',
             },
+            Button: {
+              borderRadius: '8px',
+            },
           }}
         >
           <NavItems />

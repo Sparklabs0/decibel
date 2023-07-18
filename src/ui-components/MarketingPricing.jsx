@@ -42,7 +42,7 @@ export default function MarketingPricing(props) {
           fontFamily="Inter"
           fontSize="16px"
           fontWeight="600"
-          color="rgba(49,112,61,1)"
+          color="rgba(4,52,149,1)"
           lineHeight="24px"
           textAlign="left"
           display="block"
@@ -151,7 +151,7 @@ export default function MarketingPricing(props) {
               fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
-              color="rgba(49,112,61,1)"
+              color="rgba(4,52,149,1)"
               lineHeight="30px"
               textAlign="center"
               display="block"
@@ -235,7 +235,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393324")}
             >
               <MyIcon
@@ -305,7 +305,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43139393330")}
             >
               <MyIcon
@@ -375,7 +375,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393348")}
             >
               <MyIcon
@@ -467,7 +467,7 @@ export default function MarketingPricing(props) {
               fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
-              color="rgba(49,112,61,1)"
+              color="rgba(4,52,149,1)"
               lineHeight="30px"
               textAlign="center"
               display="block"
@@ -551,7 +551,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393397")}
             >
               <MyIcon
@@ -621,7 +621,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43139393401")}
             >
               <MyIcon
@@ -691,7 +691,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393405")}
             >
               <MyIcon
@@ -783,7 +783,7 @@ export default function MarketingPricing(props) {
               fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
-              color="rgba(49,112,61,1)"
+              color="rgba(4,52,149,1)"
               lineHeight="30px"
               textAlign="center"
               display="block"
@@ -867,7 +867,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393613")}
             >
               <MyIcon
@@ -937,7 +937,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43139393617")}
             >
               <MyIcon
@@ -1007,7 +1007,7 @@ export default function MarketingPricing(props) {
               position="relative"
               borderRadius="8px"
               padding="8px 8px 8px 8px"
-              backgroundColor="rgba(199,239,202,1)"
+              backgroundColor="rgba(230,238,254,1)"
               {...getOverrideProps(overrides, "Frame 43039393621")}
             >
               <MyIcon
