@@ -10,7 +10,14 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.layout}>
       <div className={styles.navbar}>
-        <NavBarSide>
+        <NavBarSide
+          overrides={{
+            NavBarSide: {
+              height: '100vh',
+              borderRadius: '0',
+            },
+          }}
+        >
           <NavItems />
         </NavBarSide>
       </div>
