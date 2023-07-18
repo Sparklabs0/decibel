@@ -1,4 +1,5 @@
-import { useTheme } from '@aws-amplify/ui-react';
+import { useTheme, View } from '@aws-amplify/ui-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BiSolidDashboard } from 'react-icons/bi';
@@ -6,7 +7,6 @@ import { BsPencilSquare } from 'react-icons/bs';
 import { FaNoteSticky } from 'react-icons/fa6';
 import { SiAudiomack } from 'react-icons/si';
 import styles from '../styles/NavItems.module.css';
-import Link from 'next/link';
 
 const NavItems = () => {
   const [hoverIndex, setHoverIndex] = useState(-1);
@@ -21,7 +21,7 @@ const NavItems = () => {
   ];
 
   return (
-    <div className={styles.navList}>
+    <View className={styles.navList}>
       {navItems.map((item, index) => (
         <Link
           key={item.name}
@@ -32,11 +32,11 @@ const NavItems = () => {
           onMouseEnter={() => setHoverIndex(index)}
           onMouseLeave={() => setHoverIndex(-1)}
         >
-          <div className={styles.icon}>{item.icon}</div>
+          <View className={styles.icon}>{item.icon}</View>
           <span>{item.name}</span>
         </Link>
       ))}
-    </div>
+    </View>
   );
 };
 

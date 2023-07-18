@@ -52,7 +52,7 @@ function Home() {
         </Flex>
         <View height="100vh" overflow="hidden">
           {' '}
-          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+          <View style={{ width: '100%', height: '100%', position: 'relative' }}>
             <Image
               alt="display"
               src="/display_.webp"
@@ -60,7 +60,7 @@ function Home() {
               style={{ objectFit: 'cover' }}
               objectFit="cover"
             />
-          </div>
+          </View>
         </View>
       </Grid>
     </>

@@ -7,9 +7,10 @@ import NavItems from './NavItems';
 // import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const { tokens } = useTheme();
   return (
-    <div className={styles.layout}>
-      <div className={styles.navbar}>
+    <View className={styles.layout}>
+      <View className={styles.navbar}>
         <NavBarSide
           overrides={{
             NavBarSide: {
@@ -20,9 +21,14 @@ function Layout({ children }: { children: React.ReactNode }) {
         >
           <NavItems />
         </NavBarSide>
-      </div>
-      <div className={styles.content}>{children}</div>
-    </div>
+      </View>
+      <View
+        className={styles.content}
+        backgroundColor={tokens.colors.background.tertiary}
+      >
+        {children}
+      </View>
+    </View>
   );
 }
 

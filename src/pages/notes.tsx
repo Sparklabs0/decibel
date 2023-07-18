@@ -1,8 +1,9 @@
-import Layout from "@/custom-components/Layout";
-import React, { ReactElement } from "react";
+import Layout from '@/custom-components/Layout';
+import { View } from '@aws-amplify/ui-react';
+import React, { ReactElement } from 'react';
 
 function Notes() {
-  return <div>Notes</div>;
+  return <View>Notes</View>;
 }
 
 Notes.getLayout = function getLayout(page: ReactElement) {
