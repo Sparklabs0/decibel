@@ -11,8 +11,7 @@ import {
   useAuth,
   useAuthSignOutAction,
 } from "@aws-amplify/ui-react/internal";
-import LogoWithText from "./LogoWithText";
-import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};
@@ -61,36 +60,9 @@ export default function NavBarSide(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 32px 0px 32px"
+          children={children}
           {...getOverrideProps(overrides, "Frame 32129767088")}
-        >
-          <LogoWithText
-            width="127.88px"
-            height="18.91px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            color="brand"
-            {...getOverrideProps(overrides, "LogoWithText")}
-          ></LogoWithText>
-          <View
-            width="243px"
-            height="369px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            overflow="hidden"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            children={children}
-            {...getOverrideProps(overrides, "Frame 437")}
-          ></View>
-        </Flex>
+        ></Flex>
         <Flex
           gap="4px"
           direction="row"

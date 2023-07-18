@@ -6,8 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { LogoWithTextProps } from "./LogoWithText";
 import { ButtonProps, FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+import { LogoWithTextProps } from "./LogoWithText";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NavBarSideOverridesProps = {
     NavBarSide?: PrimitiveOverrideProps<FlexProps>;
