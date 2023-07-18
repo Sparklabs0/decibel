@@ -7,13 +7,14 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ButtonProps, FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
-import { LogoWithTextProps } from "./LogoWithText";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NavBarSideOverridesProps = {
     NavBarSide?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767087"?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767088"?: PrimitiveOverrideProps<FlexProps>;
-    LogoWithText?: LogoWithTextProps;
+    "Slice 1"?: PrimitiveOverrideProps<ViewProps>;
+    Spark?: PrimitiveOverrideProps<TextProps>;
+    "Slice 2"?: PrimitiveOverrideProps<ViewProps>;
     "Frame 437"?: PrimitiveOverrideProps<ViewProps>;
     "Frame 416"?: PrimitiveOverrideProps<FlexProps>;
     "Frame 415"?: PrimitiveOverrideProps<FlexProps>;

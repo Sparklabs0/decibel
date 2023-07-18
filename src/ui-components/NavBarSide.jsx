@@ -11,7 +11,7 @@ import {
   useAuth,
   useAuthSignOutAction,
 } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};
@@ -60,9 +60,46 @@ export default function NavBarSide(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 32px 0px 32px"
-          children={children}
           {...getOverrideProps(overrides, "Frame 32129767088")}
-        ></Flex>
+        >
+          <View {...getOverrideProps(overrides, "Slice 1")}></View>
+          <Text
+            fontFamily="Inter"
+            fontSize="20px"
+            fontWeight="700"
+            color="rgba(0,0,0,1)"
+            lineHeight="24.204544067382812px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Spark"
+            {...getOverrideProps(overrides, "Spark")}
+          ></Text>
+          <View {...getOverrideProps(overrides, "Slice 2")}></View>
+          <View
+            width="243px"
+            height="369px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            overflow="hidden"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            children={children}
+            {...getOverrideProps(overrides, "Frame 437")}
+          ></View>
+        </Flex>
         <Flex
           gap="4px"
           direction="row"
