@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "User": {
-            "name": "User",
+        "Notes": {
+            "name": "Notes",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,18 +10,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
+                "text": {
+                    "name": "text",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -42,7 +35,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "Notes",
             "attributes": [
                 {
                     "type": "model",
@@ -70,5 +63,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "f1d9171cfa04301b3f16775bf20c7d82"
+    "version": "2f90b4f88d35603797cbd09d5a21caf1"
 };

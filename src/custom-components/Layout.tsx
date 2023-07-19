@@ -6,7 +6,7 @@ import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <View className={styles.layout}>
+    <View className={styles.layout} height="100vh">
       <View className={styles.navbar}>
         <NavBarSide
           overrides={{

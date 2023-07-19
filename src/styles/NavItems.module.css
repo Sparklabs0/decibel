@@ -41,6 +41,15 @@
   background-color: var(--amplify-colors-brand-primary-80);
   color: var(--amplify-colors-brand-primary-10);
 }
+
+.navItem .desc {
+  color: var(--amplify-colors-neutral-60);
+}
+
+.navItem.active .desc {
+  color: var(--amplify-colors-neutral-40);
+}
+
 /* 
 .hovered {
   background-color: red;

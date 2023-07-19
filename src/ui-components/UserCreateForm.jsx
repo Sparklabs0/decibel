@@ -6,11 +6,184 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { User } from "../models";
+import {
+  Autocomplete,
+  Badge,
+  Button,
+  Divider,
+  Flex,
+  Grid,
+  Icon,
+  ScrollView,
+  Text,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
+import {
+  getOverrideProps,
+  useDataStoreBinding,
+} from "@aws-amplify/ui-react/internal";
+import { User, Notes as Notes0 } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
+function ArrayField({
+  items = [],
+  onChange,
+  label,
+  inputFieldRef,
+  children,
+  hasError,
+  setFieldValue,
+  currentFieldValue,
+  defaultFieldValue,
+  lengthLimit,
+  getBadgeText,
+  errorMessage,
+}) {
+  const labelElement = <Text>{label}</Text>;
+  const {
+    tokens: {
+      components: {
+        fieldmessages: { error: errorStyles },
+      },
+    },
+  } = useTheme();
+  const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
+  const [isEditing, setIsEditing] = React.useState();
+  React.useEffect(() => {
+    if (isEditing) {
+      inputFieldRef?.current?.focus();
+    }
+  }, [isEditing]);
+  const removeItem = async (removeIndex) => {
+    const newItems = items.filter((value, index) => index !== removeIndex);
+    await onChange(newItems);
+    setSelectedBadgeIndex(undefined);
+  };
+  const addItem = async () => {
+    if (
+      currentFieldValue !== undefined &&
+      currentFieldValue !== null &&
+      currentFieldValue !== "" &&
+      !hasError
+    ) {
+      const newItems = [...items];
+      if (selectedBadgeIndex !== undefined) {
+        newItems[selectedBadgeIndex] = currentFieldValue;
+        setSelectedBadgeIndex(undefined);
+      } else {
+        newItems.push(currentFieldValue);
+      }
+      await onChange(newItems);
+      setIsEditing(false);
+    }
+  };
+  const arraySection = (
+    <React.Fragment>
+      {!!items?.length && (
+        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+          {items.map((value, index) => {
+            return (
+              <Badge
+                key={index}
+                style={{
+                  cursor: "pointer",
+                  alignItems: "center",
+                  marginRight: 3,
+                  marginTop: 3,
+                  backgroundColor:
+                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                }}
+                onClick={() => {
+                  setSelectedBadgeIndex(index);
+                  setFieldValue(items[index]);
+                  setIsEditing(true);
+                }}
+              >
+                {getBadgeText ? getBadgeText(value) : value.toString()}
+                <Icon
+                  style={{
+                    cursor: "pointer",
+                    paddingLeft: 3,
+                    width: 20,
+                    height: 20,
+                  }}
+                  viewBox={{ width: 20, height: 20 }}
+                  paths={[
+                    {
+                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
+                      stroke: "black",
+                    },
+                  ]}
+                  ariaLabel="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    removeItem(index);
+                  }}
+                />
+              </Badge>
+            );
+          })}
+        </ScrollView>
+      )}
+      <Divider orientation="horizontal" marginTop={5} />
+    </React.Fragment>
+  );
+  if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
+    return (
+      <React.Fragment>
+        {labelElement}
+        {arraySection}
+      </React.Fragment>
+    );
+  }
+  return (
+    <React.Fragment>
+      {labelElement}
+      {isEditing && children}
+      {!isEditing ? (
+        <>
+          <Button
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            Add item
+          </Button>
+          {errorMessage && hasError && (
+            <Text color={errorStyles.color} fontSize={errorStyles.fontSize}>
+              {errorMessage}
+            </Text>
+          )}
+        </>
+      ) : (
+        <Flex justifyContent="flex-end">
+          {(currentFieldValue || isEditing) && (
+            <Button
+              children="Cancel"
+              type="button"
+              size="small"
+              onClick={() => {
+                setFieldValue(defaultFieldValue);
+                setIsEditing(false);
+                setSelectedBadgeIndex(undefined);
+              }}
+            ></Button>
+          )}
+          <Button
+            size="small"
+            variation="link"
+            isDisabled={hasError}
+            onClick={addItem}
+          >
+            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+          </Button>
+        </Flex>
+      )}
+      {arraySection}
+    </React.Fragment>
+  );
+}
 export default function UserCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -25,18 +198,43 @@ export default function UserCreateForm(props) {
   const initialValues = {
     email: "",
     name: "",
+    Notes: [],
   };
   const [email, setEmail] = React.useState(initialValues.email);
   const [name, setName] = React.useState(initialValues.name);
+  const [Notes, setNotes] = React.useState(initialValues.Notes);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setEmail(initialValues.email);
     setName(initialValues.name);
+    setNotes(initialValues.Notes);
+    setCurrentNotesValue(undefined);
+    setCurrentNotesDisplayValue("");
     setErrors({});
+  };
+  const [currentNotesDisplayValue, setCurrentNotesDisplayValue] =
+    React.useState("");
+  const [currentNotesValue, setCurrentNotesValue] = React.useState(undefined);
+  const NotesRef = React.createRef();
+  const getIDValue = {
+    Notes: (r) => JSON.stringify({ id: r?.id }),
+  };
+  const NotesIdSet = new Set(
+    Array.isArray(Notes)
+      ? Notes.map((r) => getIDValue.Notes?.(r))
+      : getIDValue.Notes?.(Notes)
+  );
+  const notesRecords = useDataStoreBinding({
+    type: "collection",
+    model: Notes0,
+  }).items;
+  const getDisplayValue = {
+    Notes: (r) => `${r?.text ? r?.text + " - " : ""}${r?.id}`,
   };
   const validations = {
     email: [{ type: "Required" }, { type: "Email" }],
     name: [{ type: "Required" }],
+    Notes: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -66,19 +264,28 @@ export default function UserCreateForm(props) {
         let modelFields = {
           email,
           name,
+          Notes,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
                 ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
+                  runValidationTasks(
+                    fieldName,
+                    item,
+                    getDisplayValue[fieldName]
+                  )
                 )
               );
               return promises;
             }
             promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
+              runValidationTasks(
+                fieldName,
+                modelFields[fieldName],
+                getDisplayValue[fieldName]
+              )
             );
             return promises;
           }, [])
@@ -95,7 +302,25 @@ export default function UserCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new User(modelFields));
+          const modelFieldsToSave = {
+            email: modelFields.email,
+            name: modelFields.name,
+          };
+          const user = await DataStore.save(new User(modelFieldsToSave));
+          const promises = [];
+          promises.push(
+            ...Notes.reduce((promises, original) => {
+              promises.push(
+                DataStore.save(
+                  Notes.copyOf(original, (updated) => {
+                    updated.userID = user.id;
+                  })
+                )
+              );
+              return promises;
+            }, [])
+          );
+          await Promise.all(promises);
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -122,6 +347,7 @@ export default function UserCreateForm(props) {
             const modelFields = {
               email: value,
               name,
+              Notes,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -147,6 +373,7 @@ export default function UserCreateForm(props) {
             const modelFields = {
               email,
               name: value,
+              Notes,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -161,6 +388,79 @@ export default function UserCreateForm(props) {
         hasError={errors.name?.hasError}
         {...getOverrideProps(overrides, "name")}
       ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              email,
+              name,
+              Notes: values,
+            };
+            const result = onChange(modelFields);
+            values = result?.Notes ?? values;
+          }
+          setNotes(values);
+          setCurrentNotesValue(undefined);
+          setCurrentNotesDisplayValue("");
+        }}
+        currentFieldValue={currentNotesValue}
+        label={"Notes"}
+        items={Notes}
+        hasError={errors?.Notes?.hasError}
+        errorMessage={errors?.Notes?.errorMessage}
+        getBadgeText={getDisplayValue.Notes}
+        setFieldValue={(model) => {
+          setCurrentNotesDisplayValue(
+            model ? getDisplayValue.Notes(model) : ""
+          );
+          setCurrentNotesValue(model);
+        }}
+        inputFieldRef={NotesRef}
+        defaultFieldValue={""}
+      >
+        <Autocomplete
+          label="Notes"
+          isRequired={false}
+          isReadOnly={false}
+          placeholder="Search Notes"
+          value={currentNotesDisplayValue}
+          options={notesRecords
+            .filter((r) => !NotesIdSet.has(getIDValue.Notes?.(r)))
+            .map((r) => ({
+              id: getIDValue.Notes?.(r),
+              label: getDisplayValue.Notes?.(r),
+            }))}
+          onSelect={({ id, label }) => {
+            setCurrentNotesValue(
+              notesRecords.find((r) =>
+                Object.entries(JSON.parse(id)).every(
+                  ([key, value]) => r[key] === value
+                )
+              )
+            );
+            setCurrentNotesDisplayValue(label);
+            runValidationTasks("Notes", label);
+          }}
+          onClear={() => {
+            setCurrentNotesDisplayValue("");
+          }}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.Notes?.hasError) {
+              runValidationTasks("Notes", value);
+            }
+            setCurrentNotesDisplayValue(value);
+            setCurrentNotesValue(undefined);
+          }}
+          onBlur={() => runValidationTasks("Notes", currentNotesDisplayValue)}
+          errorMessage={errors.Notes?.errorMessage}
+          hasError={errors.Notes?.hasError}
+          ref={NotesRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "Notes")}
+        ></Autocomplete>
+      </ArrayField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -1,4 +1,4 @@
-import { useTheme, View } from '@aws-amplify/ui-react';
+import { Flex, Text, useTheme, View } from '@aws-amplify/ui-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -13,10 +13,30 @@ const NavItems = () => {
   const { tokens } = useTheme();
 
   const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: <BiSolidDashboard /> },
-    { name: 'New Notes', path: '/new_notes', icon: <BsPencilSquare /> },
-    { name: 'Notes', path: '/notes', icon: <FaNoteSticky /> },
-    { name: 'Audio Files', path: '/audio_files', icon: <SiAudiomack /> },
+    {
+      name: 'Dashboard',
+      desc: '',
+      path: '/dashboard',
+      icon: <BiSolidDashboard />,
+    },
+    {
+      name: 'Create',
+      desc: 'create a note',
+      path: '/new_notes',
+      icon: <BsPencilSquare />,
+    },
+    {
+      name: 'Notes',
+      desc: 'your notes',
+      path: '/notes',
+      icon: <FaNoteSticky />,
+    },
+    {
+      name: 'Audio Files',
+      desc: 'your audio',
+      path: '/audio_files',
+      icon: <SiAudiomack />,
+    },
   ];
 
   return (
@@ -30,7 +50,10 @@ const NavItems = () => {
             className={`${styles.navItem} ${isActive ? styles.active : ''}`}
           >
             <View className={styles.icon}>{item.icon}</View>
-            <span>{item.name}</span>
+            <Flex direction="column" gap="0">
+              <span>{item.name}</span>
+              <Text className={styles.desc}>{item.desc}</Text>
+            </Flex>
           </Link>
         );
       })}
