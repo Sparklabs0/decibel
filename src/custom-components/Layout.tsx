@@ -1,5 +1,6 @@
 import { NavBarHeader, NavBarSide } from '@/ui-components';
 import {
+  Button,
   Card,
   Flex,
   Grid,
@@ -7,12 +8,14 @@ import {
   View,
   withAuthenticator,
 } from '@aws-amplify/ui-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styles from '../styles/Layout.module.css';
 import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { tokens } = useTheme();
+  const router = useRouter();
   return (
     <>
       <NavBarSide
@@ -46,6 +49,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         left="300px"
         boxShadow="none"
       />
+
       <View
         top="80px"
         bottom="0"
@@ -54,6 +58,16 @@ function Layout({ children }: { children: React.ReactNode }) {
         position="fixed"
         className={styles.content}
       >
+        <Button
+          border="none"
+          marginBottom={20}
+          backgroundColor={tokens.colors.brand.primary[20]}
+          onClick={() => {
+            router.back();
+          }}
+        >
+          Back
+        </Button>
         {children}
       </View>
     </>

@@ -1,6 +1,7 @@
-type Notes @model @auth(rules: [{allow: public}]) {
+type Notes @model @auth(rules: [{allow: public}, {allow: private}, {allow: owner}]) {
   id: ID!
   text: String
   title: String
+  audios: [String]
 }
  

@@ -16,16 +16,19 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type NotesUpdateFormInputValues = {
     text?: string;
     title?: string;
+    audios?: string[];
 };
 export declare type NotesUpdateFormValidationValues = {
     text?: ValidationFunction<string>;
     title?: ValidationFunction<string>;
+    audios?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NotesUpdateFormOverridesProps = {
     NotesUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     text?: PrimitiveOverrideProps<TextFieldProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
+    audios?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NotesUpdateFormProps = React.PropsWithChildren<{
     overrides?: NotesUpdateFormOverridesProps | undefined | null;

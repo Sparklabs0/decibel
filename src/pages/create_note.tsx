@@ -1,11 +1,14 @@
 import Layout from '@/custom-components/Layout';
-import { Text, View } from '@aws-amplify/ui-react';
+import { Button, Text, View } from '@aws-amplify/ui-react';
+import Link from 'next/link';
 import React, { ReactElement } from 'react';
 
 function NewNotes() {
   return (
     <View>
-      <Text>Create Note</Text>
+      <Link href="/upload_audio" >
+        <Button>Upload Audio</Button>
+      </Link>
     </View>
   );
 }
