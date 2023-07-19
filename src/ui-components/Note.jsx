@@ -44,7 +44,7 @@ export default function Note(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="NOTE"
+        children={notes?.title}
         {...getOverrideProps(overrides, "NOTE")}
       ></Text>
       <Text

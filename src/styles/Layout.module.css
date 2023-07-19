@@ -1,23 +1,25 @@
 /* Layout.module.css */
 
 .layout {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   padding-left: var(--space-xl);
   /* gap: 2rem; */
 }
 
-.navbar {
+.sidebar {
   /* max-width: 18rem; */
   padding-left: 0px;
   padding-top: 0px;
-  /* width: 100%; */
+}
+
+.navbar {
 }
 
 .content {
   /* margin-top: 1rem; */
-  display: flex;
-  width: 100%;
+  /* display: flex;
+  width: 100%; */
   background-color: var(--amplify-colors-white);
   /* background-color: red; */
   /* flex-direction: column; */
@@ -28,7 +30,7 @@
 
 @media (min-width: 1024px) {
   .layout {
-    flex-direction: row;
+    /* flex-direction: row; */
   }
   .content {
     padding: 2rem;

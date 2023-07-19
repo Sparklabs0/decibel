@@ -22,13 +22,13 @@ const NavItems = () => {
     {
       name: 'Create',
       desc: 'create a note',
-      path: '/new_notes',
+      path: '/create_note',
       icon: <BsPencilSquare />,
     },
     {
       name: 'Notes',
       desc: 'your notes',
-      path: '/notes',
+      path: '/my_notes',
       icon: <FaNoteSticky />,
     },
     {

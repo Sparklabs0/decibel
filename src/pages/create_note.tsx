@@ -1,9 +1,13 @@
 import Layout from '@/custom-components/Layout';
-import { View } from '@aws-amplify/ui-react';
+import { Text, View } from '@aws-amplify/ui-react';
 import React, { ReactElement } from 'react';
 
 function NewNotes() {
-  return <View>New Notes</View>;
+  return (
+    <View>
+      <Text>Create Note</Text>
+    </View>
+  );
 }
 
 NewNotes.getLayout = function getLayout(page: ReactElement) {

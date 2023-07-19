@@ -24,15 +24,19 @@ export default function NotesCreateForm(props) {
   } = props;
   const initialValues = {
     text: "",
+    title: "",
   };
   const [text, setText] = React.useState(initialValues.text);
+  const [title, setTitle] = React.useState(initialValues.title);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setText(initialValues.text);
+    setTitle(initialValues.title);
     setErrors({});
   };
   const validations = {
     text: [],
+    title: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -61,6 +65,7 @@ export default function NotesCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           text,
+          title,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -116,6 +121,7 @@ export default function NotesCreateForm(props) {
           if (onChange) {
             const modelFields = {
               text: value,
+              title,
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
@@ -129,6 +135,31 @@ export default function NotesCreateForm(props) {
         errorMessage={errors.text?.errorMessage}
         hasError={errors.text?.hasError}
         {...getOverrideProps(overrides, "text")}
+      ></TextField>
+      <TextField
+        label="Title"
+        isRequired={false}
+        isReadOnly={false}
+        value={title}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              text,
+              title: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.title ?? value;
+          }
+          if (errors.title?.hasError) {
+            runValidationTasks("title", value);
+          }
+          setTitle(value);
+        }}
+        onBlur={() => runValidationTasks("title", title)}
+        errorMessage={errors.title?.errorMessage}
+        hasError={errors.title?.hasError}
+        {...getOverrideProps(overrides, "title")}
       ></TextField>
       <Flex
         justifyContent="space-between"
