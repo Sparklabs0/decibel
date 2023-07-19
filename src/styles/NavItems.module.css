@@ -33,7 +33,7 @@
 }
 
 .navItem:hover .icon {
-  background-color: var(--amplify-colors-brand-primary-20);
+  background-color: var(--amplify-colors-brand-secondary-10);
 }
 
 .navItem.active:hover .icon {
@@ -54,6 +54,7 @@
 }
 
 .navItem .desc {
+  margin-top: 0;
   color: var(--amplify-colors-neutral-80);
 }
 

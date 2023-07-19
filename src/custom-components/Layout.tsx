@@ -19,7 +19,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <NavBarSide
-        backgroundColor={tokens.colors.brand.primary[10]}
+        backgroundColor={tokens.colors.brand.secondary[10]}
         overrides={{
           NavBarSide: {
             height: "100vh",
