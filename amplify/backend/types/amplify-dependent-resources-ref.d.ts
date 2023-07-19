@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "hackathon": {
+    "hackathon00": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "hackathon": {
+    "hackathon00": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "HostedUIDomain": "string",
@@ -20,7 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "s3hackathonstorageb477421c": {
+    "s3hackathon00storage8fb1b21c": {
       "BucketName": "string",
       "Region": "string"
     }

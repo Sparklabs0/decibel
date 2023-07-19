@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 export default function Note(props) {
-  const { notes, overrides, ...rest } = props;
+  const { overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -44,7 +44,7 @@ export default function Note(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={notes?.title}
+        children="NOTE"
         {...getOverrideProps(overrides, "NOTE")}
       ></Text>
       <Text
@@ -67,7 +67,7 @@ export default function Note(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={notes?.text}
+        children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
         {...getOverrideProps(
           overrides,
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."

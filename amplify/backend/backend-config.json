@@ -1,26 +1,12 @@
 {
   "api": {
-    "hackathon": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "hackathon"
-        }
-      ],
+    "hackathon00": {
+      "dependsOn": [],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authhackathon"
-              }
             }
           ],
           "defaultAuthentication": {
@@ -37,7 +23,7 @@
     }
   },
   "auth": {
-    "hackathon": {
+    "hackathon00": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -73,7 +59,7 @@
     }
   },
   "storage": {
-    "s3hackathonstorageb477421c": {
+    "s3hackathon00storage8fb1b21c": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

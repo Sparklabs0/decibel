@@ -13,25 +13,25 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type NotesCreateFormInputValues = {
+export declare type NoteCreateFormInputValues = {
     audios?: string[];
 };
-export declare type NotesCreateFormValidationValues = {
+export declare type NoteCreateFormValidationValues = {
     audios?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NotesCreateFormOverridesProps = {
-    NotesCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type NoteCreateFormOverridesProps = {
+    NoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     audios?: PrimitiveOverrideProps<StorageManagerProps>;
 } & EscapeHatchProps;
-export declare type NotesCreateFormProps = React.PropsWithChildren<{
-    overrides?: NotesCreateFormOverridesProps | undefined | null;
+export declare type NoteCreateFormProps = React.PropsWithChildren<{
+    overrides?: NoteCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: NotesCreateFormInputValues) => NotesCreateFormInputValues;
-    onSuccess?: (fields: NotesCreateFormInputValues) => void;
-    onError?: (fields: NotesCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: NotesCreateFormInputValues) => NotesCreateFormInputValues;
-    onValidate?: NotesCreateFormValidationValues;
+    onSubmit?: (fields: NoteCreateFormInputValues) => NoteCreateFormInputValues;
+    onSuccess?: (fields: NoteCreateFormInputValues) => void;
+    onError?: (fields: NoteCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: NoteCreateFormInputValues) => NoteCreateFormInputValues;
+    onValidate?: NoteCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function NotesCreateForm(props: NotesCreateFormProps): React.ReactElement;
+export default function NoteCreateForm(props: NoteCreateFormProps): React.ReactElement;

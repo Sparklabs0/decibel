@@ -1,22 +1,22 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-hackathon-dev-155222-authRole",
-      "UnauthRoleArn": "arn:aws:iam::615300157430:role/amplify-hackathon-dev-155222-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::615300157430:role/amplify-hackathon-dev-155222-authRole",
+      "AuthRoleName": "amplify-hackathon00-staging-171111-authRole",
+      "UnauthRoleArn": "arn:aws:iam::615300157430:role/amplify-hackathon00-staging-171111-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::615300157430:role/amplify-hackathon00-staging-171111-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-hackathon-dev-155222-deployment",
-      "UnauthRoleName": "amplify-hackathon-dev-155222-unauthRole",
-      "StackName": "amplify-hackathon-dev-155222",
-      "StackId": "arn:aws:cloudformation:ap-south-1:615300157430:stack/amplify-hackathon-dev-155222/a7e5b1e0-23c2-11ee-8855-0223640e7e62",
-      "AmplifyAppId": "d1hscxk0vegy6q"
+      "DeploymentBucketName": "amplify-hackathon00-staging-171111-deployment",
+      "UnauthRoleName": "amplify-hackathon00-staging-171111-unauthRole",
+      "StackName": "amplify-hackathon00-staging-171111",
+      "StackId": "arn:aws:cloudformation:ap-south-1:615300157430:stack/amplify-hackathon00-staging-171111/42afc5d0-2657-11ee-b19c-025b8a84360c",
+      "AmplifyAppId": "d32r5lkmc00pvf"
     },
     "categories": {
       "auth": {
-        "hackathon": {}
+        "hackathon00": {}
       },
       "storage": {
-        "s3hackathonstorageb477421c": {}
+        "s3hackathon00storage8fb1b21c": {}
       }
     }
   }

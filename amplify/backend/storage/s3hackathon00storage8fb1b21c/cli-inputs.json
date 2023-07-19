@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3hackathon00storage8fb1b21c",
+  "bucketName": "hackathon-00-storage-8fb1b21c",
+  "policyUUID": "bf031b67",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

@@ -9,10 +9,10 @@ import * as React from "react";
 import { Button, Flex, Grid } from "@aws-amplify/ui-react";
 import { StorageManager } from "@aws-amplify/ui-react-storage";
 import { Field, getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Notes } from "../models";
+import { Note } from "../models";
 import { fetchByPath, processFile, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function NotesCreateForm(props) {
+export default function NoteCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -91,7 +91,7 @@ export default function NotesCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new Notes(modelFields));
+          await DataStore.save(new Note(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -104,7 +104,7 @@ export default function NotesCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "NotesCreateForm")}
+      {...getOverrideProps(overrides, "NoteCreateForm")}
       {...rest}
     >
       <Field
@@ -143,7 +143,7 @@ export default function NotesCreateForm(props) {
           }}
           processFile={processFile}
           accessLevel={"private"}
-          acceptedFileTypes={["audio/*"]}
+          acceptedFileTypes={["audio*"]}
           isResumable={false}
           showThumbnails={true}
           maxFileCount={4}

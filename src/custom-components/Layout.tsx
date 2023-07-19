@@ -1,4 +1,4 @@
-import { NavBarHeader, NavBarSide } from "@/ui-components";
+import { NavBarHeader, NavBarSide } from '@/ui-components';
 import {
   Button,
   Card,
@@ -7,11 +7,11 @@ import {
   useTheme,
   View,
   withAuthenticator,
-} from "@aws-amplify/ui-react";
-import React from "react";
-import styles from "../styles/Layout.module.css";
-import NavItems from "./NavItems";
-import { useRouter } from "next/router";
+} from '@aws-amplify/ui-react';
+import { useRouter } from 'next/router';
+import React from 'react';
+import styles from '../styles/Layout.module.css';
+import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { tokens } = useTheme();
@@ -22,11 +22,11 @@ function Layout({ children }: { children: React.ReactNode }) {
         backgroundColor={tokens.colors.brand.secondary[10]}
         overrides={{
           NavBarSide: {
-            height: "100vh",
-            borderRadius: "0",
+            height: '100vh',
+            borderRadius: '0',
           },
           Button: {
-            borderRadius: "8px",
+            borderRadius: '8px',
           },
         }}
         columnStart="1"
@@ -75,7 +75,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default withAuthenticator(Layout, {
-  loginMechanisms: ["email"],
-  signUpAttributes: ["name", "email"],
-  socialProviders: ["google"],
+  loginMechanisms: ['email'],
+  signUpAttributes: ['name', 'email'],
+  socialProviders: ['google'],
 });

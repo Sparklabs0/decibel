@@ -2,9 +2,9 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "hackat25fa0916",
-    "userPoolName": "hackathon",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "hackat7ccd01bc",
+    "userPoolName": "hackathon00",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -33,10 +33,10 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "hackat25fa0916_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "hackat7ccd01bc_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "25fa0916",
-    "resourceName": "hackathon",
+    "sharedId": "7ccd01bc",
+    "resourceName": "hackathon00",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "usernameAttributes": [
@@ -48,6 +48,13 @@
     "adminQueries": false,
     "thirdPartyAuth": false,
     "authProviders": [],
+    "hostedUI": true,
+    "hostedUIDomainName": "3ov1h2b24kvm",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
@@ -63,20 +70,6 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "ewxza6h5k316",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}"
-    "hostedUI": true,
-    "hostedUIDomainName": "ewxza6h5k316",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000\",\"https://decibel.buzz\"],\"LogoutURLs\":[\"http://localhost:3000\",\"https://decibel.buzz\"]}"
+    "dependsOn": []
   }
 }

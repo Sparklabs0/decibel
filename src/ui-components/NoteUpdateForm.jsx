@@ -19,7 +19,7 @@ import {
   useTheme,
 } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Notes } from "../models";
+import { Note } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 function ArrayField({
@@ -180,10 +180,10 @@ function ArrayField({
     </React.Fragment>
   );
 }
-export default function NotesUpdateForm(props) {
+export default function NoteUpdateForm(props) {
   const {
     id: idProp,
-    notes: notesModelProp,
+    note: noteModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -193,41 +193,41 @@ export default function NotesUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    text: "",
     title: "",
+    body: "",
     audios: [],
   };
-  const [text, setText] = React.useState(initialValues.text);
   const [title, setTitle] = React.useState(initialValues.title);
+  const [body, setBody] = React.useState(initialValues.body);
   const [audios, setAudios] = React.useState(initialValues.audios);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = notesRecord
-      ? { ...initialValues, ...notesRecord }
+    const cleanValues = noteRecord
+      ? { ...initialValues, ...noteRecord }
       : initialValues;
-    setText(cleanValues.text);
     setTitle(cleanValues.title);
+    setBody(cleanValues.body);
     setAudios(cleanValues.audios ?? []);
     setCurrentAudiosValue("");
     setErrors({});
   };
-  const [notesRecord, setNotesRecord] = React.useState(notesModelProp);
+  const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
   React.useEffect(() => {
     const queryData = async () => {
       const record = idProp
-        ? await DataStore.query(Notes, idProp)
-        : notesModelProp;
-      setNotesRecord(record);
+        ? await DataStore.query(Note, idProp)
+        : noteModelProp;
+      setNoteRecord(record);
     };
     queryData();
-  }, [idProp, notesModelProp]);
-  React.useEffect(resetStateValues, [notesRecord]);
+  }, [idProp, noteModelProp]);
+  React.useEffect(resetStateValues, [noteRecord]);
   const [currentAudiosValue, setCurrentAudiosValue] = React.useState("");
   const audiosRef = React.createRef();
   const validations = {
-    text: [],
     title: [],
-    audios: [],
+    body: [],
+    audios: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -255,8 +255,8 @@ export default function NotesUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          text,
           title,
+          body,
           audios,
         };
         const validationResponses = await Promise.all(
@@ -288,7 +288,7 @@ export default function NotesUpdateForm(props) {
             }
           });
           await DataStore.save(
-            Notes.copyOf(notesRecord, (updated) => {
+            Note.copyOf(noteRecord, (updated) => {
               Object.assign(updated, modelFields);
             })
           );
@@ -301,35 +301,9 @@ export default function NotesUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "NotesUpdateForm")}
+      {...getOverrideProps(overrides, "NoteUpdateForm")}
       {...rest}
     >
-      <TextField
-        label="Text"
-        isRequired={false}
-        isReadOnly={false}
-        value={text}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              text: value,
-              title,
-              audios,
-            };
-            const result = onChange(modelFields);
-            value = result?.text ?? value;
-          }
-          if (errors.text?.hasError) {
-            runValidationTasks("text", value);
-          }
-          setText(value);
-        }}
-        onBlur={() => runValidationTasks("text", text)}
-        errorMessage={errors.text?.errorMessage}
-        hasError={errors.text?.hasError}
-        {...getOverrideProps(overrides, "text")}
-      ></TextField>
       <TextField
         label="Title"
         isRequired={false}
@@ -339,8 +313,8 @@ export default function NotesUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              text,
               title: value,
+              body,
               audios,
             };
             const result = onChange(modelFields);
@@ -356,13 +330,39 @@ export default function NotesUpdateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
+      <TextField
+        label="Body"
+        isRequired={false}
+        isReadOnly={false}
+        value={body}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              body: value,
+              audios,
+            };
+            const result = onChange(modelFields);
+            value = result?.body ?? value;
+          }
+          if (errors.body?.hasError) {
+            runValidationTasks("body", value);
+          }
+          setBody(value);
+        }}
+        onBlur={() => runValidationTasks("body", body)}
+        errorMessage={errors.body?.errorMessage}
+        hasError={errors.body?.hasError}
+        {...getOverrideProps(overrides, "body")}
+      ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
           if (onChange) {
             const modelFields = {
-              text,
               title,
+              body,
               audios: values,
             };
             const result = onChange(modelFields);
@@ -382,7 +382,7 @@ export default function NotesUpdateForm(props) {
       >
         <TextField
           label="Audios"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           value={currentAudiosValue}
           onChange={(e) => {
@@ -411,7 +411,7 @@ export default function NotesUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || notesModelProp)}
+          isDisabled={!(idProp || noteModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -423,7 +423,7 @@ export default function NotesUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || notesModelProp) ||
+              !(idProp || noteModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}
