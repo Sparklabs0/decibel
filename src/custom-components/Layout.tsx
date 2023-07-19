@@ -13,19 +13,7 @@ import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Grid
-      columnGap="0.2rem"
-      rowGap="0.2rem"
-      height="100vh"
-      templateColumns="1fr 6fr "
-      templateRows="1fr 12fr"
-    >
-      <NavBarHeader
-        columnStart="1"
-        columnEnd="-1"
-        className={styles.navbar}
-        width="100%"
-      />
+    <>
       <NavBarSide
         overrides={{
           NavBarSide: {
@@ -38,17 +26,34 @@ function Layout({ children }: { children: React.ReactNode }) {
         }}
         columnStart="1"
         columnEnd="2"
-        height="100%"
-        width="100%"
+        position="fixed"
+        left="0"
+        overflow="auto"
+        width="300px"
         className={styles.sidebar}
       >
         <NavItems />
       </NavBarSide>
-
-      <View columnStart="2" columnEnd="-1" className={styles.content}>
+      <NavBarHeader
+        className={styles.navbar}
+        position="fixed"
+        right="0"
+        height="80px"
+        width="calc(100vw - 300px)"
+        left="301px"
+      />
+      <View
+        top="81px"
+        bottom="0"
+        right="0"
+        left="301px"
+        position="fixed"
+        padding="20px"
+        className={styles.content}
+      >
         {children}
       </View>
-    </Grid>
+    </>
   );
 }
 

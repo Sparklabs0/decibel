@@ -17,9 +17,11 @@
 }
 
 .content {
-  /* margin-top: 1rem; */
+  /* margin-top: 6rem;
+  margin-left: 300px; */
   /* display: flex;
   width: 100%; */
+  overflow: auto;
   background-color: var(--amplify-colors-white);
   /* background-color: red; */
   /* flex-direction: column; */
