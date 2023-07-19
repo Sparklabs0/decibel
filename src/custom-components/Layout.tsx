@@ -48,7 +48,6 @@ function Layout({ children }: { children: React.ReactNode }) {
         right="0"
         left="301px"
         position="fixed"
-        padding="20px"
         className={styles.content}
       >
         {children}
