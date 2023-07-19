@@ -21,7 +21,10 @@
   margin-left: 300px; */
   /* display: flex;
   width: 100%; */
-  padding: 20px;
+  padding-top: 40px;
+  padding-bottom: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
   overflow: auto;
   background-color: var(--amplify-colors-white);
   /* background-color: red; */

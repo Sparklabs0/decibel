@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 4px;
+  gap: 8px;
 }
 
 .navItem {
@@ -16,6 +16,11 @@
   border-radius: var(--border-radius-medium);
 }
 
+.navItem:hover {
+  background-color: var(--amplify-colors-brand-primary-20);
+  color: var(--amplify-colors-brand-primary-100);
+}
+
 .navItem .icon {
   margin-right: 8px;
   background-color: var(--amplify-colors-brand-primary-10);
@@ -27,23 +32,29 @@
   color: var(--amplify-colors-brand-primary-100);
 }
 
-.navItem:hover {
+.navItem:hover .icon {
   background-color: var(--amplify-colors-brand-primary-20);
-  color: var(--amplify-colors-brand-primary-100);
 }
 
-.active {
+.navItem.active:hover .icon {
+  background-color: var(--amplify-colors-brand-primary-10);
+}
+.navItem.active .icon {
+  background-color: var(--amplify-colors-brand-primary-10);
+}
+
+.navItem.active {
   background-color: var(--amplify-colors-brand-primary-80);
-  color: var(--amplify-colors-brand-primary-10);
+  color: var(--amplify-colors-white);
 }
 
-.active:hover {
+.navItem.active:hover {
   background-color: var(--amplify-colors-brand-primary-80);
   color: var(--amplify-colors-brand-primary-10);
 }
 
 .navItem .desc {
-  color: var(--amplify-colors-neutral-60);
+  color: var(--amplify-colors-neutral-80);
 }
 
 .navItem.active .desc {

@@ -17,25 +17,25 @@ const NavItems = () => {
       name: 'Dashboard',
       desc: '',
       path: '/dashboard',
-      icon: <BiSolidDashboard />,
+      icon: <BiSolidDashboard size="20px" />,
     },
     {
       name: 'Create',
       desc: 'create a note',
       path: '/create_note',
-      icon: <BsPencilSquare />,
+      icon: <BsPencilSquare size="20px" />,
     },
     {
       name: 'Notes',
       desc: 'your notes',
       path: '/my_notes',
-      icon: <FaNoteSticky />,
+      icon: <FaNoteSticky size="20px" />,
     },
     {
       name: 'Audio Files',
       desc: 'your audio',
       path: '/audio_files',
-      icon: <SiAudiomack />,
+      icon: <SiAudiomack size="20px" />,
     },
   ];
 

@@ -12,9 +12,11 @@ import styles from '../styles/Layout.module.css';
 import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const { tokens } = useTheme();
   return (
     <>
       <NavBarSide
+        backgroundColor={tokens.colors.brand.primary[10]}
         overrides={{
           NavBarSide: {
             height: '100vh',
@@ -37,16 +39,18 @@ function Layout({ children }: { children: React.ReactNode }) {
       <NavBarHeader
         className={styles.navbar}
         position="fixed"
+        backgroundColor={tokens.colors.neutral[20]}
         right="0"
         height="80px"
         width="calc(100vw - 300px)"
-        left="301px"
+        left="300px"
+        boxShadow="none"
       />
       <View
-        top="81px"
+        top="80px"
         bottom="0"
         right="0"
-        left="301px"
+        left="300px"
         position="fixed"
         className={styles.content}
       >
