@@ -207,7 +207,19 @@
     lodash "4.17.21"
     xstate "^4.33.6"
 
-"@aws-amplify/ui-react@^5.0.4":
+"@aws-amplify/ui-react-storage@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-storage/-/ui-react-storage-2.0.4.tgz#1ba96c26e60ca8ecc825609283e03ff9439e9779"
+  integrity sha512-Y/7JbtFOH5jXoKCgnVbhQNIxkDU6P1Tdq1FpX+9TT7oGHw0aQXB+A3BU0CBWmVs2lS37YmFKkmZDGS/kHEBdgg==
+  dependencies:
+    "@aws-amplify/ui" "5.6.6"
+    "@aws-amplify/ui-react" "5.0.4"
+    "@aws-amplify/ui-react-core" "2.1.25"
+    classnames "2.3.1"
+    lodash "4.17.21"
+    tslib "2.4.1"
+
+"@aws-amplify/ui-react@5.0.4", "@aws-amplify/ui-react@^5.0.4":
   version "5.0.4"
   resolved "https://registry.npmjs.org/@aws-amplify/ui-react/-/ui-react-5.0.4.tgz"
   integrity sha512-/XGAtytQ5gaCm6oxsnQYhkohLLGj3RX9932uobSK5jGCgsqsSyQTyCL4OgVAAYjU54hSK27oYTWltiFr5gIgzQ==
@@ -2690,7 +2702,7 @@ available-typed-arrays@^1.0.5:
 
 aws-amplify@^5.3.4:
   version "5.3.4"
-  resolved "https://registry.npmjs.org/aws-amplify/-/aws-amplify-5.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-5.3.4.tgz#c60e88432f3553f3fe819d7c0c9bb0bbb8cae9d1"
   integrity sha512-VbOE8ac4RgyKbpa2vIZmdhbCYexAhU1KdADDY7CcH48PLiBdHoZ8b9LG9laLK3MN+J1jXmVHASzWarqndsfF/w==
   dependencies:
     "@aws-amplify/analytics" "6.4.0"

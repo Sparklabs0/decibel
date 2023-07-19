@@ -5,7 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps } from "@aws-amplify/ui-react";
+import { StorageManagerProps } from "@aws-amplify/ui-react-storage";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -13,18 +14,15 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NotesCreateFormInputValues = {
-    text?: string;
-    title?: string;
+    audios?: string[];
 };
 export declare type NotesCreateFormValidationValues = {
-    text?: ValidationFunction<string>;
-    title?: ValidationFunction<string>;
+    audios?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NotesCreateFormOverridesProps = {
     NotesCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    text?: PrimitiveOverrideProps<TextFieldProps>;
-    title?: PrimitiveOverrideProps<TextFieldProps>;
+    audios?: PrimitiveOverrideProps<StorageManagerProps>;
 } & EscapeHatchProps;
 export declare type NotesCreateFormProps = React.PropsWithChildren<{
     overrides?: NotesCreateFormOverridesProps | undefined | null;

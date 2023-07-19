@@ -6,10 +6,11 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Grid } from "@aws-amplify/ui-react";
+import { StorageManager } from "@aws-amplify/ui-react-storage";
+import { Field, getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Notes } from "../models";
-import { fetchByPath, validateField } from "./utils";
+import { fetchByPath, processFile, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function NotesCreateForm(props) {
   const {
@@ -23,20 +24,16 @@ export default function NotesCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    text: "",
-    title: "",
+    audios: [],
   };
-  const [text, setText] = React.useState(initialValues.text);
-  const [title, setTitle] = React.useState(initialValues.title);
+  const [audios, setAudios] = React.useState(initialValues.audios);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setText(initialValues.text);
-    setTitle(initialValues.title);
+    setAudios(initialValues.audios);
     setErrors({});
   };
   const validations = {
-    text: [],
-    title: [],
+    audios: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -64,8 +61,7 @@ export default function NotesCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          text,
-          title,
+          audios,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -111,56 +107,50 @@ export default function NotesCreateForm(props) {
       {...getOverrideProps(overrides, "NotesCreateForm")}
       {...rest}
     >
-      <TextField
-        label="Text"
-        isRequired={false}
+      <Field
+        errorMessage={errors.audios?.errorMessage}
+        hasError={errors.audios?.hasError}
+        label={"Audios"}
+        isRequired={true}
         isReadOnly={false}
-        value={text}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              text: value,
-              title,
-            };
-            const result = onChange(modelFields);
-            value = result?.text ?? value;
-          }
-          if (errors.text?.hasError) {
-            runValidationTasks("text", value);
-          }
-          setText(value);
-        }}
-        onBlur={() => runValidationTasks("text", text)}
-        errorMessage={errors.text?.errorMessage}
-        hasError={errors.text?.hasError}
-        {...getOverrideProps(overrides, "text")}
-      ></TextField>
-      <TextField
-        label="Title"
-        isRequired={false}
-        isReadOnly={false}
-        value={title}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              text,
-              title: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.title ?? value;
-          }
-          if (errors.title?.hasError) {
-            runValidationTasks("title", value);
-          }
-          setTitle(value);
-        }}
-        onBlur={() => runValidationTasks("title", title)}
-        errorMessage={errors.title?.errorMessage}
-        hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
-      ></TextField>
+      >
+        <StorageManager
+          onUploadSuccess={({ key }) => {
+            setAudios((prev) => {
+              let value = [...prev, key];
+              if (onChange) {
+                const modelFields = {
+                  audios: value,
+                };
+                const result = onChange(modelFields);
+                value = result?.audios ?? value;
+              }
+              return value;
+            });
+          }}
+          onFileRemove={({ key }) => {
+            setAudios((prev) => {
+              let value = prev.filter((f) => f !== key);
+              if (onChange) {
+                const modelFields = {
+                  audios: value,
+                };
+                const result = onChange(modelFields);
+                value = result?.audios ?? value;
+              }
+              return value;
+            });
+          }}
+          processFile={processFile}
+          accessLevel={"private"}
+          acceptedFileTypes={["audio/*"]}
+          isResumable={false}
+          showThumbnails={true}
+          maxFileCount={4}
+          maxSize={10000000}
+          {...getOverrideProps(overrides, "audios")}
+        ></StorageManager>
+      </Field>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

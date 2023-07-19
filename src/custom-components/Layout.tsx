@@ -1,4 +1,4 @@
-import { NavBarHeader, NavBarSide } from '@/ui-components';
+import { NavBarHeader, NavBarSide } from "@/ui-components";
 import {
   Card,
   Flex,
@@ -6,10 +6,10 @@ import {
   useTheme,
   View,
   withAuthenticator,
-} from '@aws-amplify/ui-react';
-import React from 'react';
-import styles from '../styles/Layout.module.css';
-import NavItems from './NavItems';
+} from "@aws-amplify/ui-react";
+import React from "react";
+import styles from "../styles/Layout.module.css";
+import NavItems from "./NavItems";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { tokens } = useTheme();
@@ -19,11 +19,11 @@ function Layout({ children }: { children: React.ReactNode }) {
         backgroundColor={tokens.colors.brand.primary[10]}
         overrides={{
           NavBarSide: {
-            height: '100vh',
-            borderRadius: '0',
+            height: "100vh",
+            borderRadius: "0",
           },
           Button: {
-            borderRadius: '8px',
+            borderRadius: "8px",
           },
         }}
         columnStart="1"
@@ -61,6 +61,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default withAuthenticator(Layout, {
-  loginMechanisms: ['email'],
-  signUpAttributes: ['name', 'email'],
+  loginMechanisms: ["email"],
+  signUpAttributes: ["name", "email"],
+  socialProviders: ["google"],
 });

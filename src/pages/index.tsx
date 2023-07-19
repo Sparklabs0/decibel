@@ -41,6 +41,7 @@ function Home() {
             components={components}
             loginMechanisms={['email']}
             signUpAttributes={['name', 'email']}
+            socialProviders={['google']}
           >
             {/* {({ signOut, user }) => (
           <main>
