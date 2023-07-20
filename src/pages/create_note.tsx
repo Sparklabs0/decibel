@@ -13,10 +13,13 @@ import { REFUSED } from 'dns';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
 import * as mutations from '../graphql/mutations';
+interface Files {
+  [key: string]: any; // Or you can specify the specific type of the files if known
+}
 function NoteAudioUploader() {
   const router = useRouter();
   const [title, setTitle] = useState('');
-  const [files, setFiles] = useState({});
+  const [files, setFiles] = useState<Files>({});
   const ref = React.useRef<StorageManagerHandle>(null);
   const { tokens } = useTheme();
 
@@ -29,17 +32,16 @@ function NoteAudioUploader() {
   };
 
   const createNote = async () => {
-    console.log({ title, files });
-    // try {
-    //   const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
-    //     query: mutations.createNote,
-    //     variables: { input: { title: '2todoDetails', audio: ['3.mp3'] } },
-    //     authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-    //   });
-    //   console.log(note);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      const fileKeys = Object.keys(files);
+      const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
+        query: mutations.createNote,
+        variables: { input: { title, audio: fileKeys } },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -66,11 +68,40 @@ function NoteAudioUploader() {
         accessLevel="protected"
         maxFileCount={1}
         maxFileSize={5000000}
+        onFileRemove={({ key = '' }) => {
+          setFiles((prevFiles) => {
+            const updatedFiles = { ...prevFiles };
+            delete updatedFiles[key];
+            return updatedFiles;
+          });
+        }}
+        onUploadError={(error, { key }) => {
+          setFiles((prevFiles) => {
+            return {
+              ...prevFiles,
+              [key]: {
+                status: 'error',
+              },
+            };
+          });
+        }}
         onUploadSuccess={({ key = '' }) => {
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
-              [key]: true,
+              [key]: {
+                status: 'success',
+              },
+            };
+          });
+        }}
+        onUploadStart={({ key = '' }) => {
+          setFiles((prevFiles) => {
+            return {
+              ...prevFiles,
+              [key]: {
+                status: 'uploading',
+              },
             };
           });
         }}

@@ -6,20 +6,10 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Note } from "../models";
-import {
-  getOverrideProps,
-  useDataStoreDeleteAction,
-} from "@aws-amplify/ui-react/internal";
-import { schema } from "../models/schema";
-import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
-  const { note, overrides, ...rest } = props;
-  const vectorOnClick = useDataStoreDeleteAction({
-    model: Note,
-    id: note?.id,
-    schema: schema,
-  });
+  const { note, frame438, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -35,6 +25,20 @@ export default function NoteCard(props) {
       {...getOverrideProps(overrides, "NoteCard")}
       {...rest}
     >
+      <View
+        width="278px"
+        height="22px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        overflow="hidden"
+        shrink="0"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        children={frame438}
+        {...getOverrideProps(overrides, "Frame 438")}
+      ></View>
       <Text
         fontFamily="Inter"
         fontSize="24px"
@@ -77,48 +81,12 @@ export default function NoteCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={note?.body}
+        children={note?.text}
         {...getOverrideProps(
           overrides,
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
         )}
       ></Text>
-      <View
-        width="16px"
-        height="18px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
-        shrink="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 438")}
-      >
-        <Icon
-          width="16px"
-          height="18px"
-          viewBox={{ minX: 0, minY: 0, width: 16, height: 18 }}
-          paths={[
-            {
-              d: "M3 18C2.45 18 1.979 17.804 1.587 17.412C1.195 17.02 0.999333 16.5493 1 16L1 3L0 3L0 1L5 1L5 0L11 0L11 1L16 1L16 3L15 3L15 16C15 16.55 14.804 17.021 14.412 17.413C14.02 17.805 13.5493 18.0007 13 18L3 18ZM5 14L7 14L7 5L5 5L5 14ZM9 14L11 14L11 5L9 5L9 14Z",
-              fill: "rgba(255,0,0,1)",
-              fillRule: "nonzero",
-            },
-          ]}
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          position="absolute"
-          top="0px"
-          left="0px"
-          onClick={() => {
-            vectorOnClick();
-          }}
-          {...getOverrideProps(overrides, "Vector")}
-        ></Icon>
-      </View>
     </Flex>
   );
 }
