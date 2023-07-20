@@ -194,21 +194,21 @@ export default function NoteUpdateForm(props) {
   } = props;
   const initialValues = {
     title: "",
-    body: "",
-    audios: [],
+    text: "",
+    audio: [],
   };
   const [title, setTitle] = React.useState(initialValues.title);
-  const [body, setBody] = React.useState(initialValues.body);
-  const [audios, setAudios] = React.useState(initialValues.audios);
+  const [text, setText] = React.useState(initialValues.text);
+  const [audio, setAudio] = React.useState(initialValues.audio);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
       ? { ...initialValues, ...noteRecord }
       : initialValues;
     setTitle(cleanValues.title);
-    setBody(cleanValues.body);
-    setAudios(cleanValues.audios ?? []);
-    setCurrentAudiosValue("");
+    setText(cleanValues.text);
+    setAudio(cleanValues.audio ?? []);
+    setCurrentAudioValue("");
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -222,12 +222,12 @@ export default function NoteUpdateForm(props) {
     queryData();
   }, [idProp, noteModelProp]);
   React.useEffect(resetStateValues, [noteRecord]);
-  const [currentAudiosValue, setCurrentAudiosValue] = React.useState("");
-  const audiosRef = React.createRef();
+  const [currentAudioValue, setCurrentAudioValue] = React.useState("");
+  const audioRef = React.createRef();
   const validations = {
     title: [],
-    body: [],
-    audios: [{ type: "Required" }],
+    text: [],
+    audio: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -256,8 +256,8 @@ export default function NoteUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           title,
-          body,
-          audios,
+          text,
+          audio,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -314,8 +314,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title: value,
-              body,
-              audios,
+              text,
+              audio,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -331,30 +331,30 @@ export default function NoteUpdateForm(props) {
         {...getOverrideProps(overrides, "title")}
       ></TextField>
       <TextField
-        label="Body"
+        label="Text"
         isRequired={false}
         isReadOnly={false}
-        value={body}
+        value={text}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               title,
-              body: value,
-              audios,
+              text: value,
+              audio,
             };
             const result = onChange(modelFields);
-            value = result?.body ?? value;
+            value = result?.text ?? value;
           }
-          if (errors.body?.hasError) {
-            runValidationTasks("body", value);
+          if (errors.text?.hasError) {
+            runValidationTasks("text", value);
           }
-          setBody(value);
+          setText(value);
         }}
-        onBlur={() => runValidationTasks("body", body)}
-        errorMessage={errors.body?.errorMessage}
-        hasError={errors.body?.hasError}
-        {...getOverrideProps(overrides, "body")}
+        onBlur={() => runValidationTasks("text", text)}
+        errorMessage={errors.text?.errorMessage}
+        hasError={errors.text?.hasError}
+        {...getOverrideProps(overrides, "text")}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
@@ -362,42 +362,42 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title,
-              body,
-              audios: values,
+              text,
+              audio: values,
             };
             const result = onChange(modelFields);
-            values = result?.audios ?? values;
+            values = result?.audio ?? values;
           }
-          setAudios(values);
-          setCurrentAudiosValue("");
+          setAudio(values);
+          setCurrentAudioValue("");
         }}
-        currentFieldValue={currentAudiosValue}
-        label={"Audios"}
-        items={audios}
-        hasError={errors?.audios?.hasError}
-        errorMessage={errors?.audios?.errorMessage}
-        setFieldValue={setCurrentAudiosValue}
-        inputFieldRef={audiosRef}
+        currentFieldValue={currentAudioValue}
+        label={"Audio"}
+        items={audio}
+        hasError={errors?.audio?.hasError}
+        errorMessage={errors?.audio?.errorMessage}
+        setFieldValue={setCurrentAudioValue}
+        inputFieldRef={audioRef}
         defaultFieldValue={""}
       >
         <TextField
-          label="Audios"
+          label="Audio"
           isRequired={true}
           isReadOnly={false}
-          value={currentAudiosValue}
+          value={currentAudioValue}
           onChange={(e) => {
             let { value } = e.target;
-            if (errors.audios?.hasError) {
-              runValidationTasks("audios", value);
+            if (errors.audio?.hasError) {
+              runValidationTasks("audio", value);
             }
-            setCurrentAudiosValue(value);
+            setCurrentAudioValue(value);
           }}
-          onBlur={() => runValidationTasks("audios", currentAudiosValue)}
-          errorMessage={errors.audios?.errorMessage}
-          hasError={errors.audios?.hasError}
-          ref={audiosRef}
+          onBlur={() => runValidationTasks("audio", currentAudioValue)}
+          errorMessage={errors.audio?.errorMessage}
+          hasError={errors.audio?.hasError}
+          ref={audioRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "audios")}
+          {...getOverrideProps(overrides, "audio")}
         ></TextField>
       </ArrayField>
       <Flex

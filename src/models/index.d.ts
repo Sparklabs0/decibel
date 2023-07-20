@@ -13,8 +13,8 @@ type EagerNote = {
   };
   readonly id: string;
   readonly title?: string | null;
-  readonly body?: string | null;
-  readonly audios?: string[] | null;
+  readonly text?: string | null;
+  readonly audio: string[];
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -26,8 +26,8 @@ type LazyNote = {
   };
   readonly id: string;
   readonly title?: string | null;
-  readonly body?: string | null;
-  readonly audios?: string[] | null;
+  readonly text?: string | null;
+  readonly audio: string[];
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

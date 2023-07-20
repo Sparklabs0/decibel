@@ -10,6 +10,8 @@ import {
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { BiLeftArrow, BiLeftArrowAlt } from 'react-icons/bi';
+import { BsBack } from 'react-icons/bs';
 import styles from '../styles/Layout.module.css';
 import NavItems from './NavItems';
 
@@ -60,13 +62,14 @@ function Layout({ children }: { children: React.ReactNode }) {
       >
         <Button
           border="none"
+          borderRadius={8}
           marginBottom={20}
           backgroundColor={tokens.colors.brand.primary[20]}
           onClick={() => {
             router.back();
           }}
         >
-          Back
+          <BiLeftArrowAlt />
         </Button>
         {children}
       </View>

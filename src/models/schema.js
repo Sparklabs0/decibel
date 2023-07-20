@@ -17,20 +17,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "body": {
-                    "name": "body",
+                "text": {
+                    "name": "text",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "audios": {
-                    "name": "audios",
+                "audio": {
+                    "name": "audio",
                     "isArray": true,
                     "type": "String",
                     "isRequired": true,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": false
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -61,7 +61,10 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
                                     "update",
@@ -78,5 +81,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "1282d29dd425386bbba063f35d66b892"
+    "version": "b89d8014123ae1b62218a343419b8ba7"
 };

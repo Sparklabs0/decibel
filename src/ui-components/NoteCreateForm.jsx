@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { StorageManager } from "@aws-amplify/ui-react-storage";
 import { Field, getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Note } from "../models";
@@ -24,16 +24,20 @@ export default function NoteCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    audios: [],
+    title: "",
+    audio: [],
   };
-  const [audios, setAudios] = React.useState(initialValues.audios);
+  const [title, setTitle] = React.useState(initialValues.title);
+  const [audio, setAudio] = React.useState(initialValues.audio);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setAudios(initialValues.audios);
+    setTitle(initialValues.title);
+    setAudio(initialValues.audio);
     setErrors({});
   };
   const validations = {
-    audios: [{ type: "Required" }],
+    title: [],
+    audio: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -61,7 +65,8 @@ export default function NoteCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          audios,
+          title,
+          audio,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -107,48 +112,80 @@ export default function NoteCreateForm(props) {
       {...getOverrideProps(overrides, "NoteCreateForm")}
       {...rest}
     >
+      <TextField
+        label="Title"
+        isRequired={false}
+        isReadOnly={false}
+        value={title}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title: value,
+              audio,
+            };
+            const result = onChange(modelFields);
+            value = result?.title ?? value;
+          }
+          if (errors.title?.hasError) {
+            runValidationTasks("title", value);
+          }
+          setTitle(value);
+        }}
+        onBlur={() => runValidationTasks("title", title)}
+        errorMessage={errors.title?.errorMessage}
+        hasError={errors.title?.hasError}
+        {...getOverrideProps(overrides, "title")}
+      ></TextField>
       <Field
-        errorMessage={errors.audios?.errorMessage}
-        hasError={errors.audios?.hasError}
-        label={"Audios"}
+        errorMessage={errors.audio?.errorMessage}
+        hasError={errors.audio?.hasError}
+        label={
+          <span style={{ display: "inline-flex" }}>
+            <span>Audio</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
         isRequired={true}
         isReadOnly={false}
       >
         <StorageManager
           onUploadSuccess={({ key }) => {
-            setAudios((prev) => {
+            setAudio((prev) => {
               let value = [...prev, key];
               if (onChange) {
                 const modelFields = {
-                  audios: value,
+                  title,
+                  audio: value,
                 };
                 const result = onChange(modelFields);
-                value = result?.audios ?? value;
+                value = result?.audio ?? value;
               }
               return value;
             });
           }}
           onFileRemove={({ key }) => {
-            setAudios((prev) => {
+            setAudio((prev) => {
               let value = prev.filter((f) => f !== key);
               if (onChange) {
                 const modelFields = {
-                  audios: value,
+                  title,
+                  audio: value,
                 };
                 const result = onChange(modelFields);
-                value = result?.audios ?? value;
+                value = result?.audio ?? value;
               }
               return value;
             });
           }}
           processFile={processFile}
           accessLevel={"private"}
-          acceptedFileTypes={["audio*"]}
+          acceptedFileTypes={["audio/*"]}
           isResumable={false}
           showThumbnails={true}
-          maxFileCount={4}
+          maxFileCount={1}
           maxSize={10000000}
-          {...getOverrideProps(overrides, "audios")}
+          {...getOverrideProps(overrides, "audio")}
         ></StorageManager>
       </Field>
       <Flex
@@ -169,7 +206,7 @@ export default function NoteCreateForm(props) {
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Submit"
+            children="Create Note"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}

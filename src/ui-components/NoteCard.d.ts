@@ -9,16 +9,16 @@ import { Note } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NoteOverridesProps = {
-    Note?: PrimitiveOverrideProps<FlexProps>;
+export declare type NoteCardOverridesProps = {
+    NoteCard?: PrimitiveOverrideProps<FlexProps>;
     NOTE?: PrimitiveOverrideProps<TextProps>;
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."?: PrimitiveOverrideProps<TextProps>;
     "Frame 438"?: PrimitiveOverrideProps<ViewProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
 } & EscapeHatchProps;
-export declare type NoteProps = React.PropsWithChildren<Partial<FlexProps> & {
+export declare type NoteCardProps = React.PropsWithChildren<Partial<FlexProps> & {
     note?: Note;
 } & {
-    overrides?: NoteOverridesProps | undefined | null;
+    overrides?: NoteCardOverridesProps | undefined | null;
 }>;
-export default function Note(props: NoteProps): React.ReactElement;
+export default function NoteCard(props: NoteCardProps): React.ReactElement;

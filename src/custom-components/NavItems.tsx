@@ -20,16 +20,16 @@ const NavItems = () => {
       icon: <BiSolidDashboard size="20px" />,
     },
     {
-      name: 'Create',
-      desc: 'create a note',
-      path: '/create_note',
-      icon: <BsPencilSquare size="20px" />,
-    },
-    {
       name: 'Notes',
       desc: 'your notes',
       path: '/my_notes',
       icon: <FaNoteSticky size="20px" />,
+    },
+    {
+      name: 'Create',
+      desc: 'create a note',
+      path: '/create_note',
+      icon: <BsPencilSquare size="20px" />,
     },
     {
       name: 'Audio Files',
