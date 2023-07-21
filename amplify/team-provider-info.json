@@ -17,6 +17,9 @@
       },
       "storage": {
         "s3hackathon00storage8fb1b21c": {}
+      },
+      "api": {
+        "hackathon00": {}
       }
     }
   }

@@ -3,6 +3,7 @@ import {
   ListNotesQuery,
   ListNotesQueryVariables,
 } from '@/API';
+import DeleteNoteModal from '@/custom-components/DeleteNoteModal';
 import Layout from '@/custom-components/Layout';
 import { getNote } from '@/graphql/queries';
 import { Note } from '@/models';
@@ -45,17 +46,35 @@ function Notes() {
       {/* <NoteCardCollection /> */}
       <Collection
         type="grid"
-        row={2}
+        templateColumns="repeat(auto-fill,  1fr)"
+        gap={20}
         items={notes?.listNotes?.items as any}
-        gap="1.5rem"
       >
         {(item, index) => (
-          <NoteCard key={index} padding="1rem" note={item as any}></NoteCard>
+          <NoteCard
+            boxShadow="none"
+            key={index}
+            padding="1rem"
+            note={item as any}
+            overrides={{
+              NOTE: { flex: '0 0 auto' },
+              NoteCard: {
+                border: '1px solid black',
+                borderRadius: '8px',
+                width: '100%',
+              },
+              'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.':
+                { flex: '1 1 auto' },
+            }}
+          >
+            <DeleteNoteModal note={item as any} />
+          </NoteCard>
         )}
       </Collection>
       <Flex marginTop={12}>
-        <Button>Prev</Button>
-        <Button onClick={getNotes}>Next</Button>
+        {/* <Button>Prev</Button>
+        <Button onClick={getNotes}>Next</Button> */}
       </Flex>
     </View>
   );

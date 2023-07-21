@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
-  const { note, frame438, overrides, ...rest } = props;
+  const { note, children, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -25,20 +25,6 @@ export default function NoteCard(props) {
       {...getOverrideProps(overrides, "NoteCard")}
       {...rest}
     >
-      <View
-        width="278px"
-        height="22px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
-        overflow="hidden"
-        shrink="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        children={frame438}
-        {...getOverrideProps(overrides, "Frame 438")}
-      ></View>
       <Text
         fontFamily="Inter"
         fontSize="24px"
@@ -81,12 +67,26 @@ export default function NoteCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={note?.text}
+        children={`${note?.audio}${","}`}
         {...getOverrideProps(
           overrides,
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
         )}
       ></Text>
+      <View
+        width="272px"
+        height="24px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        overflow="hidden"
+        shrink="0"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        children={children}
+        {...getOverrideProps(overrides, "Frame 438")}
+      ></View>
     </Flex>
   );
 }

@@ -11,9 +11,6 @@ export const getNote = /* GraphQL */ `
       audio
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       owner
       __typename
     }
@@ -33,46 +30,10 @@ export const listNotes = /* GraphQL */ `
         audio
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         owner
         __typename
       }
       nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncNotes = /* GraphQL */ `
-  query SyncNotes(
-    $filter: ModelNoteFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncNotes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        text
-        audio
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-        __typename
-      }
-      nextToken
-      startedAt
       __typename
     }
   }

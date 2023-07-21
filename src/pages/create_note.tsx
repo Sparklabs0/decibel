@@ -44,15 +44,32 @@ function NoteAudioUploader() {
     }
   };
 
+  interface ProcessedFile {
+    file: File;
+    key: string;
+  }
+
+  const processFile = async ({
+    file,
+  }: {
+    file: File;
+  }): Promise<ProcessedFile> => {
+    const fileExtension = file.name.split('.').pop();
+
+    return file
+      .arrayBuffer()
+      .then((filebuffer) => window.crypto.subtle.digest('SHA-1', filebuffer))
+      .then((hashBuffer) => {
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray
+          .map((a) => a.toString(16).padStart(2, '0'))
+          .join('');
+        return { file, key: `${hashHex}.${fileExtension}` };
+      });
+  };
+
   return (
     <Flex direction="column">
-      {/* <NoteCreateForm
-        marginTop={24}
-        padding={0}
-        onSuccess={() => {
-          router.push('/audio_files');
-        }}
-      /> */}
       <TextField
         descriptiveText="Enter a valid note title"
         placeholder="Enter Title"
@@ -68,6 +85,7 @@ function NoteAudioUploader() {
         accessLevel="protected"
         maxFileCount={1}
         maxFileSize={5000000}
+        processFile={processFile}
         onFileRemove={({ key = '' }) => {
           setFiles((prevFiles) => {
             const updatedFiles = { ...prevFiles };
