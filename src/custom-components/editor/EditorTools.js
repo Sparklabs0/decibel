@@ -8,6 +8,10 @@ import checklist from "@editorjs/checklist";
 import warning from "@editorjs/warning";
 // import link from "@editorjs/link";
 import inlineCode from "@editorjs/inline-code";
+import nextedList from "@editorjs/nested-list";
+import marker from "@editorjs/marker";
+import autoCompleLink from "@editorjs/link-autocomplete";
+import spoiler from "editorjs-inline-spoiler-tool";
 
 export const EDITOR_TOOLS = {
   code: Code,
@@ -18,4 +22,10 @@ export const EDITOR_TOOLS = {
   warning: warning,
 //   link: link,
   inlineCode: inlineCode,
+  nextedList: nextedList,
+  marker: marker,
+  autoCompleLink: autoCompleLink,
+  spoiler: spoiler,
+
 };
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import EditorJs from "@editorjs/editorjs";
-import { Text } from "@aws-amplify/ui-react";
+import { Text, View } from "@aws-amplify/ui-react";
 import styles from '@/styles/Editor.module.css';
 import demoData from "./defaultcontent";
 
@@ -69,19 +69,19 @@ function Editor({ id }: { id: string }) {
   }, [isMounted]);
 
   return (
-    <div className={styles.container}>
+    <View className={styles.container}>
      <Text variation="primary" width="100%" textAlign="center" as="h2" fontSize={50}>
         Title goes here
       </Text>
       <Text variation="primary" width="100%" textAlign="center" as="h5" fontSize={30}>
         Subtitle
       </Text>
-      <div className={styles.statusBox}>
+      <View className={styles.statusBox}>
         {saveStatus}
-      </div>
+      </View>
       <div id="editorjs">
       </div>
-    </div>
+    </View>
   );
 }
 
