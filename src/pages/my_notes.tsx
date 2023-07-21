@@ -130,7 +130,7 @@ function Notes() {
       </Collection>
       <Flex marginTop={12}>
         <Button borderRadius="8px" variation="primary" onClick={getNotes}>
-          Load More
+          Next Page
         </Button>
       </Flex>
     </View>
