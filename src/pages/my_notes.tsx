@@ -46,7 +46,7 @@ function Notes() {
       {/* <NoteCardCollection /> */}
       <Collection
         type="grid"
-        templateColumns="repeat(auto-fill,  1fr)"
+        templateColumns="1fr 1fr"
         gap={20}
         items={notes?.listNotes?.items as any}
       >
