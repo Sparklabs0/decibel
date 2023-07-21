@@ -5,6 +5,7 @@ import { Button, Heading, Text, useTheme, View } from '@aws-amplify/ui-react';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
+import toast from 'react-hot-toast';
 
 const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
   const { tokens } = useTheme();
@@ -16,6 +17,8 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
         query: mutations.deleteNote,
         variables: { input: { id } },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      }).then(() => {
+        toast.success('Note deleted successfully');
       });
     } catch (error) {
       console.error(error);
@@ -31,7 +34,9 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
+      padding: '60px',
       transform: 'translate(-50%, -50%)',
+      borderRadius: '8px',
     },
   };
 
@@ -60,7 +65,7 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
         // style={modalStyles}
         style={modalStyles}
       >
-        <Heading level={3}>Confirm Deletion</Heading>
+        <Heading fontSize={25} level={3}>Confirm Deletion</Heading>
         <Text marginBottom={24}>
           Are you sure you want to delete this note?
         </Text>

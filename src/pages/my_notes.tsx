@@ -30,6 +30,7 @@ import {
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
+import { useRouter } from 'next/router';
 function Notes() {
   const [notes, setNotes] = useState<NotesByDateQuery>();
   const nextTokenRef = useRef<string | undefined>(undefined);
@@ -86,6 +87,8 @@ function Notes() {
     };
   }, []);
 
+  const router = useRouter();
+
   return (
     <View>
       {/* <NoteCardCollection /> */}
@@ -106,6 +109,9 @@ function Notes() {
             key={index}
             padding="1rem"
             note={item as any}
+            onClick={() => {
+              // router.push(`/notes/${item?.id}`);
+            }}
             overrides={{
               NOTE: { flex: '0 0 auto' },
               NoteCard: {
@@ -124,7 +130,7 @@ function Notes() {
       </Collection>
       <Flex marginTop={12}>
         <Button borderRadius="8px" variation="primary" onClick={getNotes}>
-          Loop
+          Load More
         </Button>
       </Flex>
     </View>
