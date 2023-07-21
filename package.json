@@ -13,6 +13,8 @@
     "@aws-amplify/datastore": "^4.6.4",
     "@aws-amplify/ui-react": "^5.0.4",
     "@aws-amplify/ui-react-storage": "^2.0.4",
+    "@editorjs/editorjs": "^2.27.2",
+    "@radix-ui/react-popover": "^1.0.6",
     "@tiptap/core": "^2.0.4",
     "@tiptap/extension-color": "^2.0.3",
     "@tiptap/extension-highlight": "^2.0.3",
@@ -39,6 +41,7 @@
     "framer-motion": "^10.12.18",
     "lucide-react": "^0.244.0",
     "next": "13.4.10",
+    "openai-edge": "^1.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
@@ -50,8 +53,12 @@
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.26",
-    "tailwindcss": "^3.3.3"
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.6"
   }
 }
