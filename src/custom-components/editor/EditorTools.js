@@ -12,7 +12,6 @@ import inlineCode from "@editorjs/inline-code";
 export const EDITOR_TOOLS = {
   code: Code,
   header: Header,
-  Paragraph: Paragraph,
   quote: quote,
   list: list,
   checklist: checklist,

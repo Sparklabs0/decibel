@@ -1,10 +1,11 @@
-"use client";
 import React, { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import EditorJs from "@editorjs/editorjs";
-import { EditorData } from "./types";
+import { Text } from "@aws-amplify/ui-react";
+import styles from '@/styles/Editor.module.css';
+import demoData from "./defaultcontent";
 
-function Editor({ data }: { data: EditorData }) {
+
+function Editor({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef<EditorJs>();
   const [saveStatus, setSaveStatus] = useState("Saved");
@@ -21,27 +22,33 @@ function Editor({ data }: { data: EditorData }) {
     if (!ref.current) {
       const editor = new EditorJs({
         holder: "editorjs",
+        minHeight : 0,
         // autofocus: true,
         tools: EditorTools,
-        placeholder: "Let`s write an awesome story!",
-        onChange: async () => {
-          let content = await editor.saver.save();
-          console.log(content);
+        placeholder: "Pres Tab to select a block",
+
+        onChange:  () => {
+          setSaveStatus("Unsaved");
+          save();
         },
         onReady: () => {
           // alert("Editor is ready to work!");
         },
-        data: data
+        
+         data: demoData
       });
       ref.current = editor;
     }
   };
 
-  // We need to use this function, if autosave in Amplify is costly
   const save = async () => {
     if (ref.current) {
       let output = await ref.current.save().then((output) => {
-        // we can do anything with output data
+        setSaveStatus("Saving...");
+        setTimeout(() => {
+          setSaveStatus("Saved");
+        }, 500);
+        return output;
       });
       console.log(output);
     }
@@ -62,12 +69,18 @@ function Editor({ data }: { data: EditorData }) {
   }, [isMounted]);
 
   return (
-    <div 
-    className="relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white pt-8 sm:rounded-lg sm:border  sm:shadow-lg">
-      <div className="absolute right-5 top-5 mb-5 rounded-lg bg-stone-100 px-2 py-1 text-sm text-stone-400">
+    <div className={styles.container}>
+     <Text variation="primary" width="100%" textAlign="center" as="h2" fontSize={50}>
+        Title goes here
+      </Text>
+      <Text variation="primary" width="100%" textAlign="center" as="h5" fontSize={30}>
+        Subtitle
+      </Text>
+      <div className={styles.statusBox}>
         {saveStatus}
       </div>
-      <div id="editorjs"></div>
+      <div id="editorjs">
+      </div>
     </div>
   );
 }
