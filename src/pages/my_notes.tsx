@@ -20,7 +20,13 @@ import {
   GraphQLSubscription,
   GRAPHQL_AUTH_MODE,
 } from '@aws-amplify/api';
-import { Button, Collection, Flex, View } from '@aws-amplify/ui-react';
+import {
+  Button,
+  Collection,
+  Flex,
+  SearchField,
+  View,
+} from '@aws-amplify/ui-react';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
@@ -30,7 +36,7 @@ function Notes() {
 
   const getNotes = async () => {
     const variables: NotesByDateQueryVariables = {
-      limit: 10,
+      limit: 8,
       type: 'Note',
       sortDirection: ModelSortDirection.DESC,
     };
@@ -83,6 +89,11 @@ function Notes() {
   return (
     <View>
       {/* <NoteCardCollection /> */}
+      <SearchField
+        marginBottom={24}
+        label="Search"
+        placeholder="Search notes... ( non functional )"
+      />
       <Collection
         type="grid"
         templateColumns="1fr 1fr"
