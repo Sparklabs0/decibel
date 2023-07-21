@@ -123,7 +123,7 @@ function Notes() {
         )}
       </Collection>
       <Flex marginTop={12}>
-        <Button borderRadius="8px" onClick={getNotes}>
+        <Button borderRadius="8px" variation="primary" onClick={getNotes}>
           Loop
         </Button>
       </Flex>

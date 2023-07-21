@@ -64,7 +64,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           border="none"
           borderRadius={8}
           marginBottom={20}
-          backgroundColor={tokens.colors.brand.primary[20]}
+          variation="primary"
           onClick={() => {
             router.back();
           }}

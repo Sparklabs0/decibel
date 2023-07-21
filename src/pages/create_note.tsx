@@ -39,6 +39,7 @@ function NoteAudioUploader() {
         variables: { input: { title, audio: fileKeys, type: 'Note' } },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
+      router.push('/my_notes');
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +140,7 @@ function NoteAudioUploader() {
           onClick={createNote}
           borderRadius={8}
           color={tokens.colors.white.original}
-          backgroundColor={tokens.colors.brand.primary[80]}
+          variation="primary"
         >
           Create Note
         </Button>
