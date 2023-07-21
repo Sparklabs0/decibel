@@ -69,7 +69,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             router.back();
           }}
         >
-          <BiLeftArrowAlt />
+          <BiLeftArrowAlt color="white" />
         </Button>
         {children}
       </View>

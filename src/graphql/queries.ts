@@ -9,6 +9,7 @@ export const getNote = /* GraphQL */ `
       title
       text
       audio
+      type
       createdAt
       updatedAt
       owner
@@ -28,6 +29,40 @@ export const listNotes = /* GraphQL */ `
         title
         text
         audio
+        type
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const notesByDate = /* GraphQL */ `
+  query NotesByDate(
+    $type: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    notesByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        text
+        audio
+        type
         createdAt
         updatedAt
         owner

@@ -7,12 +7,16 @@ export type CreateNoteInput = {
   title?: string | null,
   text?: string | null,
   audio: Array< string >,
+  type: string,
+  createdAt?: string | null,
 };
 
 export type ModelNoteConditionInput = {
   title?: ModelStringInput | null,
   text?: ModelStringInput | null,
   audio?: ModelStringInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelNoteConditionInput | null > | null,
   or?: Array< ModelNoteConditionInput | null > | null,
   not?: ModelNoteConditionInput | null,
@@ -64,6 +68,7 @@ export type Note = {
   title?: string | null,
   text?: string | null,
   audio: Array< string >,
+  type: string,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
@@ -74,6 +79,8 @@ export type UpdateNoteInput = {
   title?: string | null,
   text?: string | null,
   audio?: Array< string > | null,
+  type?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeleteNoteInput = {
@@ -85,6 +92,8 @@ export type ModelNoteFilterInput = {
   title?: ModelStringInput | null,
   text?: ModelStringInput | null,
   audio?: ModelStringInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelNoteFilterInput | null > | null,
   or?: Array< ModelNoteFilterInput | null > | null,
   not?: ModelNoteFilterInput | null,
@@ -112,11 +121,29 @@ export type ModelNoteConnection = {
   nextToken?: string | null,
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelSubscriptionNoteFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   title?: ModelSubscriptionStringInput | null,
   text?: ModelSubscriptionStringInput | null,
   audio?: ModelSubscriptionStringInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionNoteFilterInput | null > | null,
   or?: Array< ModelSubscriptionNoteFilterInput | null > | null,
 };
@@ -163,6 +190,7 @@ export type CreateNoteMutation = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -181,6 +209,7 @@ export type UpdateNoteMutation = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -199,6 +228,7 @@ export type DeleteNoteMutation = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -216,6 +246,7 @@ export type GetNoteQuery = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -237,6 +268,34 @@ export type ListNotesQuery = {
       title?: string | null,
       text?: string | null,
       audio: Array< string >,
+      type: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type NotesByDateQueryVariables = {
+  type: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNoteFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type NotesByDateQuery = {
+  notesByDate?:  {
+    __typename: "ModelNoteConnection",
+    items:  Array< {
+      __typename: "Note",
+      id: string,
+      title?: string | null,
+      text?: string | null,
+      audio: Array< string >,
+      type: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -257,6 +316,7 @@ export type OnCreateNoteSubscription = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -275,6 +335,7 @@ export type OnUpdateNoteSubscription = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -293,6 +354,7 @@ export type OnDeleteNoteSubscription = {
     title?: string | null,
     text?: string | null,
     audio: Array< string >,
+    type: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,

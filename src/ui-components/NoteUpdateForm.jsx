@@ -196,10 +196,14 @@ export default function NoteUpdateForm(props) {
     title: "",
     text: "",
     audio: [],
+    type: "",
+    createdAt: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [text, setText] = React.useState(initialValues.text);
   const [audio, setAudio] = React.useState(initialValues.audio);
+  const [type, setType] = React.useState(initialValues.type);
+  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
@@ -209,6 +213,8 @@ export default function NoteUpdateForm(props) {
     setText(cleanValues.text);
     setAudio(cleanValues.audio ?? []);
     setCurrentAudioValue("");
+    setType(cleanValues.type);
+    setCreatedAt(cleanValues.createdAt);
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -228,6 +234,8 @@ export default function NoteUpdateForm(props) {
     title: [],
     text: [],
     audio: [{ type: "Required" }],
+    type: [{ type: "Required" }],
+    createdAt: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -258,6 +266,8 @@ export default function NoteUpdateForm(props) {
           title,
           text,
           audio,
+          type,
+          createdAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -316,6 +326,8 @@ export default function NoteUpdateForm(props) {
               title: value,
               text,
               audio,
+              type,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -342,6 +354,8 @@ export default function NoteUpdateForm(props) {
               title,
               text: value,
               audio,
+              type,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
@@ -364,6 +378,8 @@ export default function NoteUpdateForm(props) {
               title,
               text,
               audio: values,
+              type,
+              createdAt,
             };
             const result = onChange(modelFields);
             values = result?.audio ?? values;
@@ -400,6 +416,62 @@ export default function NoteUpdateForm(props) {
           {...getOverrideProps(overrides, "audio")}
         ></TextField>
       </ArrayField>
+      <TextField
+        label="Type"
+        isRequired={true}
+        isReadOnly={false}
+        value={type}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              text,
+              audio,
+              type: value,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.type ?? value;
+          }
+          if (errors.type?.hasError) {
+            runValidationTasks("type", value);
+          }
+          setType(value);
+        }}
+        onBlur={() => runValidationTasks("type", type)}
+        errorMessage={errors.type?.errorMessage}
+        hasError={errors.type?.hasError}
+        {...getOverrideProps(overrides, "type")}
+      ></TextField>
+      <TextField
+        label="Created at"
+        isRequired={true}
+        isReadOnly={false}
+        value={createdAt}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              text,
+              audio,
+              type,
+              createdAt: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.createdAt ?? value;
+          }
+          if (errors.createdAt?.hasError) {
+            runValidationTasks("createdAt", value);
+          }
+          setCreatedAt(value);
+        }}
+        onBlur={() => runValidationTasks("createdAt", createdAt)}
+        errorMessage={errors.createdAt?.errorMessage}
+        hasError={errors.createdAt?.hasError}
+        {...getOverrideProps(overrides, "createdAt")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

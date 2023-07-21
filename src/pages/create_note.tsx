@@ -36,7 +36,7 @@ function NoteAudioUploader() {
       const fileKeys = Object.keys(files);
       const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
         query: mutations.createNote,
-        variables: { input: { title, audio: fileKeys } },
+        variables: { input: { title, audio: fileKeys, type: 'Note' } },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
     } catch (error) {

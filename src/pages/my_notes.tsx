@@ -2,43 +2,82 @@ import {
   GetNoteQueryVariables,
   ListNotesQuery,
   ListNotesQueryVariables,
+  ModelSortDirection,
+  NotesByDateQuery,
+  NotesByDateQueryVariables,
+  OnCreateNoteSubscription,
+  OnDeleteNoteSubscription,
 } from '@/API';
 import DeleteNoteModal from '@/custom-components/DeleteNoteModal';
 import Layout from '@/custom-components/Layout';
 import { getNote } from '@/graphql/queries';
 import { Note } from '@/models';
 import { NoteCard, NoteCardCollection } from '@/ui-components';
-import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
+import {
+  API,
+  graphqlOperation,
+  GraphQLQuery,
+  GraphQLSubscription,
+  GRAPHQL_AUTH_MODE,
+} from '@aws-amplify/api';
 import { Button, Collection, Flex, View } from '@aws-amplify/ui-react';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as queries from '../graphql/queries';
-
+import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
-  const [notes, setNotes] = useState<ListNotesQuery>();
-  const prevTokenRef = useRef<string | undefined>(undefined);
+  const [notes, setNotes] = useState<NotesByDateQuery>();
+  const nextTokenRef = useRef<string | undefined>(undefined);
 
   const getNotes = async () => {
-    const variables: ListNotesQueryVariables = {
-      limit: 1,
+    const variables: NotesByDateQueryVariables = {
+      limit: 10,
+      type: 'Note',
+      sortDirection: ModelSortDirection.DESC,
     };
-    // if (prevTokenRef.current) {
-    //   variables.nextToken = prevTokenRef.current;
-    // }
-    const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
-      query: queries.listNotes,
-      // variables: variables,
+    if (nextTokenRef.current) {
+      variables.nextToken = nextTokenRef.current;
+    }
+    const allNotes = await API.graphql<GraphQLQuery<NotesByDateQuery>>({
+      query: queries.notesByDate,
+      variables: variables,
       authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
     });
-
-    // if (allNotes?.data?.listNotes?.nextToken !== prevTokenRef.current) {
+    // if (allNotes?.data?.notesByDate?.nextToken !== nextTokenRef.current) {
     setNotes(allNotes.data);
-    // prevTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
+    nextTokenRef.current = allNotes?.data?.notesByDate?.nextToken as string;
     // }
   };
 
   useEffect(() => {
     getNotes();
-    return () => {};
+    const sub = API.graphql<GraphQLSubscription<OnDeleteNoteSubscription>>({
+      query: subscriptions.onDeleteNote,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+    }).subscribe({
+      next: ({ provider, value }) => {
+        if (value?.data?.onDeleteNote?.id) {
+          const deletedNoteId = value.data.onDeleteNote.id;
+          setNotes((prevNotes: any) => {
+            if (!prevNotes?.notesByDate?.items) return prevNotes;
+            const updatedNotes = {
+              ...prevNotes,
+              notesByDate: {
+                ...prevNotes.notesByDate,
+                items: prevNotes.notesByDate.items.filter(
+                  (note: Note) => note.id !== deletedNoteId
+                ),
+              },
+            };
+            return updatedNotes;
+          });
+        }
+      },
+      error: (error) => console.warn(error),
+    });
+    // Stop receiving data updates from the subscription
+    return () => {
+      sub.unsubscribe();
+    };
   }, []);
 
   return (
@@ -48,7 +87,7 @@ function Notes() {
         type="grid"
         templateColumns="1fr 1fr"
         gap={20}
-        items={notes?.listNotes?.items as any}
+        items={notes?.notesByDate?.items as any}
       >
         {(item, index) => (
           <NoteCard
@@ -73,8 +112,9 @@ function Notes() {
         )}
       </Collection>
       <Flex marginTop={12}>
-        {/* <Button>Prev</Button>
-        <Button onClick={getNotes}>Next</Button> */}
+        <Button borderRadius="8px" onClick={getNotes}>
+          Loop
+        </Button>
       </Flex>
     </View>
   );

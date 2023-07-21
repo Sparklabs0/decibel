@@ -15,7 +15,6 @@ function DeleteNoteModal({ note }: { note: Note }) {
         variables: { input: { id } },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
-      console.log(res);
     } catch (error) {
       console.error(error);
     }

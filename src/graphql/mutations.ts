@@ -12,6 +12,7 @@ export const createNote = /* GraphQL */ `
       title
       text
       audio
+      type
       createdAt
       updatedAt
       owner
@@ -29,6 +30,7 @@ export const updateNote = /* GraphQL */ `
       title
       text
       audio
+      type
       createdAt
       updatedAt
       owner
@@ -46,6 +48,7 @@ export const deleteNote = /* GraphQL */ `
       title
       text
       audio
+      type
       createdAt
       updatedAt
       owner
