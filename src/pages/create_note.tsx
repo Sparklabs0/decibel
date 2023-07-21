@@ -1,31 +1,31 @@
-import { CreateNoteMutation } from "@/API";
-import Layout from "@/custom-components/Layout";
-import { NoteCreateForm } from "@/ui-components";
-import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
-import { Button, Flex, TextField, useTheme } from "@aws-amplify/ui-react";
+import { CreateNoteMutation } from '@/API';
+import Layout from '@/custom-components/Layout';
+import { NoteCreateForm } from '@/ui-components';
+import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
+import { Button, Flex, TextField, useTheme } from '@aws-amplify/ui-react';
 import {
   StorageManager,
   StorageManagerProps,
-} from "@aws-amplify/ui-react-storage";
-import { StorageManagerHandle } from "@aws-amplify/ui-react-storage/dist/types/components/StorageManager/types";
-import { tokens } from "@aws-amplify/ui/dist/types/theme/tokens";
-import { REFUSED } from "dns";
-import { useRouter } from "next/router";
-import React, { ChangeEvent, ReactElement, useRef, useState } from "react";
-import * as mutations from "../graphql/mutations";
-import { toast } from "react-hot-toast";
+} from '@aws-amplify/ui-react-storage';
+import { StorageManagerHandle } from '@aws-amplify/ui-react-storage/dist/types/components/StorageManager/types';
+import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
+import { REFUSED } from 'dns';
+import { useRouter } from 'next/router';
+import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import * as mutations from '../graphql/mutations';
 interface Files {
   [key: string]: any; // Or you can specify the specific type of the files if known
 }
 function NoteAudioUploader() {
   const router = useRouter();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [files, setFiles] = useState<Files>({});
   const ref = React.useRef<StorageManagerHandle>(null);
   const { tokens } = useTheme();
 
   const resetForm = async () => {
-    setTitle("");
+    setTitle('');
     setFiles({});
     if (ref.current) {
       ref.current.clearFiles();
@@ -38,14 +38,14 @@ function NoteAudioUploader() {
       if (fileKeys.length != 0) {
         const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
           query: mutations.createNote,
-          variables: { input: { title, audio: fileKeys, type: "Note" } },
+          variables: { input: { title, audio: fileKeys, type: 'Note' } },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
         }).then(() => {
-          toast.success("Note created successfully");
-          router.push("/my_notes");
+          toast.success('Note created successfully');
+          router.push('/my_notes');
         });
       } else {
-        toast.error("Please upload an audio file");
+        toast.error('Please upload an audio file');
       }
     } catch (error) {
       console.error(error);
@@ -62,16 +62,16 @@ function NoteAudioUploader() {
   }: {
     file: File;
   }): Promise<ProcessedFile> => {
-    const fileExtension = file.name.split(".").pop();
+    const fileExtension = file.name.split('.').pop();
 
     return file
       .arrayBuffer()
-      .then((filebuffer) => window.crypto.subtle.digest("SHA-1", filebuffer))
+      .then((filebuffer) => window.crypto.subtle.digest('SHA-1', filebuffer))
       .then((hashBuffer) => {
         const hashArray = Array.from(new Uint8Array(hashBuffer));
         const hashHex = hashArray
-          .map((a) => a.toString(16).padStart(2, "0"))
-          .join("");
+          .map((a) => a.toString(16).padStart(2, '0'))
+          .join('');
         return { file, key: `${hashHex}.${fileExtension}` };
       });
   };
@@ -89,12 +89,12 @@ function NoteAudioUploader() {
         }}
       />
       <StorageManager
-        acceptedFileTypes={["audio/*"]}
-        accessLevel="protected"
+        acceptedFileTypes={['audio/*']}
+        accessLevel="private"
         maxFileCount={1}
         maxFileSize={5000000}
         processFile={processFile}
-        onFileRemove={({ key = "" }) => {
+        onFileRemove={({ key = '' }) => {
           setFiles((prevFiles) => {
             const updatedFiles = { ...prevFiles };
             delete updatedFiles[key];
@@ -106,27 +106,27 @@ function NoteAudioUploader() {
             return {
               ...prevFiles,
               [key]: {
-                status: "error",
+                status: 'error',
               },
             };
           });
         }}
-        onUploadSuccess={({ key = "" }) => {
+        onUploadSuccess={({ key = '' }) => {
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
               [key]: {
-                status: "success",
+                status: 'success',
               },
             };
           });
         }}
-        onUploadStart={({ key = "" }) => {
+        onUploadStart={({ key = '' }) => {
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
               [key]: {
-                status: "uploading",
+                status: 'uploading',
               },
             };
           });
