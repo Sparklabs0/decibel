@@ -9,7 +9,6 @@ import {
   View,
 } from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
-import Link from 'next/link';
 import { ReactElement, useEffect, useState } from 'react';
 
 export const AudioFiles = () => {
@@ -20,8 +19,9 @@ export const AudioFiles = () => {
     Storage.list('', { level: 'private' })
       .then(({ results }) => {
         // Extract the file keys from the response and filter out any undefined values
+        
         const keys = results
-          .map((result) => result.key)
+          .map((result) =>  result.key)
           .filter(Boolean) as string[];
         setFileKeys(keys);
       })

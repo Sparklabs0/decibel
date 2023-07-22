@@ -13,10 +13,12 @@ import {
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
   const { note, children, overrides, ...rest } = props;
-  const noteCardOnClick = useNavigateAction({
+  const nOTEOnClick = useNavigateAction({
     type: "url",
     url: `${"/note/"}${note?.id}`,
   });
+  const loremipsumdolorsitametCommaconsecteturadipiscingelitCommaseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaPeriodUtenimadminimveniamCommaquisnostrudexercitationPeriodOnClick =
+    useNavigateAction({ type: "url", url: `${"/note/"}${note?.id}` });
   return (
     <Flex
       gap="16px"
@@ -29,9 +31,6 @@ export default function NoteCard(props) {
       boxShadow="0px 2px 6px rgba(0.05098039284348488, 0.10196078568696976, 0.14901961386203766, 0.15000000596046448)"
       padding="40px 40px 40px 40px"
       backgroundColor="rgba(255,255,255,1)"
-      onClick={() => {
-        noteCardOnClick();
-      }}
       {...getOverrideProps(overrides, "NoteCard")}
       {...rest}
     >
@@ -55,6 +54,9 @@ export default function NoteCard(props) {
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={note?.title}
+        onClick={() => {
+          nOTEOnClick();
+        }}
         {...getOverrideProps(overrides, "NOTE")}
       ></Text>
       <Text
@@ -78,6 +80,9 @@ export default function NoteCard(props) {
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={`${note?.audio}${","}`}
+        onClick={() => {
+          loremipsumdolorsitametCommaconsecteturadipiscingelitCommaseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaPeriodUtenimadminimveniamCommaquisnostrudexercitationPeriodOnClick();
+        }}
         {...getOverrideProps(
           overrides,
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
