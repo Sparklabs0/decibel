@@ -12,7 +12,6 @@ export const onCreateNote = /* GraphQL */ `
       title
       text
       audio
-      type
       createdAt
       jsonData
       label
@@ -32,7 +31,6 @@ export const onUpdateNote = /* GraphQL */ `
       title
       text
       audio
-      type
       createdAt
       jsonData
       label
@@ -52,7 +50,6 @@ export const onDeleteNote = /* GraphQL */ `
       title
       text
       audio
-      type
       createdAt
       jsonData
       label

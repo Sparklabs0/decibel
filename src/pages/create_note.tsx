@@ -38,12 +38,11 @@ function NoteAudioUploader() {
       if (fileKeys.length != 0) {
         const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
           query: mutations.createNote,
-          variables: { input: { title, audio: fileKeys, type: 'Note' } },
+          variables: { input: { title, audio: fileKeys } },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-        }).then(() => {
-          toast.success('Note created successfully');
-          router.push('/my_notes');
         });
+        toast.success('Note created successfully');
+        router.push('/my_notes');
       } else {
         toast.error('Please upload an audio file');
       }
@@ -140,6 +139,7 @@ function NoteAudioUploader() {
           border="none"
           backgroundColor={tokens.colors.neutral[60]}
           onClick={resetForm}
+          variation="menu"
         >
           Reset
         </Button>

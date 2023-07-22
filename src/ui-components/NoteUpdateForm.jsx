@@ -197,7 +197,6 @@ export default function NoteUpdateForm(props) {
     title: "",
     text: "",
     audio: [],
-    type: "",
     createdAt: "",
     jsonData: "",
     label: "",
@@ -205,7 +204,6 @@ export default function NoteUpdateForm(props) {
   const [title, setTitle] = React.useState(initialValues.title);
   const [text, setText] = React.useState(initialValues.text);
   const [audio, setAudio] = React.useState(initialValues.audio);
-  const [type, setType] = React.useState(initialValues.type);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
   const [label, setLabel] = React.useState(initialValues.label);
@@ -218,7 +216,6 @@ export default function NoteUpdateForm(props) {
     setText(cleanValues.text);
     setAudio(cleanValues.audio ?? []);
     setCurrentAudioValue("");
-    setType(cleanValues.type);
     setCreatedAt(cleanValues.createdAt);
     setJsonData(
       typeof cleanValues.jsonData === "string"
@@ -245,7 +242,6 @@ export default function NoteUpdateForm(props) {
     title: [],
     text: [],
     audio: [{ type: "Required" }],
-    type: [{ type: "Required" }],
     createdAt: [{ type: "Required" }],
     jsonData: [{ type: "JSON" }],
     label: [],
@@ -279,7 +275,6 @@ export default function NoteUpdateForm(props) {
           title,
           text,
           audio,
-          type,
           createdAt,
           jsonData,
           label,
@@ -341,7 +336,6 @@ export default function NoteUpdateForm(props) {
               title: value,
               text,
               audio,
-              type,
               createdAt,
               jsonData,
               label,
@@ -371,7 +365,6 @@ export default function NoteUpdateForm(props) {
               title,
               text: value,
               audio,
-              type,
               createdAt,
               jsonData,
               label,
@@ -397,7 +390,6 @@ export default function NoteUpdateForm(props) {
               title,
               text,
               audio: values,
-              type,
               createdAt,
               jsonData,
               label,
@@ -438,36 +430,6 @@ export default function NoteUpdateForm(props) {
         ></TextField>
       </ArrayField>
       <TextField
-        label="Type"
-        isRequired={true}
-        isReadOnly={false}
-        value={type}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title,
-              text,
-              audio,
-              type: value,
-              createdAt,
-              jsonData,
-              label,
-            };
-            const result = onChange(modelFields);
-            value = result?.type ?? value;
-          }
-          if (errors.type?.hasError) {
-            runValidationTasks("type", value);
-          }
-          setType(value);
-        }}
-        onBlur={() => runValidationTasks("type", type)}
-        errorMessage={errors.type?.errorMessage}
-        hasError={errors.type?.hasError}
-        {...getOverrideProps(overrides, "type")}
-      ></TextField>
-      <TextField
         label="Created at"
         isRequired={true}
         isReadOnly={false}
@@ -479,7 +441,6 @@ export default function NoteUpdateForm(props) {
               title,
               text,
               audio,
-              type,
               createdAt: value,
               jsonData,
               label,
@@ -509,7 +470,6 @@ export default function NoteUpdateForm(props) {
               title,
               text,
               audio,
-              type,
               createdAt,
               jsonData: value,
               label,
@@ -539,7 +499,6 @@ export default function NoteUpdateForm(props) {
               title,
               text,
               audio,
-              type,
               createdAt,
               jsonData,
               label: value,

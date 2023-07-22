@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
-  const { note, children, overrides, ...rest } = props;
+  const { children, note, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -19,7 +19,8 @@ export default function NoteCard(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      boxShadow="0px 2px 6px rgba(0.05098039284348488, 0.10196078568696976, 0.14901961386203766, 0.15000000596046448)"
+      boxShadow="0px 13px 16px rgba(0, 0.16388893127441406, 0.49166667461395264, 0.07999999821186066)"
+      borderRadius="11px"
       padding="40px 40px 40px 40px"
       backgroundColor="rgba(255,255,255,1)"
       {...getOverrideProps(overrides, "NoteCard")}
@@ -45,7 +46,30 @@ export default function NoteCard(props) {
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={note?.title}
-        {...getOverrideProps(overrides, "NOTE")}
+        {...getOverrideProps(overrides, "note_title")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="600"
+        color="rgba(48,64,80,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        letterSpacing="0.01px"
+        width="unset"
+        height="unset"
+        gap="unset"
+        alignItems="unset"
+        shrink="0"
+        alignSelf="stretch"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children={`${note?.audio}${","}`}
+        {...getOverrideProps(overrides, "note_audios")}
       ></Text>
       <Text
         fontFamily="Inter"
@@ -67,11 +91,8 @@ export default function NoteCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={`${note?.audio}${","}`}
-        {...getOverrideProps(
-          overrides,
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
-        )}
+        children={note?.text}
+        {...getOverrideProps(overrides, "note_text")}
       ></Text>
       <View
         width="272px"

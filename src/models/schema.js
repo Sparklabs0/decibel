@@ -35,10 +35,23 @@ export const schema = {
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "jsonData": {
+                    "name": "jsonData",
+                    "isArray": false,
+                    "type": "AWSJSON",
                     "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "attributes": []
+                },
+                "label": {
+                    "name": "label",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -81,5 +94,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "b89d8014123ae1b62218a343419b8ba7"
+    "version": "311359ff3ca661a16844829443dcd509"
 };

@@ -11,13 +11,14 @@ import { FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteCardOverridesProps = {
     NoteCard?: PrimitiveOverrideProps<FlexProps>;
-    NOTE?: PrimitiveOverrideProps<TextProps>;
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."?: PrimitiveOverrideProps<TextProps>;
+    note_title?: PrimitiveOverrideProps<TextProps>;
+    note_audios?: PrimitiveOverrideProps<TextProps>;
+    note_text?: PrimitiveOverrideProps<TextProps>;
     "Frame 438"?: PrimitiveOverrideProps<ViewProps>;
 } & EscapeHatchProps;
 export declare type NoteCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    note?: Note;
     children?: React.ReactNode;
+    note?: Note;
 } & {
     overrides?: NoteCardOverridesProps | undefined | null;
 }>;

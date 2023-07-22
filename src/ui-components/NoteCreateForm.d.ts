@@ -16,7 +16,6 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type NoteCreateFormInputValues = {
     title?: string;
     audio?: string[];
-    type?: string;
     createdAt?: string;
     jsonData?: string;
     label?: string;
@@ -24,7 +23,6 @@ export declare type NoteCreateFormInputValues = {
 export declare type NoteCreateFormValidationValues = {
     title?: ValidationFunction<string>;
     audio?: ValidationFunction<string>;
-    type?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
     jsonData?: ValidationFunction<string>;
     label?: ValidationFunction<string>;
@@ -34,7 +32,6 @@ export declare type NoteCreateFormOverridesProps = {
     NoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
     audio?: PrimitiveOverrideProps<StorageManagerProps>;
-    type?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
     jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
     label?: PrimitiveOverrideProps<TextFieldProps>;

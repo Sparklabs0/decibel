@@ -17,7 +17,6 @@ export declare type NoteUpdateFormInputValues = {
     title?: string;
     text?: string;
     audio?: string[];
-    type?: string;
     createdAt?: string;
     jsonData?: string;
     label?: string;
@@ -26,7 +25,6 @@ export declare type NoteUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
     text?: ValidationFunction<string>;
     audio?: ValidationFunction<string>;
-    type?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
     jsonData?: ValidationFunction<string>;
     label?: ValidationFunction<string>;
@@ -37,7 +35,6 @@ export declare type NoteUpdateFormOverridesProps = {
     title?: PrimitiveOverrideProps<TextFieldProps>;
     text?: PrimitiveOverrideProps<TextFieldProps>;
     audio?: PrimitiveOverrideProps<TextFieldProps>;
-    type?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
     jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
     label?: PrimitiveOverrideProps<TextFieldProps>;

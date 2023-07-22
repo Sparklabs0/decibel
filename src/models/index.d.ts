@@ -9,26 +9,30 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 type EagerNote = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Note, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    readOnlyFields: 'updatedAt';
   };
   readonly id: string;
   readonly title?: string | null;
   readonly text?: string | null;
   readonly audio: string[];
-  readonly createdAt?: string | null;
+  readonly createdAt: string;
+  readonly jsonData?: string | null;
+  readonly label?: string | null;
   readonly updatedAt?: string | null;
 }
 
 type LazyNote = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Note, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    readOnlyFields: 'updatedAt';
   };
   readonly id: string;
   readonly title?: string | null;
   readonly text?: string | null;
   readonly audio: string[];
-  readonly createdAt?: string | null;
+  readonly createdAt: string;
+  readonly jsonData?: string | null;
+  readonly label?: string | null;
   readonly updatedAt?: string | null;
 }
 

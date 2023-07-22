@@ -9,6 +9,7 @@ import {
   useTheme,
   View,
 } from '@aws-amplify/ui-react';
+import { DataStore } from 'aws-amplify';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -24,11 +25,11 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
     try {
       const res = await API.graphql<GraphQLQuery<DeleteNoteMutation>>({
         query: mutations.deleteNote,
+        //@ts-ignore
         variables: { input: { id } },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-      }).then(() => {
-        toast.success('Note deleted successfully');
       });
+      toast.success('Note deleted successfully');
     } catch (error) {
       console.error(error);
     } finally {
@@ -72,6 +73,7 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
             backgroundColor={tokens.colors.neutral[60]}
             borderRadius={8}
             alignItems="center"
+            variation="menu"
           >
             <Text color={tokens.colors.white.original}>Editor</Text>
             <View marginLeft={8}>

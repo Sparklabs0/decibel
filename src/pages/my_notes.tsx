@@ -2,9 +2,9 @@ import {
   GetNoteQueryVariables,
   ListNotesQuery,
   ListNotesQueryVariables,
-  ModelSortDirection,
-  NotesByDateQuery,
-  NotesByDateQueryVariables,
+  // ModelSortDirection,
+  // NotesByDateQuery,
+  // NotesByDateQueryVariables,
   OnCreateNoteSubscription,
   OnDeleteNoteSubscription,
 } from '@/API';
@@ -33,26 +33,24 @@ import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
-  const [notes, setNotes] = useState<NotesByDateQuery>();
+  const [notes, setNotes] = useState<ListNotesQuery>();
   const nextTokenRef = useRef<string | undefined>(undefined);
   const { tokens } = useTheme();
   const getNotes = async () => {
-    const variables: NotesByDateQueryVariables = {
+    const variables: ListNotesQueryVariables = {
       limit: 8,
-      type: 'Note',
-      sortDirection: ModelSortDirection.DESC,
     };
     if (nextTokenRef.current) {
       variables.nextToken = nextTokenRef.current;
     }
-    const allNotes = await API.graphql<GraphQLQuery<NotesByDateQuery>>({
-      query: queries.notesByDate,
+    const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
+      query: queries.listNotes,
       variables: variables,
       authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
     });
-    // if (allNotes?.data?.notesByDate?.nextToken !== nextTokenRef.current) {
+    // if (allNotes?.data?.listNotes?.nextToken !== nextTokenRef.current) {
     setNotes(allNotes.data);
-    nextTokenRef.current = allNotes?.data?.notesByDate?.nextToken as string;
+    nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
     // }
   };
 
@@ -66,12 +64,12 @@ function Notes() {
         if (value?.data?.onDeleteNote?.id) {
           const deletedNoteId = value.data.onDeleteNote.id;
           setNotes((prevNotes: any) => {
-            if (!prevNotes?.notesByDate?.items) return prevNotes;
+            if (!prevNotes?.listNotes?.items) return prevNotes;
             const updatedNotes = {
               ...prevNotes,
-              notesByDate: {
-                ...prevNotes.notesByDate,
-                items: prevNotes.notesByDate.items.filter(
+              listNotes: {
+                ...prevNotes.listNotes,
+                items: prevNotes.listNotes.items.filter(
                   (note: Note) => note.id !== deletedNoteId
                 ),
               },
@@ -82,7 +80,6 @@ function Notes() {
       },
       error: (error) => console.warn(error),
     });
-    // Stop receiving data updates from the subscription
     return () => {
       sub.unsubscribe();
     };
@@ -102,7 +99,7 @@ function Notes() {
         type="grid"
         templateColumns="1fr 1fr"
         gap={20}
-        items={notes?.notesByDate?.items as any}
+        items={notes?.listNotes?.items as any}
       >
         {(item, index) => (
           <NoteCard
@@ -111,15 +108,16 @@ function Notes() {
             padding="1rem"
             note={item as any}
             overrides={{
-              NOTE: { flex: '0 0 auto' },
+              note_title: { flex: '0 0 auto' },
+              note_audio: { flex: '0 0 auto' },
+              note_text: { flex: '1 1 auto' },
+              'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
+
               NoteCard: {
                 border: '1px solid black',
                 borderRadius: '8px',
                 width: '100%',
               },
-              'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.':
-                { flex: '1 1 auto' },
             }}
           >
             <NoteCardActions note={item as any} />

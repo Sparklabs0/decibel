@@ -32,14 +32,12 @@ export default function NoteCreateForm(props) {
   const initialValues = {
     title: "",
     audio: [],
-    type: "",
     createdAt: "",
     jsonData: "",
     label: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [audio, setAudio] = React.useState(initialValues.audio);
-  const [type, setType] = React.useState(initialValues.type);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
   const [label, setLabel] = React.useState(initialValues.label);
@@ -47,7 +45,6 @@ export default function NoteCreateForm(props) {
   const resetStateValues = () => {
     setTitle(initialValues.title);
     setAudio(initialValues.audio);
-    setType(initialValues.type);
     setCreatedAt(initialValues.createdAt);
     setJsonData(initialValues.jsonData);
     setLabel(initialValues.label);
@@ -56,7 +53,6 @@ export default function NoteCreateForm(props) {
   const validations = {
     title: [],
     audio: [{ type: "Required" }],
-    type: [{ type: "Required" }],
     createdAt: [{ type: "Required" }],
     jsonData: [{ type: "JSON" }],
     label: [],
@@ -89,7 +85,6 @@ export default function NoteCreateForm(props) {
         let modelFields = {
           title,
           audio,
-          type,
           createdAt,
           jsonData,
           label,
@@ -149,7 +144,6 @@ export default function NoteCreateForm(props) {
             const modelFields = {
               title: value,
               audio,
-              type,
               createdAt,
               jsonData,
               label,
@@ -187,7 +181,6 @@ export default function NoteCreateForm(props) {
                 const modelFields = {
                   title,
                   audio: value,
-                  type,
                   createdAt,
                   jsonData,
                   label,
@@ -205,7 +198,6 @@ export default function NoteCreateForm(props) {
                 const modelFields = {
                   title,
                   audio: value,
-                  type,
                   createdAt,
                   jsonData,
                   label,
@@ -229,40 +221,6 @@ export default function NoteCreateForm(props) {
       <TextField
         label={
           <span style={{ display: "inline-flex" }}>
-            <span>Type</span>
-            <span style={{ color: "red" }}>*</span>
-          </span>
-        }
-        isRequired={true}
-        isReadOnly={false}
-        value={type}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title,
-              audio,
-              type: value,
-              createdAt,
-              jsonData,
-              label,
-            };
-            const result = onChange(modelFields);
-            value = result?.type ?? value;
-          }
-          if (errors.type?.hasError) {
-            runValidationTasks("type", value);
-          }
-          setType(value);
-        }}
-        onBlur={() => runValidationTasks("type", type)}
-        errorMessage={errors.type?.errorMessage}
-        hasError={errors.type?.hasError}
-        {...getOverrideProps(overrides, "type")}
-      ></TextField>
-      <TextField
-        label={
-          <span style={{ display: "inline-flex" }}>
             <span>Created at</span>
             <span style={{ color: "red" }}>*</span>
           </span>
@@ -276,7 +234,6 @@ export default function NoteCreateForm(props) {
             const modelFields = {
               title,
               audio,
-              type,
               createdAt: value,
               jsonData,
               label,
@@ -304,7 +261,6 @@ export default function NoteCreateForm(props) {
             const modelFields = {
               title,
               audio,
-              type,
               createdAt,
               jsonData: value,
               label,
@@ -333,7 +289,6 @@ export default function NoteCreateForm(props) {
             const modelFields = {
               title,
               audio,
-              type,
               createdAt,
               jsonData,
               label: value,
