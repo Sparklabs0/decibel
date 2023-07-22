@@ -29,33 +29,52 @@ import {
   View,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
   const [notes, setNotes] = useState<ListNotesQuery>();
   const nextTokenRef = useRef<string | undefined>(undefined);
   const { tokens } = useTheme();
-  const getNotes = async () => {
+  const [search, setSearch] = useState('');
+  const getNotes = useCallback(async () => {
     const variables: ListNotesQueryVariables = {
       limit: 8,
     };
     if (nextTokenRef.current) {
       variables.nextToken = nextTokenRef.current;
     }
-    const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
-      query: queries.listNotes,
-      variables: variables,
-      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-    });
-    // if (allNotes?.data?.listNotes?.nextToken !== nextTokenRef.current) {
-    setNotes(allNotes.data);
-    nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
-    // }
-  };
+    if (search) {
+      variables.filter = { title: { contains: search } };
+    }
+    try {
+      const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
+        query: queries.listNotes,
+        variables: variables,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      });
+      console.log(allNotes);
+      setNotes(allNotes.data);
+      // if (allNotes?.data?.listNotes?.nextToken !== nextTokenRef.current) {
+      nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
+      // }
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+    }
+  }, [search]); // Add search as a dependency to the useCallback hook
 
   useEffect(() => {
     getNotes();
+  }, [search, getNotes]);
+  //subscribe to delete note event
+  useEffect(() => {
     const sub = API.graphql<GraphQLSubscription<OnDeleteNoteSubscription>>({
       query: subscriptions.onDeleteNote,
       authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
@@ -93,7 +112,11 @@ function Notes() {
       <SearchField
         marginBottom={24}
         label="Search"
-        placeholder="Search notes... ( non functional )"
+        value={search}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setSearch(e.target.value);
+        }}
+        placeholder="Search with title"
       />
       <Collection
         type="grid"
