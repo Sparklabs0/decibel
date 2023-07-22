@@ -1,13 +1,22 @@
 import { DeleteNoteMutation } from '@/API';
 import { Note } from '@/models';
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
-import { Button, Heading, Text, useTheme, View } from '@aws-amplify/ui-react';
+import {
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useTheme,
+  View,
+} from '@aws-amplify/ui-react';
+import Link from 'next/link';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { BiEdit, BiLink } from 'react-icons/bi';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
-import toast from 'react-hot-toast';
 
-const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
+const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
   const { tokens } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,7 +55,7 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
 
   return (
     <>
-      <Text color={tokens.colors.black.original}>
+      <Flex color={tokens.colors.black.original} gap={8}>
         <Button
           borderRadius="8px"
           border="none"
@@ -57,15 +66,29 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
         >
           Delete
         </Button>
-      </Text>
-
+        <Link href={`/note/${note.id}`}>
+          <Button
+            border="none"
+            backgroundColor={tokens.colors.neutral[60]}
+            borderRadius={8}
+            alignItems="center"
+          >
+            <Text color={tokens.colors.white.original}>Editor</Text>
+            <View marginLeft={8}>
+              <BiEdit color="white" />
+            </View>
+          </Button>
+        </Link>
+      </Flex>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
         // style={modalStyles}
         style={modalStyles}
       >
-        <Heading fontSize={25} level={3}>Confirm Deletion</Heading>
+        <Heading fontSize={25} level={3}>
+          Confirm Deletion
+        </Heading>
         <Text marginBottom={24}>
           Are you sure you want to delete this note?
         </Text>
@@ -77,6 +100,7 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
           >
             Delete
           </Button>
+
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
         </View>
       </Modal>
@@ -84,4 +108,4 @@ const DeleteNoteModal: React.FC<{ note: Note }> = ({ note }) => {
   );
 };
 
-export default DeleteNoteModal;
+export default NoteCardActions;

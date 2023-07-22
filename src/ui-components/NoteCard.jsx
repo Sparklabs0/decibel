@@ -6,19 +6,10 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  getOverrideProps,
-  useNavigateAction,
-} from "@aws-amplify/ui-react/internal";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
   const { note, children, overrides, ...rest } = props;
-  const nOTEOnClick = useNavigateAction({
-    type: "url",
-    url: `${"/note/"}${note?.id}`,
-  });
-  const loremipsumdolorsitametCommaconsecteturadipiscingelitCommaseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaPeriodUtenimadminimveniamCommaquisnostrudexercitationPeriodOnClick =
-    useNavigateAction({ type: "url", url: `${"/note/"}${note?.id}` });
   return (
     <Flex
       gap="16px"
@@ -54,9 +45,6 @@ export default function NoteCard(props) {
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={note?.title}
-        onClick={() => {
-          nOTEOnClick();
-        }}
         {...getOverrideProps(overrides, "NOTE")}
       ></Text>
       <Text
@@ -80,9 +68,6 @@ export default function NoteCard(props) {
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children={`${note?.audio}${","}`}
-        onClick={() => {
-          loremipsumdolorsitametCommaconsecteturadipiscingelitCommaseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaPeriodUtenimadminimveniamCommaquisnostrudexercitationPeriodOnClick();
-        }}
         {...getOverrideProps(
           overrides,
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."

@@ -8,11 +8,11 @@ import {
   OnCreateNoteSubscription,
   OnDeleteNoteSubscription,
 } from '@/API';
-import DeleteNoteModal from '@/custom-components/DeleteNoteModal';
 import Layout from '@/custom-components/Layout';
+import NoteCardActions from '@/custom-components/NoteCardActions';
 import { getNote } from '@/graphql/queries';
 import { Note } from '@/models';
-import { NoteCard, NoteCardCollection } from '@/ui-components';
+import { NoteCard } from '@/ui-components';
 import {
   API,
   graphqlOperation,
@@ -25,16 +25,17 @@ import {
   Collection,
   Flex,
   SearchField,
+  useTheme,
   View,
 } from '@aws-amplify/ui-react';
+import { useRouter } from 'next/router';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
-import { useRouter } from 'next/router';
 function Notes() {
   const [notes, setNotes] = useState<NotesByDateQuery>();
   const nextTokenRef = useRef<string | undefined>(undefined);
-
+  const { tokens } = useTheme();
   const getNotes = async () => {
     const variables: NotesByDateQueryVariables = {
       limit: 8,
@@ -109,28 +110,23 @@ function Notes() {
             key={index}
             padding="1rem"
             note={item as any}
-            // onClick={() => {
-            //   // router.push(`/notes/${item?.id}`);
-            // }}
-            style={{ cursor: 'pointer' }}
             overrides={{
               NOTE: { flex: '0 0 auto' },
               NoteCard: {
                 border: '1px solid black',
                 borderRadius: '8px',
                 width: '100%',
-                
               },
               'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.':
                 { flex: '1 1 auto' },
             }}
           >
-            <DeleteNoteModal note={item as any} />
+            <NoteCardActions note={item as any} />
           </NoteCard>
         )}
       </Collection>
-      <Flex marginTop={12}>
+      <Flex marginTop={24}>
         <Button borderRadius="8px" variation="primary" onClick={getNotes}>
           Next Page
         </Button>
