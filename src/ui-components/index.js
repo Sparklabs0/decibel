@@ -25,7 +25,6 @@ export { default as EditProfile } from "./EditProfile";
 export { default as LogoWithText } from "./LogoWithText";
 export { default as NavBarSide } from "./NavBarSide";
 export { default as Filters } from "./Filters";
-export { default as NoteCardCollection } from "./NoteCardCollection";
 export { default as studioTheme } from "./studioTheme";
 export { default as NoteCreateForm } from "./NoteCreateForm";
 export { default as NoteUpdateForm } from "./NoteUpdateForm";

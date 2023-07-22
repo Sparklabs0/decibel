@@ -14,6 +14,8 @@ export const onCreateNote = /* GraphQL */ `
       audio
       type
       createdAt
+      jsonData
+      label
       updatedAt
       owner
       __typename
@@ -32,6 +34,8 @@ export const onUpdateNote = /* GraphQL */ `
       audio
       type
       createdAt
+      jsonData
+      label
       updatedAt
       owner
       __typename
@@ -50,6 +54,8 @@ export const onDeleteNote = /* GraphQL */ `
       audio
       type
       createdAt
+      jsonData
+      label
       updatedAt
       owner
       __typename

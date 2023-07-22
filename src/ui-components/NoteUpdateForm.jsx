@@ -15,6 +15,7 @@ import {
   Icon,
   ScrollView,
   Text,
+  TextAreaField,
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
@@ -198,12 +199,16 @@ export default function NoteUpdateForm(props) {
     audio: [],
     type: "",
     createdAt: "",
+    jsonData: "",
+    label: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [text, setText] = React.useState(initialValues.text);
   const [audio, setAudio] = React.useState(initialValues.audio);
   const [type, setType] = React.useState(initialValues.type);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
+  const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
+  const [label, setLabel] = React.useState(initialValues.label);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
@@ -215,6 +220,12 @@ export default function NoteUpdateForm(props) {
     setCurrentAudioValue("");
     setType(cleanValues.type);
     setCreatedAt(cleanValues.createdAt);
+    setJsonData(
+      typeof cleanValues.jsonData === "string"
+        ? cleanValues.jsonData
+        : JSON.stringify(cleanValues.jsonData)
+    );
+    setLabel(cleanValues.label);
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -236,6 +247,8 @@ export default function NoteUpdateForm(props) {
     audio: [{ type: "Required" }],
     type: [{ type: "Required" }],
     createdAt: [{ type: "Required" }],
+    jsonData: [{ type: "JSON" }],
+    label: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -268,6 +281,8 @@ export default function NoteUpdateForm(props) {
           audio,
           type,
           createdAt,
+          jsonData,
+          label,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -328,6 +343,8 @@ export default function NoteUpdateForm(props) {
               audio,
               type,
               createdAt,
+              jsonData,
+              label,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -356,6 +373,8 @@ export default function NoteUpdateForm(props) {
               audio,
               type,
               createdAt,
+              jsonData,
+              label,
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
@@ -380,6 +399,8 @@ export default function NoteUpdateForm(props) {
               audio: values,
               type,
               createdAt,
+              jsonData,
+              label,
             };
             const result = onChange(modelFields);
             values = result?.audio ?? values;
@@ -430,6 +451,8 @@ export default function NoteUpdateForm(props) {
               audio,
               type: value,
               createdAt,
+              jsonData,
+              label,
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
@@ -458,6 +481,8 @@ export default function NoteUpdateForm(props) {
               audio,
               type,
               createdAt: value,
+              jsonData,
+              label,
             };
             const result = onChange(modelFields);
             value = result?.createdAt ?? value;
@@ -471,6 +496,66 @@ export default function NoteUpdateForm(props) {
         errorMessage={errors.createdAt?.errorMessage}
         hasError={errors.createdAt?.hasError}
         {...getOverrideProps(overrides, "createdAt")}
+      ></TextField>
+      <TextAreaField
+        label="Json data"
+        isRequired={false}
+        isReadOnly={false}
+        value={jsonData}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              text,
+              audio,
+              type,
+              createdAt,
+              jsonData: value,
+              label,
+            };
+            const result = onChange(modelFields);
+            value = result?.jsonData ?? value;
+          }
+          if (errors.jsonData?.hasError) {
+            runValidationTasks("jsonData", value);
+          }
+          setJsonData(value);
+        }}
+        onBlur={() => runValidationTasks("jsonData", jsonData)}
+        errorMessage={errors.jsonData?.errorMessage}
+        hasError={errors.jsonData?.hasError}
+        {...getOverrideProps(overrides, "jsonData")}
+      ></TextAreaField>
+      <TextField
+        label="Label"
+        isRequired={false}
+        isReadOnly={false}
+        value={label}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              text,
+              audio,
+              type,
+              createdAt,
+              jsonData,
+              label: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.label ?? value;
+          }
+          if (errors.label?.hasError) {
+            runValidationTasks("label", value);
+          }
+          setLabel(value);
+        }}
+        onBlur={() => runValidationTasks("label", label)}
+        errorMessage={errors.label?.errorMessage}
+        hasError={errors.label?.hasError}
+        {...getOverrideProps(overrides, "label")}
       ></TextField>
       <Flex
         justifyContent="space-between"

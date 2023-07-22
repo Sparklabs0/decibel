@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { StorageManagerProps } from "@aws-amplify/ui-react-storage";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
@@ -18,12 +18,16 @@ export declare type NoteCreateFormInputValues = {
     audio?: string[];
     type?: string;
     createdAt?: string;
+    jsonData?: string;
+    label?: string;
 };
 export declare type NoteCreateFormValidationValues = {
     title?: ValidationFunction<string>;
     audio?: ValidationFunction<string>;
     type?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
+    jsonData?: ValidationFunction<string>;
+    label?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteCreateFormOverridesProps = {
@@ -32,6 +36,8 @@ export declare type NoteCreateFormOverridesProps = {
     audio?: PrimitiveOverrideProps<StorageManagerProps>;
     type?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+    jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    label?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteCreateFormProps = React.PropsWithChildren<{
     overrides?: NoteCreateFormOverridesProps | undefined | null;

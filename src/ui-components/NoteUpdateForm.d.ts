@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { Note } from "../models";
 export declare type ValidationResponse = {
@@ -19,6 +19,8 @@ export declare type NoteUpdateFormInputValues = {
     audio?: string[];
     type?: string;
     createdAt?: string;
+    jsonData?: string;
+    label?: string;
 };
 export declare type NoteUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -26,6 +28,8 @@ export declare type NoteUpdateFormValidationValues = {
     audio?: ValidationFunction<string>;
     type?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
+    jsonData?: ValidationFunction<string>;
+    label?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteUpdateFormOverridesProps = {
@@ -35,6 +39,8 @@ export declare type NoteUpdateFormOverridesProps = {
     audio?: PrimitiveOverrideProps<TextFieldProps>;
     type?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+    jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    label?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteUpdateFormProps = React.PropsWithChildren<{
     overrides?: NoteUpdateFormOverridesProps | undefined | null;
