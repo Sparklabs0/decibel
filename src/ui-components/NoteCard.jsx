@@ -6,10 +6,17 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import {
+  getOverrideProps,
+  useNavigateAction,
+} from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
   const { note, children, overrides, ...rest } = props;
+  const noteCardOnClick = useNavigateAction({
+    type: "url",
+    url: `${"/note/"}${note?.id}`,
+  });
   return (
     <Flex
       gap="16px"
@@ -22,6 +29,9 @@ export default function NoteCard(props) {
       boxShadow="0px 2px 6px rgba(0.05098039284348488, 0.10196078568696976, 0.14901961386203766, 0.15000000596046448)"
       padding="40px 40px 40px 40px"
       backgroundColor="rgba(255,255,255,1)"
+      onClick={() => {
+        noteCardOnClick();
+      }}
       {...getOverrideProps(overrides, "NoteCard")}
       {...rest}
     >

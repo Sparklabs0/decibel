@@ -109,15 +109,17 @@ function Notes() {
             key={index}
             padding="1rem"
             note={item as any}
-            onClick={() => {
-              // router.push(`/notes/${item?.id}`);
-            }}
+            // onClick={() => {
+            //   // router.push(`/notes/${item?.id}`);
+            // }}
+            style={{ cursor: 'pointer' }}
             overrides={{
               NOTE: { flex: '0 0 auto' },
               NoteCard: {
                 border: '1px solid black',
                 borderRadius: '8px',
                 width: '100%',
+                
               },
               'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.':
