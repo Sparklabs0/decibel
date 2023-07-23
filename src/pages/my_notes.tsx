@@ -6,7 +6,7 @@ import {
   // NotesByDateQuery,
   // NotesByDateQueryVariables,
   OnCreateNoteSubscription,
-  OnDeleteNoteSubscription,
+  OnDeleteNoteSubscription
 } from '@/API';
 import Layout from '@/custom-components/Layout';
 import NoteCardActions from '@/custom-components/NoteCardActions';
@@ -18,7 +18,7 @@ import {
   graphqlOperation,
   GraphQLQuery,
   GraphQLSubscription,
-  GRAPHQL_AUTH_MODE,
+  GRAPHQL_AUTH_MODE
 } from '@aws-amplify/api';
 import {
   Button,
@@ -26,7 +26,7 @@ import {
   Flex,
   SearchField,
   useTheme,
-  View,
+  View
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import React, {
@@ -35,7 +35,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState,
+  useState
 } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
@@ -120,26 +120,28 @@ function Notes() {
       />
       <Collection
         type="grid"
-        templateColumns="1fr 1fr"
+        templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
         gap={20}
         items={notes?.listNotes?.items as any}
       >
         {(item, index) => (
           <NoteCard
-            boxShadow="none"
             key={index}
             padding="1rem"
             note={item as any}
             overrides={{
               note_title: { flex: '0 0 auto' },
-              note_audio: { flex: '0 0 auto' },
-              note_text: { flex: '1 1 auto' },
+              note_audio: {
+                flex: '0 0 auto',
+              },
+              note_text: {
+                flex: '1 1 auto',
+              },
               'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
-
               NoteCard: {
-                border: '1px solid black',
-                borderRadius: '8px',
                 width: '100%',
+                boxShadow:
+                  '0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)',
               },
             }}
           >

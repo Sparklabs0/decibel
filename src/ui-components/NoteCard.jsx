@@ -27,7 +27,7 @@ export default function NoteCard(props) {
       {...rest}
     >
       <Text
-        fontFamily="Inter"
+        fontFamily="Roboto"
         fontSize="24px"
         fontWeight="600"
         color="rgba(13,26,38,1)"
@@ -49,7 +49,7 @@ export default function NoteCard(props) {
         {...getOverrideProps(overrides, "note_title")}
       ></Text>
       <Text
-        fontFamily="Inter"
+        fontFamily="Roboto"
         fontSize="16px"
         fontWeight="600"
         color="rgba(48,64,80,1)"
@@ -67,12 +67,14 @@ export default function NoteCard(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
+        whiteSpace="nowrap"
+        overflow="hidden"
+        textOverflow="ellipses"
         children={`${note?.audio}${","}`}
         {...getOverrideProps(overrides, "note_audios")}
       ></Text>
       <Text
-        fontFamily="Inter"
+        fontFamily="Roboto"
         fontSize="16px"
         fontWeight="400"
         color="rgba(48,64,80,1)"

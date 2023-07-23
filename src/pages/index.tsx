@@ -7,12 +7,10 @@ import {
   View,
   withAuthenticator,
 } from '@aws-amplify/ui-react';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Dashboard from './dashboard';
-const inter = Inter({ subsets: ['latin'] });
 
 const components = {
   // Add your custom components here
