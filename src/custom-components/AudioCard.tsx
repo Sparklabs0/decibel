@@ -10,7 +10,7 @@ import { Storage } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import AudioPlayer from 'react-audio-player';
 import { toast } from 'react-hot-toast';
-import { IoTrashBinSharp } from 'react-icons/io5';
+import { ImBin2 } from 'react-icons/im';
 import Modal from 'react-modal'; // Import Modal from 'react-modal'
 function AudioCard({
   fileKey,
@@ -62,7 +62,9 @@ function AudioCard({
       <Flex width="100%" justifyContent="space-between" direction="row">
         <Flex direction="column">
           <View flex="1">
-            <AudioPlayer src={audioUrl} controls />
+            <AudioPlayer src={audioUrl} controls style={{
+              width: '100%',
+            }} />
           </View>
           <View flex="2">
             <Text fontWeight="bold">File Key</Text>
@@ -72,8 +74,12 @@ function AudioCard({
         <Button
           onClick={() => setIsModalOpen(true)} // Open the modal when the button is clicked
           variation="destructive"
+          style={{
+            height: '50px',
+            backgroundColor: `${tokens.colors.red[60]}`,
+          }}
         >
-          <IoTrashBinSharp size={24} />
+          <ImBin2 size={17} />
         </Button>
       </Flex>
       {/* Modal for confirmation */}
@@ -92,6 +98,7 @@ function AudioCard({
             borderRadius: '8px',
           },
         }}
+        overlayClassName={'modal-overlay'}
       >
         <Text marginBottom={24}>
           Are you sure you want to delete this audio file?
