@@ -44,7 +44,9 @@ function Notes() {
   const nextTokenRef = useRef<string | undefined>(undefined);
   const { tokens } = useTheme();
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false); 
   const getNotes = useCallback(async () => {
+    setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
       limit: 8,
     };
@@ -64,9 +66,11 @@ function Notes() {
       setNotes(allNotes.data);
       // if (allNotes?.data?.listNotes?.nextToken !== nextTokenRef.current) {
       nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
+      setLoading(false); // Set loading to false when search is complete
       // }
     } catch (error) {
       console.error('Error fetching notes:', error);
+      setLoading(false); // Set loading to false in case of an error
     }
   }, [search]); // Add search as a dependency to the useCallback hook
 
@@ -118,6 +122,7 @@ function Notes() {
         }}
         placeholder="Search with title"
       />
+      {loading && <p>Loading...</p>}
       <Collection
         type="grid"
         templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
