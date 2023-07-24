@@ -45,6 +45,7 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
       bottom: 'auto',
       marginRight: '-50%',
       padding: '60px',
+      border: 'none',
       transform: 'translate(-50%, -50%)',
       borderRadius: '8px',
     },
@@ -85,6 +86,7 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
+        
         // style={modalStyles}
         style={modalStyles}
       >

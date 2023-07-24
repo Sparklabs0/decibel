@@ -19,6 +19,12 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     }
   },
+  "predictions": {
+    "transcription1fe080fb": {
+      "language": "string",
+      "region": "string"
+    }
+  },
   "storage": {
     "s3hackathon00storage8fb1b21c": {
       "BucketName": "string",

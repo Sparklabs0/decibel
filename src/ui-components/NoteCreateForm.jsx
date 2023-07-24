@@ -35,12 +35,16 @@ export default function NoteCreateForm(props) {
     createdAt: "",
     jsonData: "",
     label: "",
+    transcription: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [audio, setAudio] = React.useState(initialValues.audio);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
   const [label, setLabel] = React.useState(initialValues.label);
+  const [transcription, setTranscription] = React.useState(
+    initialValues.transcription
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
@@ -48,6 +52,7 @@ export default function NoteCreateForm(props) {
     setCreatedAt(initialValues.createdAt);
     setJsonData(initialValues.jsonData);
     setLabel(initialValues.label);
+    setTranscription(initialValues.transcription);
     setErrors({});
   };
   const validations = {
@@ -56,6 +61,7 @@ export default function NoteCreateForm(props) {
     createdAt: [{ type: "Required" }],
     jsonData: [{ type: "JSON" }],
     label: [],
+    transcription: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -88,6 +94,7 @@ export default function NoteCreateForm(props) {
           createdAt,
           jsonData,
           label,
+          transcription,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -147,6 +154,7 @@ export default function NoteCreateForm(props) {
               createdAt,
               jsonData,
               label,
+              transcription,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -184,6 +192,7 @@ export default function NoteCreateForm(props) {
                   createdAt,
                   jsonData,
                   label,
+                  transcription,
                 };
                 const result = onChange(modelFields);
                 value = result?.audio ?? value;
@@ -201,6 +210,7 @@ export default function NoteCreateForm(props) {
                   createdAt,
                   jsonData,
                   label,
+                  transcription,
                 };
                 const result = onChange(modelFields);
                 value = result?.audio ?? value;
@@ -237,6 +247,7 @@ export default function NoteCreateForm(props) {
               createdAt: value,
               jsonData,
               label,
+              transcription,
             };
             const result = onChange(modelFields);
             value = result?.createdAt ?? value;
@@ -264,6 +275,7 @@ export default function NoteCreateForm(props) {
               createdAt,
               jsonData: value,
               label,
+              transcription,
             };
             const result = onChange(modelFields);
             value = result?.jsonData ?? value;
@@ -292,6 +304,7 @@ export default function NoteCreateForm(props) {
               createdAt,
               jsonData,
               label: value,
+              transcription,
             };
             const result = onChange(modelFields);
             value = result?.label ?? value;
@@ -305,6 +318,35 @@ export default function NoteCreateForm(props) {
         errorMessage={errors.label?.errorMessage}
         hasError={errors.label?.hasError}
         {...getOverrideProps(overrides, "label")}
+      ></TextField>
+      <TextField
+        label="Transcription"
+        isRequired={false}
+        isReadOnly={false}
+        value={transcription}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              audio,
+              createdAt,
+              jsonData,
+              label,
+              transcription: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.transcription ?? value;
+          }
+          if (errors.transcription?.hasError) {
+            runValidationTasks("transcription", value);
+          }
+          setTranscription(value);
+        }}
+        onBlur={() => runValidationTasks("transcription", transcription)}
+        errorMessage={errors.transcription?.errorMessage}
+        hasError={errors.transcription?.hasError}
+        {...getOverrideProps(overrides, "transcription")}
       ></TextField>
       <Flex
         justifyContent="space-between"

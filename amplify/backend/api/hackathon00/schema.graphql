@@ -3,8 +3,9 @@ type Note @model @auth(rules: [{allow: owner}]) {
   title: String
   text: String
   audio: [String!]!
-  # type: String! @index(name: "notesByDate", queryField: "notesByDate", sortKeyFields: ["createdAt"])
   createdAt: String!
-  jsonData: AWSJSON 
-  label: String 
+  jsonData: AWSJSON
+  label: String
+  transcription: String
 }
+ 

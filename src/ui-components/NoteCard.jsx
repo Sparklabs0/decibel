@@ -19,7 +19,7 @@ export default function NoteCard(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      boxShadow="0px 13px 16px rgba(0, 0.16388893127441406, 0.49166667461395264, 0.07999999821186066)"
+      boxShadow="0px 4px 12px rgba(0.0042708334513008595, 0.17368076741695404, 0.512499988079071, 0.10000000149011612)"
       borderRadius="11px"
       padding="40px 40px 40px 40px"
       backgroundColor="rgba(255,255,255,1)"

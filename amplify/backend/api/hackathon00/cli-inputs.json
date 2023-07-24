@@ -17,6 +17,10 @@
         "cognitoUserPoolId": "authhackathon00"
       }
     ],
-    "conflictResolution": {}
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "NONE"
+      }
+    }
   }
 }
