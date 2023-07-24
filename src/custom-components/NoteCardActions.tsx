@@ -89,6 +89,7 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
         
         // style={modalStyles}
         style={modalStyles}
+        overlayClassName='modal-overlay'
       >
         <Heading fontSize={25} level={3}>
           Confirm Deletion
