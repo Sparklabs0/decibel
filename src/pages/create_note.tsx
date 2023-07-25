@@ -2,14 +2,24 @@ import { CreateNoteMutation } from '@/API';
 import Layout from '@/custom-components/Layout';
 import { NoteCreateForm } from '@/ui-components';
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
-import { Button, Flex, TextField, useTheme } from '@aws-amplify/ui-react';
+import {
+  Button,
+  Flex,
+  Text,
+  TextField,
+  useTheme,
+  View,
+} from '@aws-amplify/ui-react';
 import {
   StorageManager,
   StorageManagerProps,
 } from '@aws-amplify/ui-react-storage';
 import { StorageManagerHandle } from '@aws-amplify/ui-react-storage/dist/types/components/StorageManager/types';
 import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
+import { Predictions, Storage } from 'aws-amplify';
+import axios from 'axios';
 import { REFUSED } from 'dns';
+
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -17,13 +27,19 @@ import * as mutations from '../graphql/mutations';
 interface Files {
   [key: string]: any; // Or you can specify the specific type of the files if known
 }
+enum LoadingStatus {
+  Transcribing = 'transcribing note...',
+  Summarizing = 'generating & formatting note ...',
+}
 function NoteAudioUploader() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<Files>({});
+  // const [summary, setSummary] = useState<string>('');
   const ref = React.useRef<StorageManagerHandle>(null);
   const { tokens } = useTheme();
 
+  const [loading, setLoading] = useState<LoadingStatus | ''>('');
   const resetForm = async () => {
     setTitle('');
     setFiles({});
@@ -34,20 +50,70 @@ function NoteAudioUploader() {
 
   const createNote = async () => {
     try {
-      const fileKeys = Object.keys(files);
-      if (fileKeys.length != 0) {
+      if (!files || Object.keys(files).length === 0) {
+        toast.error('Please upload an audio file');
+        return;
+      }
+
+      try {
+        const data = await Storage.get(Object.keys(files)[0], {
+          level: 'private',
+        });
+
+        setLoading(LoadingStatus.Transcribing);
+        toast.loading(LoadingStatus.Transcribing);
+        const transcriptionResponse = await axios.post(`/api/transcribe`, {
+          source: data,
+        });
+
+        if (!transcriptionResponse.data.transcript) {
+          toast.error('Transcription not available');
+          setLoading('');
+          return;
+        }
+        setLoading(LoadingStatus.Summarizing);
+        toast.loading(LoadingStatus.Summarizing);
+        const summarizingResponse = await axios.post(`/api/summarize`, {
+          prompt: transcriptionResponse.data.transcript,
+        });
+        toast.dismiss();
+
+        const summaryData = JSON.parse(summarizingResponse.data.summary);
+        const summaryText =
+          summaryData && summaryData[0] && summaryData[0].summary;
+
+        if (!summaryText) {
+          toast.error('Summary not available');
+          setLoading('');
+          return;
+        }
+        // setSummary(summaryText);
+
+        const fileKeys = Object.keys(files);
         const note = await API.graphql<GraphQLQuery<CreateNoteMutation>>({
           query: mutations.createNote,
-          variables: { input: { title, audio: fileKeys } },
+          variables: {
+            input: {
+              title,
+              audio: fileKeys,
+              transcription: transcriptionResponse.data.transcript,
+              summary: summaryText,
+            },
+          },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
         });
+
         toast.success('Note created successfully');
         router.push('/my_notes');
-      } else {
-        toast.error('Please upload an audio file');
+      } catch (error) {
+        console.error('Error during the process:', error);
+        toast.error('Error during the process');
+      } finally {
+        setLoading('');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error while getting audio:', error);
+      toast.error('Error while getting audio');
     }
   };
 
@@ -62,7 +128,6 @@ function NoteAudioUploader() {
     file: File;
   }): Promise<ProcessedFile> => {
     const fileExtension = file.name.split('.').pop();
-
     return file
       .arrayBuffer()
       .then((filebuffer) => window.crypto.subtle.digest('SHA-1', filebuffer))
@@ -148,10 +213,17 @@ function NoteAudioUploader() {
           borderRadius={8}
           color={tokens.colors.white.original}
           variation="primary"
+          isLoading={
+            loading === LoadingStatus.Transcribing ||
+            loading === LoadingStatus.Summarizing
+          }
         >
           Create Note
         </Button>
       </Flex>
+      {/* <Flex>
+        <Text>{summary}</Text>
+      </Flex> */}
     </Flex>
   );
 }

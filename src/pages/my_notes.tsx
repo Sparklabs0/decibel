@@ -6,8 +6,9 @@ import {
   // NotesByDateQuery,
   // NotesByDateQueryVariables,
   OnCreateNoteSubscription,
-  OnDeleteNoteSubscription
+  OnDeleteNoteSubscription,
 } from '@/API';
+import AudioForNoteCard from '@/custom-components/AudioForNoteCard';
 import Layout from '@/custom-components/Layout';
 import NoteCardActions from '@/custom-components/NoteCardActions';
 import { getNote } from '@/graphql/queries';
@@ -18,7 +19,7 @@ import {
   graphqlOperation,
   GraphQLQuery,
   GraphQLSubscription,
-  GRAPHQL_AUTH_MODE
+  GRAPHQL_AUTH_MODE,
 } from '@aws-amplify/api';
 import {
   Button,
@@ -26,7 +27,7 @@ import {
   Flex,
   SearchField,
   useTheme,
-  View
+  View,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import React, {
@@ -35,7 +36,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
@@ -44,7 +45,8 @@ function Notes() {
   const nextTokenRef = useRef<string | undefined>(undefined);
   const { tokens } = useTheme();
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+
   const getNotes = useCallback(async () => {
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
@@ -77,6 +79,7 @@ function Notes() {
   useEffect(() => {
     getNotes();
   }, [search, getNotes]);
+
   //subscribe to delete note event
   useEffect(() => {
     const sub = API.graphql<GraphQLSubscription<OnDeleteNoteSubscription>>({
@@ -108,8 +111,6 @@ function Notes() {
     };
   }, []);
 
-  const router = useRouter();
-
   return (
     <View>
       {/* <NoteCardCollection /> */}
@@ -125,7 +126,8 @@ function Notes() {
       {loading && <p>Loading...</p>}
       <Collection
         type="grid"
-        templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
+        templateColumns="1fr"
+        // templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
         gap={20}
         items={notes?.listNotes?.items as any}
       >
@@ -136,22 +138,31 @@ function Notes() {
             note={item as any}
             overrides={{
               note_title: { flex: '0 0 auto' },
-              note_audio: {
+              audioElem: {
                 flex: '0 0 auto',
+                height: 'fit-content',
+                width: 'fit-content',
               },
               note_text: {
                 flex: '1 1 auto',
+                // /* Show ellipsis after 4 lines */
+                // // overflow: 'hidden',
+                // // display: '-webkit-box',
+                // // '-webkit-line-clamp': 4,
+                // // '-webkit-box-orient': 'vertical',
+                // // position: 'relative',
               },
-              'Frame 438': { height: 'fit-content', flex: '0 0 auto' },
+              actionElem: { height: 'fit-content', flex: '0 0 auto' },
               NoteCard: {
                 width: '100%',
                 // boxShadow:
                 //   '0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)',
               },
             }}
-          >
-            <NoteCardActions note={item as any} />
-          </NoteCard>
+            //@ts-ignore
+            audioElem={<AudioForNoteCard fileKey={item?.audio[0] as string} />}
+            actionElem={<NoteCardActions note={item as any} />}
+          ></NoteCard>
         )}
       </Collection>
       <Flex marginTop={24}>

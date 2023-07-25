@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import { studioTheme } from '@/ui-components/';
+
 import { AmplifyProvider, Authenticator, View } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify, Auth } from 'aws-amplify';

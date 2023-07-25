@@ -30,6 +30,7 @@
     "@types/react-dom": "18.2.7",
     "ai": "^2.1.22",
     "aws-amplify": "^5.3.4",
+    "axios": "^1.4.0",
     "clsx": "^2.0.0",
     "editorjs-button": "^1.0.4",
     "editorjs-inline-spoiler-tool": "^1.0.1",
