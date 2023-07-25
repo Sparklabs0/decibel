@@ -41,7 +41,7 @@ function AudioCard({
       const res = await Storage.remove(fileKey, { level: 'private' });
       setIsModalOpen(false); // Close the modal after deletion
       removeFromList(fileKey);
-      toast.success('Note deleted successfully');
+      toast.success('Audio file deleted successfully');
       // Implement a function to update the list of audio files after deletion if necessary
     } catch (error) {
       console.log('Error deleting audio:', error);
