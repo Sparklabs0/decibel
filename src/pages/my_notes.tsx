@@ -25,6 +25,8 @@ import {
   Button,
   Collection,
   Flex,
+  Heading,
+  Loader,
   SearchField,
   useTheme,
   View,
@@ -38,6 +40,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
@@ -50,26 +53,26 @@ function Notes() {
   const getNotes = useCallback(async () => {
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
-      limit: 8,
+      limit: 10,
     };
-    if (nextTokenRef.current) {
-      variables.nextToken = nextTokenRef.current;
-    }
+
+    variables.nextToken = nextTokenRef.current;
+
     if (search) {
       variables.filter = { title: { contains: search } };
+      variables.nextToken = undefined;
     }
+
     try {
       const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
         query: queries.listNotes,
         variables: variables,
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
-      console.log(allNotes);
+
       setNotes(allNotes.data);
-      // if (allNotes?.data?.listNotes?.nextToken !== nextTokenRef.current) {
       nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
       setLoading(false); // Set loading to false when search is complete
-      // }
     } catch (error) {
       console.error('Error fetching notes:', error);
       setLoading(false); // Set loading to false in case of an error
@@ -111,6 +114,10 @@ function Notes() {
     };
   }, []);
 
+  const onClear = () => {
+    setSearch('');
+  };
+
   return (
     <View>
       {/* <NoteCardCollection /> */}
@@ -119,44 +126,50 @@ function Notes() {
         label="Search"
         value={search}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setSearch(e.target.value);
+          const term = e.target.value.trim();
+          setSearch(term);
         }}
-        placeholder="Search with title"
+        onClear={onClear}
+        placeholder="Search notes with title"
       />
-      {loading && <p>Loading...</p>}
+      <Heading marginBottom={24} marginTop={48} level={4}>
+        Your Notes
+      </Heading>
+      {loading && <Loader size="large" color="#007bff" />}
       <Collection
         type="grid"
-        templateColumns="1fr"
-        // templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
+        // templateColumns="1fr"
+        templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
         gap={20}
         items={notes?.listNotes?.items as any}
       >
         {(item, index) => (
           <NoteCard
             key={index}
-            padding="2rem"
+            padding={24}
             note={item as any}
             overrides={{
               note_title: { flex: '0 0 auto' },
               audioElem: {
-                flex: '0 0 auto',
                 height: 'fit-content',
                 width: 'fit-content',
               },
               note_text: {
-                flex: '1 1 auto',
-                // /* Show ellipsis after 4 lines */
-                // // overflow: 'hidden',
-                // // display: '-webkit-box',
-                // // '-webkit-line-clamp': 4,
-                // // '-webkit-box-orient': 'vertical',
-                // // position: 'relative',
+                /* Show ellipsis after 4 lines */
+                overflow: 'hidden',
+                height: '100px',
+                position: 'relative',
               },
-              actionElem: { height: 'fit-content', flex: '0 0 auto' },
+              actionElem: {
+                marginTop: '24px',
+                width: '100%',
+                height: 'fit-content',
+              },
               NoteCard: {
                 width: '100%',
-                // boxShadow:
-                //   '0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)',
+                height: 'fit-content',
+                boxShadow:
+                  '0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)',
               },
             }}
             //@ts-ignore
@@ -165,10 +178,12 @@ function Notes() {
           ></NoteCard>
         )}
       </Collection>
-      <Flex marginTop={24}>
-        <Button borderRadius="8px" variation="primary" onClick={getNotes}>
-          Next Page
-        </Button>
+      <Flex marginTop={48}>
+        {
+          <Button borderRadius="24px" variation="primary" onClick={getNotes}>
+            next page
+          </Button>
+        }
       </Flex>
     </View>
   );

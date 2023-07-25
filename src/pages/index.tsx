@@ -22,7 +22,7 @@ function Home() {
   const router = useRouter();
 
   if (authStatus === 'authenticated') {
-    router.push('/dashboard');
+    router.push('/my_notes');
     return null; // Render nothing while redirecting
   }
 

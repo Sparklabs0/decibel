@@ -55,7 +55,8 @@ function AudioCard({
   return (
     <Card
       // backgroundColor={tokens.colors.background.tertiary.value}
-      borderRadius="8px"
+      // borderRadius="0px"
+      borderRadius="16px"
       marginBottom={12}
       display="flex"
       boxShadow="0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)"

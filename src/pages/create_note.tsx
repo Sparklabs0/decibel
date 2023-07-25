@@ -4,11 +4,18 @@ import { NoteCreateForm } from '@/ui-components';
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import {
   Button,
+  Card,
+  Divider,
   Flex,
+  Heading,
+  Icon,
+  Image,
+  Loader,
   Text,
   TextField,
   useTheme,
   View,
+  VisuallyHidden,
 } from '@aws-amplify/ui-react';
 import {
   StorageManager,
@@ -19,7 +26,6 @@ import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
 import { Predictions, Storage } from 'aws-amplify';
 import axios from 'axios';
 import { REFUSED } from 'dns';
-import { ClipLoader } from 'react-spinners';
 
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
@@ -31,16 +37,17 @@ interface Files {
 enum LoadingStatus {
   Transcribing = 'transcribing audio...',
   Summarizing = 'generating note...',
+  Success = 'note creation successful...',
 }
 function NoteAudioUploader() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<Files>({});
+  const [loading, setLoading] = useState<LoadingStatus | ''>('');
   // const [summary, setSummary] = useState<string>('');
   const ref = React.useRef<StorageManagerHandle>(null);
   const { tokens } = useTheme();
 
-  const [loading, setLoading] = useState<LoadingStatus | ''>('');
   const resetForm = async () => {
     setTitle('');
     setFiles({});
@@ -103,7 +110,7 @@ function NoteAudioUploader() {
           },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
         });
-
+        setLoading(LoadingStatus.Success);
         toast.success('Note created successfully');
         router.push('/my_notes');
       } catch (error) {
@@ -143,18 +150,26 @@ function NoteAudioUploader() {
 
   return (
     <>
+      <Heading marginTop={24} marginBottom={24} level={4}>
+        Create Note
+      </Heading>
+      <Text variation="info" marginBottom={24}>
+        Effortlessly upload audio files, transcribe, and generate comprehensive
+        notes. Edit your notes using our user-friendly WYSIWYG editor.
+      </Text>
       {loading && (
         <Flex
           marginBottom={16}
           backgroundColor={tokens.colors.brand.primary[80]}
           padding={16}
         >
-          <ClipLoader size={24} color="#007bff" />
+          <Loader size="large" color="#007bff" />
           <Text color={tokens.colors.white}>{loading}</Text>
         </Flex>
       )}
       <Flex direction="column">
         <TextField
+          isRequired={true}
           // descriptiveText="Enter a valid note title"
           placeholder="Enter Title"
           label="Note Title"
@@ -164,6 +179,7 @@ function NoteAudioUploader() {
             setTitle(e.target.value);
           }}
         />
+
         <StorageManager
           acceptedFileTypes={['audio/*']}
           accessLevel="private"
@@ -208,11 +224,31 @@ function NoteAudioUploader() {
             });
           }}
           ref={ref}
+          components={{
+            Container({ children }) {
+              return <Card variation="elevated">{children}</Card>;
+            },
+            DropZone({ children, displayText, inDropZone, ...rest }) {
+              return (
+                <Flex
+                  alignItems="center"
+                  direction="column"
+                  padding="medium"
+                  backgroundColor={inDropZone ? 'brand.primary.10' : ''}
+                  {...rest}
+                >
+                  <Text>Drop audio files here, and click create note</Text>
+                  <Divider size="small" label="or" maxWidth="10rem" />
+                  {children}
+                </Flex>
+              );
+            },
+          }}
         />
         <Flex direction="row" justifyContent="space-between">
           <Button
             // color={tokens.colors.white.original}
-            borderRadius={8}
+            borderRadius="8px"
             border="none"
             // backgroundColor={tokens.colors.neutral[60]}
             onClick={resetForm}
@@ -226,7 +262,7 @@ function NoteAudioUploader() {
           </Button>
           <Button
             onClick={createNote}
-            borderRadius={8}
+            borderRadius="8px"
             color={tokens.colors.white.original}
             variation="primary"
             isDisabled={

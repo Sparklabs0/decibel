@@ -13,7 +13,10 @@ import { DataStore } from 'aws-amplify';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { BiEdit, BiLink } from 'react-icons/bi';
+import { BsPencilSquare } from 'react-icons/bs';
+import { ImBin2 } from 'react-icons/im';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
 
@@ -56,33 +59,53 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
     marginRight: '0.5rem',
   };
 
+  const tooltipStyles = {
+    position: 'absolute',
+    bottom: '-30px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    color: '#fff',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    fontSize: '14px',
+    opacity: 0, // Hidden by default
+    transition: 'opacity 0.3s ease',
+  };
+
   return (
     <>
-      <Flex color={tokens.colors.black.original} gap={8}>
-        <Button
-          borderRadius="8px"
+      <Flex
+        padding={8}
+        gap={12}
+        marginTop={12}
+        justifyContent="flex-end"
+        width="100%"
+      >
+        {/* <Button
+          borderRadius="0px"
           border="none"
-          variation="destructive"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          Delete
-        </Button>
+          padding="none"
+          variation="link"
+        > */}
+
+        {/* </Button> */}
+
         <Link href={`/note/${note.id}`}>
-          <Button
-            border="none"
-            backgroundColor={tokens.colors.neutral[60]}
-            borderRadius={8}
-            alignItems="center"
-            variation="menu"
-          >
-            <Text color={tokens.colors.white.original}>Editor</Text>
-            <View marginLeft={8}>
-              <BiEdit color="white" />
-            </View>
+          <Button>
+            <BsPencilSquare size={20} color="#666" />
           </Button>
         </Link>
+        <Button>
+          <ImBin2
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+            cursor="pointer"
+            size={20}
+            color="#666"
+          />
+        </Button>
       </Flex>
       <Modal
         isOpen={isModalOpen}
