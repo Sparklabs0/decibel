@@ -19,6 +19,7 @@ import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
 import { Predictions, Storage } from 'aws-amplify';
 import axios from 'axios';
 import { REFUSED } from 'dns';
+import { ClipLoader } from 'react-spinners';
 
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
@@ -28,8 +29,8 @@ interface Files {
   [key: string]: any; // Or you can specify the specific type of the files if known
 }
 enum LoadingStatus {
-  Transcribing = 'transcribing note...',
-  Summarizing = 'generating & formatting note ...',
+  Transcribing = 'transcribing audio...',
+  Summarizing = 'generating note...',
 }
 function NoteAudioUploader() {
   const router = useRouter();
@@ -61,7 +62,7 @@ function NoteAudioUploader() {
         });
 
         setLoading(LoadingStatus.Transcribing);
-        toast.loading(LoadingStatus.Transcribing);
+        // toast.loading(LoadingStatus.Transcribing);
         const transcriptionResponse = await axios.post(`/api/transcribe`, {
           source: data,
         });
@@ -72,11 +73,11 @@ function NoteAudioUploader() {
           return;
         }
         setLoading(LoadingStatus.Summarizing);
-        toast.loading(LoadingStatus.Summarizing);
+        // toast.loading(LoadingStatus.Summarizing);
         const summarizingResponse = await axios.post(`/api/summarize`, {
           prompt: transcriptionResponse.data.transcript,
         });
-        toast.dismiss();
+        // toast.dismiss();
 
         const summaryData = JSON.parse(summarizingResponse.data.summary);
         const summaryText =
@@ -141,90 +142,103 @@ function NoteAudioUploader() {
   };
 
   return (
-    <Flex direction="column">
-      <TextField
-        descriptiveText="Enter a valid note title"
-        placeholder="Enter Title"
-        label="Note Title"
-        errorMessage="There is an error"
-        value={title}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <StorageManager
-        acceptedFileTypes={['audio/*']}
-        accessLevel="private"
-        maxFileCount={1}
-        maxFileSize={5000000}
-        processFile={processFile}
-        onFileRemove={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            const updatedFiles = { ...prevFiles };
-            delete updatedFiles[key];
-            return updatedFiles;
-          });
-        }}
-        onUploadError={(error, { key }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'error',
-              },
-            };
-          });
-        }}
-        onUploadSuccess={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'success',
-              },
-            };
-          });
-        }}
-        onUploadStart={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'uploading',
-              },
-            };
-          });
-        }}
-        ref={ref}
-      />
-      <Flex direction="row" justifyContent="space-between">
-        <Button
-          color={tokens.colors.white.original}
-          borderRadius={8}
-          border="none"
-          backgroundColor={tokens.colors.neutral[60]}
-          onClick={resetForm}
-          variation="menu"
+    <>
+      {loading && (
+        <Flex
+          marginBottom={16}
+          backgroundColor={tokens.colors.brand.primary[80]}
+          padding={16}
         >
-          Reset
-        </Button>
-        <Button
-          onClick={createNote}
-          borderRadius={8}
-          color={tokens.colors.white.original}
-          variation="primary"
-          isLoading={
-            loading === LoadingStatus.Transcribing ||
-            loading === LoadingStatus.Summarizing
-          }
-        >
-          Create Note
-        </Button>
+          <ClipLoader size={24} color="#007bff" />
+          <Text color={tokens.colors.white}>{loading}</Text>
+        </Flex>
+      )}
+      <Flex direction="column">
+        <TextField
+          // descriptiveText="Enter a valid note title"
+          placeholder="Enter Title"
+          label="Note Title"
+          errorMessage="There is an error"
+          value={title}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <StorageManager
+          acceptedFileTypes={['audio/*']}
+          accessLevel="private"
+          maxFileCount={1}
+          maxFileSize={5000000}
+          processFile={processFile}
+          onFileRemove={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              const updatedFiles = { ...prevFiles };
+              delete updatedFiles[key];
+              return updatedFiles;
+            });
+          }}
+          onUploadError={(error, { key }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'error',
+                },
+              };
+            });
+          }}
+          onUploadSuccess={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'success',
+                },
+              };
+            });
+          }}
+          onUploadStart={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'uploading',
+                },
+              };
+            });
+          }}
+          ref={ref}
+        />
+        <Flex direction="row" justifyContent="space-between">
+          <Button
+            // color={tokens.colors.white.original}
+            borderRadius={8}
+            border="none"
+            // backgroundColor={tokens.colors.neutral[60]}
+            onClick={resetForm}
+            variation="warning"
+            isDisabled={
+              loading === LoadingStatus.Transcribing ||
+              loading === LoadingStatus.Summarizing
+            }
+          >
+            Reset
+          </Button>
+          <Button
+            onClick={createNote}
+            borderRadius={8}
+            color={tokens.colors.white.original}
+            variation="primary"
+            isDisabled={
+              loading === LoadingStatus.Transcribing ||
+              loading === LoadingStatus.Summarizing
+            }
+          >
+            Create Note
+          </Button>
+        </Flex>
       </Flex>
-      {/* <Flex>
-        <Text>{summary}</Text>
-      </Flex> */}
-    </Flex>
+    </>
   );
 }
 
