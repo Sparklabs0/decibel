@@ -10,6 +10,8 @@ import {
   View,
 } from '@aws-amplify/ui-react';
 import { DataStore } from 'aws-amplify';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -19,10 +21,13 @@ import { BsPencilSquare } from 'react-icons/bs';
 import { ImBin2 } from 'react-icons/im';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
-
 const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
   const { tokens } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const createdAtDate = dayjs(note.createdAt).toDate();
+
+  const formattedDate = dayjs(createdAtDate).format('MMM D, YYYY h:mm A');
 
   const deleteHandler = async (id: string) => {
     try {
@@ -77,35 +82,29 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
     <>
       <Flex
         padding={8}
-        gap={12}
         marginTop={12}
-        justifyContent="flex-end"
+        justifyContent="space-between"
         width="100%"
+        style={{ whiteSpace: 'nowrap' }}
       >
-        {/* <Button
-          borderRadius="0px"
-          border="none"
-          padding="none"
-          variation="link"
-        > */}
-
-        {/* </Button> */}
-
-        <Link href={`/note/${note.id}`}>
+        <Text fontSize="16px">{formattedDate}</Text>
+        <Flex padding={8} gap={12} justifyContent="flex-end" width="100%">
+          <Link href={`/note/${note.id}`}>
+            <Button>
+              <BsPencilSquare size={20} color="#666" />
+            </Button>
+          </Link>
           <Button>
-            <BsPencilSquare size={20} color="#666" />
+            <ImBin2
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+              cursor="pointer"
+              size={20}
+              color="#666"
+            />
           </Button>
-        </Link>
-        <Button>
-          <ImBin2
-            onClick={() => {
-              setIsModalOpen(true);
-            }}
-            cursor="pointer"
-            size={20}
-            color="#666"
-          />
-        </Button>
+        </Flex>
       </Flex>
       <Modal
         isOpen={isModalOpen}
