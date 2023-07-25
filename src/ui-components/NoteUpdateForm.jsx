@@ -201,6 +201,7 @@ export default function NoteUpdateForm(props) {
     jsonData: "",
     label: "",
     transcription: "",
+    summary: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [text, setText] = React.useState(initialValues.text);
@@ -211,6 +212,7 @@ export default function NoteUpdateForm(props) {
   const [transcription, setTranscription] = React.useState(
     initialValues.transcription
   );
+  const [summary, setSummary] = React.useState(initialValues.summary);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
@@ -228,6 +230,7 @@ export default function NoteUpdateForm(props) {
     );
     setLabel(cleanValues.label);
     setTranscription(cleanValues.transcription);
+    setSummary(cleanValues.summary);
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -251,6 +254,7 @@ export default function NoteUpdateForm(props) {
     jsonData: [{ type: "JSON" }],
     label: [],
     transcription: [],
+    summary: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -285,6 +289,7 @@ export default function NoteUpdateForm(props) {
           jsonData,
           label,
           transcription,
+          summary,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -347,6 +352,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -377,6 +383,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
@@ -403,6 +410,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             values = result?.audio ?? values;
@@ -455,6 +463,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.createdAt ?? value;
@@ -485,6 +494,7 @@ export default function NoteUpdateForm(props) {
               jsonData: value,
               label,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.jsonData ?? value;
@@ -515,6 +525,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label: value,
               transcription,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.label ?? value;
@@ -545,6 +556,7 @@ export default function NoteUpdateForm(props) {
               jsonData,
               label,
               transcription: value,
+              summary,
             };
             const result = onChange(modelFields);
             value = result?.transcription ?? value;
@@ -558,6 +570,37 @@ export default function NoteUpdateForm(props) {
         errorMessage={errors.transcription?.errorMessage}
         hasError={errors.transcription?.hasError}
         {...getOverrideProps(overrides, "transcription")}
+      ></TextField>
+      <TextField
+        label="Summary"
+        isRequired={false}
+        isReadOnly={false}
+        value={summary}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              text,
+              audio,
+              createdAt,
+              jsonData,
+              label,
+              transcription,
+              summary: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.summary ?? value;
+          }
+          if (errors.summary?.hasError) {
+            runValidationTasks("summary", value);
+          }
+          setSummary(value);
+        }}
+        onBlur={() => runValidationTasks("summary", summary)}
+        errorMessage={errors.summary?.errorMessage}
+        hasError={errors.summary?.hasError}
+        {...getOverrideProps(overrides, "summary")}
       ></TextField>
       <Flex
         justifyContent="space-between"

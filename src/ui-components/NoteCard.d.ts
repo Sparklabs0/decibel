@@ -12,13 +12,14 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type NoteCardOverridesProps = {
     NoteCard?: PrimitiveOverrideProps<FlexProps>;
     note_title?: PrimitiveOverrideProps<TextProps>;
-    note_audios?: PrimitiveOverrideProps<TextProps>;
+    audioElem?: PrimitiveOverrideProps<ViewProps>;
     note_text?: PrimitiveOverrideProps<TextProps>;
-    "Frame 438"?: PrimitiveOverrideProps<ViewProps>;
+    actionElem?: PrimitiveOverrideProps<ViewProps>;
 } & EscapeHatchProps;
 export declare type NoteCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    children?: React.ReactNode;
     note?: Note;
+    audioElem?: React.ReactNode;
+    actionElem?: React.ReactNode;
 } & {
     overrides?: NoteCardOverridesProps | undefined | null;
 }>;

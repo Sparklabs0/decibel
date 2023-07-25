@@ -23,6 +23,7 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
 
   const deleteHandler = async (id: string) => {
     try {
+      console.log(note);
       const res = await API.graphql<GraphQLQuery<DeleteNoteMutation>>({
         query: mutations.deleteNote,
         //@ts-ignore
@@ -86,10 +87,10 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        
         // style={modalStyles}
+        ariaHideApp={false}
         style={modalStyles}
-        overlayClassName='modal-overlay'
+        overlayClassName="modal-overlay"
       >
         <Heading fontSize={25} level={3}>
           Confirm Deletion

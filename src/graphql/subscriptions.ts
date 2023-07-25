@@ -15,6 +15,8 @@ export const onCreateNote = /* GraphQL */ `
       createdAt
       jsonData
       label
+      transcription
+      summary
       updatedAt
       owner
       __typename
@@ -34,6 +36,8 @@ export const onUpdateNote = /* GraphQL */ `
       createdAt
       jsonData
       label
+      transcription
+      summary
       updatedAt
       owner
       __typename
@@ -53,6 +57,8 @@ export const onDeleteNote = /* GraphQL */ `
       createdAt
       jsonData
       label
+      transcription
+      summary
       updatedAt
       owner
       __typename

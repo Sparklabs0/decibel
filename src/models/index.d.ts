@@ -18,6 +18,8 @@ type EagerNote = {
   readonly createdAt: string;
   readonly jsonData?: string | null;
   readonly label?: string | null;
+  readonly transcription?: string | null;
+  readonly summary?: string | null;
   readonly updatedAt?: string | null;
 }
 
@@ -33,6 +35,8 @@ type LazyNote = {
   readonly createdAt: string;
   readonly jsonData?: string | null;
   readonly label?: string | null;
+  readonly transcription?: string | null;
+  readonly summary?: string | null;
   readonly updatedAt?: string | null;
 }
 

@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
-  const { children, note, overrides, ...rest } = props;
+  const { note, audioElem, actionElem, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -48,31 +48,20 @@ export default function NoteCard(props) {
         children={note?.title}
         {...getOverrideProps(overrides, "note_title")}
       ></Text>
-      <Text
-        fontFamily="Roboto"
-        fontSize="16px"
-        fontWeight="600"
-        color="rgba(48,64,80,1)"
-        lineHeight="24px"
-        textAlign="left"
+      <View
+        width="272px"
+        height="46px"
         display="block"
-        direction="column"
-        justifyContent="unset"
-        letterSpacing="0.01px"
-        width="unset"
-        height="unset"
         gap="unset"
         alignItems="unset"
+        justifyContent="unset"
+        overflow="hidden"
         shrink="0"
-        alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        whiteSpace="nowrap"
-        overflow="hidden"
-        textOverflow="ellipses"
-        children={`${note?.audio}${","}`}
-        {...getOverrideProps(overrides, "note_audios")}
-      ></Text>
+        children={audioElem}
+        {...getOverrideProps(overrides, "audioElem")}
+      ></View>
       <Text
         fontFamily="Roboto"
         fontSize="16px"
@@ -93,12 +82,12 @@ export default function NoteCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={note?.text}
+        children={note?.summary}
         {...getOverrideProps(overrides, "note_text")}
       ></Text>
       <View
         width="272px"
-        height="24px"
+        height="45px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -107,8 +96,8 @@ export default function NoteCard(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        children={children}
-        {...getOverrideProps(overrides, "Frame 438")}
+        children={actionElem}
+        {...getOverrideProps(overrides, "actionElem")}
       ></View>
     </Flex>
   );
