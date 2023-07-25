@@ -61,6 +61,8 @@ function Notes() {
     if (search) {
       variables.filter = { title: { contains: search } };
       variables.nextToken = undefined;
+    } else {
+      variables.nextToken = undefined;
     }
 
     try {
