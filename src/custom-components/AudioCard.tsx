@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Flex,
+  Heading,
   Text,
   useTheme,
   View,
@@ -62,9 +63,13 @@ function AudioCard({
       <Flex width="100%" justifyContent="space-between" direction="row">
         <Flex direction="column">
           <View flex="1">
-            <AudioPlayer src={audioUrl} controls style={{
-              width: '100%',
-            }} />
+            <AudioPlayer
+              src={audioUrl}
+              controls
+              style={{
+                width: '100%',
+              }}
+            />
           </View>
           <View flex="2">
             <Text fontWeight="bold">File Key</Text>
@@ -100,6 +105,9 @@ function AudioCard({
         }}
         overlayClassName={'modal-overlay'}
       >
+        <Heading fontSize={25} level={3}>
+          Confirm Deletion
+        </Heading>
         <Text marginBottom={24}>
           Are you sure you want to delete this audio file?
         </Text>
