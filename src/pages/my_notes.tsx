@@ -134,7 +134,7 @@ function Notes() {
         {(item, index) => (
           <NoteCard
             key={index}
-            padding="1rem"
+            padding="2rem"
             note={item as any}
             overrides={{
               note_title: { flex: '0 0 auto' },
