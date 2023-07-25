@@ -40,6 +40,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
@@ -137,7 +138,7 @@ function Notes() {
       <Heading marginBottom={24} marginTop={48} level={4}>
         Your Notes
       </Heading>
-      {loading && <Loader size="large" color="#007bff" />}
+      {loading && <ClipLoader size={20} color="#007bff" />}
       <Collection
         type="grid"
         // templateColumns="1fr"

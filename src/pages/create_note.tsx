@@ -26,6 +26,7 @@ import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
 import { Predictions, Storage } from 'aws-amplify';
 import axios from 'axios';
 import { REFUSED } from 'dns';
+import { ClipLoader } from 'react-spinners'; // Import the ClipLoader
 
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
@@ -163,7 +164,9 @@ function NoteAudioUploader() {
           backgroundColor={tokens.colors.brand.primary[80]}
           padding={16}
         >
-          <Loader size="large" color="#007bff" />
+          {' '}
+          <ClipLoader size={20} color="#007bff" />
+          {/* <Loader size="large" color="#007bff" /> */}
           <Text color={tokens.colors.white}>{loading}</Text>
         </Flex>
       )}
