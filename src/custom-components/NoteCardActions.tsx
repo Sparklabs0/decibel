@@ -94,15 +94,12 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
               <BsPencilSquare size={20} color="#666" />
             </Button>
           </Link>
-          <Button>
-            <ImBin2
-              onClick={() => {
-                setIsModalOpen(true);
-              }}
-              cursor="pointer"
-              size={20}
-              color="#666"
-            />
+          <Button
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+          >
+            <ImBin2 cursor="pointer" size={20} color="#666" />
           </Button>
         </Flex>
       </Flex>
