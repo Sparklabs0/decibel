@@ -4,12 +4,22 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const prompt = `
-      Pretend to be an expert summarizer and notes generator for a given text.
-      The given text is: ${req.body.prompt}. Create a valid JSON array of objects for the summary following this format:
+    You you're given a machine-generated
+    transcript of an audio file.
     
-      [{"summary": "the summary of the prompt given by the user"}]
+    You must edit the transcript so that it works as a
+    written piece of note for studying later to boost productivity
+    (that is, makes sense without the
+    audio file). Make sure you retain all
+    the key pieces and important information.
     
-      The JSON object:`;
+    The given text is: ${req.body.prompt}. Create a valid JSON array of objects for the summary following this format:
+
+    [{"summary": "the study note of the audio expanded to at least 100 words"}]
+
+    Use at least 100 words for summary field.
+    
+    The JSON object:`;
 
     // Call the GPT API to generate the task description
     const response = await axios.post(

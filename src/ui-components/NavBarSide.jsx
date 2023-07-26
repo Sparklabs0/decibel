@@ -11,7 +11,7 @@ import {
   useAuth,
   useAuthSignOutAction,
 } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
+import { Button, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};
@@ -63,27 +63,20 @@ export default function NavBarSide(props) {
           {...getOverrideProps(overrides, "Frame 32129767088")}
         >
           <View {...getOverrideProps(overrides, "Slice 1")}></View>
-          <Text
-            fontFamily="Inter"
-            fontSize="20px"
-            fontWeight="700"
-            color="rgba(0,0,0,1)"
-            lineHeight="24.204544067382812px"
-            textAlign="left"
+          <Image
+            width="77px"
+            height="35px"
             display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
             gap="unset"
             alignItems="unset"
+            justifyContent="unset"
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Spark"
-            {...getOverrideProps(overrides, "Spark")}
-          ></Text>
+            objectFit="cover"
+            src="/logo.png"
+            {...getOverrideProps(overrides, "decibel-1 (1) 1")}
+          ></Image>
           <View {...getOverrideProps(overrides, "Slice 2")}></View>
           <View
             width="243px"

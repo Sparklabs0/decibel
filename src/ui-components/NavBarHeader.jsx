@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function NavBarHeader(props) {
   const { overrides, ...rest } = props;
@@ -26,27 +26,20 @@ export default function NavBarHeader(props) {
       {...getOverrideProps(overrides, "NavBarHeader")}
       {...rest}
     >
-      <Text
-        fontFamily="Inter"
-        fontSize="20px"
-        fontWeight="700"
-        color="rgba(0,0,0,1)"
-        lineHeight="30px"
-        textAlign="left"
+      <Image
+        width="77px"
+        height="35px"
         display="block"
-        direction="column"
-        justifyContent="unset"
-        width="unset"
-        height="unset"
         gap="unset"
         alignItems="unset"
+        justifyContent="unset"
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Spark"
-        {...getOverrideProps(overrides, "Spark")}
-      ></Text>
+        objectFit="cover"
+        src="/logo.png"
+        {...getOverrideProps(overrides, "decibel-1 (1) 1")}
+      ></Image>
       <Flex
         gap="32px"
         direction="row"
