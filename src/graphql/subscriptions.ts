@@ -18,9 +18,6 @@ export const onCreateNote = /* GraphQL */ `
       transcription
       summary
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       owner
       __typename
     }
@@ -42,9 +39,6 @@ export const onUpdateNote = /* GraphQL */ `
       transcription
       summary
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       owner
       __typename
     }
@@ -66,9 +60,6 @@ export const onDeleteNote = /* GraphQL */ `
       transcription
       summary
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       owner
       __typename
     }

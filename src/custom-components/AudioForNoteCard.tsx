@@ -10,7 +10,6 @@ import { Storage } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import AudioPlayer from 'react-audio-player';
 import { toast } from 'react-hot-toast';
-import { IoTrashBinSharp } from 'react-icons/io5';
 import Modal from 'react-modal'; // Import Modal from 'react-modal'
 function AudioForNoteCard({
   fileKey,

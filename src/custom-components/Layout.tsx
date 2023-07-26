@@ -12,9 +12,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { BiLeftArrow, BiLeftArrowAlt } from 'react-icons/bi';
 import { BsBack } from 'react-icons/bs';
+import { IoIosArrowBack } from 'react-icons/io';
 import styles from '../styles/Layout.module.css';
 import NavItems from './NavItems';
-
 function Layout({ children }: { children: React.ReactNode }) {
   const { tokens } = useTheme();
   const router = useRouter();
@@ -28,7 +28,13 @@ function Layout({ children }: { children: React.ReactNode }) {
             borderRadius: '0',
           },
           Button: {
+            marginLeft:'15px',
             borderRadius: '8px',
+            fontSize: '16px',
+          },
+          'Wesley Peck': {
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
           },
         }}
         columnStart="1"
@@ -36,7 +42,8 @@ function Layout({ children }: { children: React.ReactNode }) {
         position="fixed"
         left="0"
         overflow="auto"
-        width="300px"
+        width="320px"
+        maxWidth="320px"
         className={styles.sidebar}
       >
         <NavItems />
@@ -62,14 +69,14 @@ function Layout({ children }: { children: React.ReactNode }) {
       >
         <Button
           border="none"
-          borderRadius={8}
+          borderRadius="24px"
           marginBottom={20}
           variation="primary"
           onClick={() => {
             router.back();
           }}
         >
-          <BiLeftArrowAlt color="white" />
+          <IoIosArrowBack color="white" />
         </Button>
         {children}
       </View>

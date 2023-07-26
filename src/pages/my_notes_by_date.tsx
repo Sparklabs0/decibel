@@ -126,7 +126,7 @@
 //         )}
 //       </Collection>
 //       <Flex marginTop={24}>
-//         <Button borderRadius="8px" variation="primary" onClick={getNotes}>
+//         <Button borderRadius="0px" variation="primary" onClick={getNotes}>
 //           Next Page
 //         </Button>
 //       </Flex>

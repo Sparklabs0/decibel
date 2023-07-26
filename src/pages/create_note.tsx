@@ -4,11 +4,18 @@ import { NoteCreateForm } from '@/ui-components';
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import {
   Button,
+  Card,
+  Divider,
   Flex,
+  Heading,
+  Icon,
+  Image,
+  Loader,
   Text,
   TextField,
   useTheme,
   View,
+  VisuallyHidden,
 } from '@aws-amplify/ui-react';
 import {
   StorageManager,
@@ -19,6 +26,7 @@ import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
 import { Predictions, Storage } from 'aws-amplify';
 import axios from 'axios';
 import { REFUSED } from 'dns';
+import { ClipLoader } from 'react-spinners'; // Import the ClipLoader
 
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
@@ -28,18 +36,19 @@ interface Files {
   [key: string]: any; // Or you can specify the specific type of the files if known
 }
 enum LoadingStatus {
-  Transcribing = 'transcribing note...',
-  Summarizing = 'generating & formatting note ...',
+  Transcribing = 'transcribing audio...',
+  Summarizing = 'generating note...',
+  Success = 'note creation successful...',
 }
 function NoteAudioUploader() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [files, setFiles] = useState<Files>({});
+  const [loading, setLoading] = useState<LoadingStatus | ''>('');
   // const [summary, setSummary] = useState<string>('');
   const ref = React.useRef<StorageManagerHandle>(null);
   const { tokens } = useTheme();
 
-  const [loading, setLoading] = useState<LoadingStatus | ''>('');
   const resetForm = async () => {
     setTitle('');
     setFiles({});
@@ -61,7 +70,7 @@ function NoteAudioUploader() {
         });
 
         setLoading(LoadingStatus.Transcribing);
-        toast.loading(LoadingStatus.Transcribing);
+        // toast.loading(LoadingStatus.Transcribing);
         const transcriptionResponse = await axios.post(`/api/transcribe`, {
           source: data,
         });
@@ -72,11 +81,11 @@ function NoteAudioUploader() {
           return;
         }
         setLoading(LoadingStatus.Summarizing);
-        toast.loading(LoadingStatus.Summarizing);
+        // toast.loading(LoadingStatus.Summarizing);
         const summarizingResponse = await axios.post(`/api/summarize`, {
           prompt: transcriptionResponse.data.transcript,
         });
-        toast.dismiss();
+        // toast.dismiss();
 
         const summaryData = JSON.parse(summarizingResponse.data.summary);
         const summaryText =
@@ -102,7 +111,7 @@ function NoteAudioUploader() {
           },
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
         });
-
+        setLoading(LoadingStatus.Success);
         toast.success('Note created successfully');
         router.push('/my_notes');
       } catch (error) {
@@ -141,90 +150,134 @@ function NoteAudioUploader() {
   };
 
   return (
-    <Flex direction="column">
-      <TextField
-        descriptiveText="Enter a valid note title"
-        placeholder="Enter Title"
-        label="Note Title"
-        errorMessage="There is an error"
-        value={title}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <StorageManager
-        acceptedFileTypes={['audio/*']}
-        accessLevel="private"
-        maxFileCount={1}
-        maxFileSize={5000000}
-        processFile={processFile}
-        onFileRemove={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            const updatedFiles = { ...prevFiles };
-            delete updatedFiles[key];
-            return updatedFiles;
-          });
-        }}
-        onUploadError={(error, { key }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'error',
-              },
-            };
-          });
-        }}
-        onUploadSuccess={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'success',
-              },
-            };
-          });
-        }}
-        onUploadStart={({ key = '' }) => {
-          setFiles((prevFiles) => {
-            return {
-              ...prevFiles,
-              [key]: {
-                status: 'uploading',
-              },
-            };
-          });
-        }}
-        ref={ref}
-      />
-      <Flex direction="row" justifyContent="space-between">
-        <Button
-          color={tokens.colors.white.original}
-          borderRadius={8}
-          border="none"
-          backgroundColor={tokens.colors.neutral[60]}
-          onClick={resetForm}
-          variation="menu"
+    <>
+      <Heading marginTop={24} marginBottom={24} level={4}>
+        Create Note
+      </Heading>
+      <Text variation="info" marginBottom={24}>
+        Effortlessly upload audio files, transcribe, and generate comprehensive
+        notes. Edit your notes using our user-friendly WYSIWYG editor.
+      </Text>
+      {loading && (
+        <Flex
+          marginBottom={16}
+          backgroundColor={tokens.colors.brand.primary[80]}
+          padding={16}
         >
-          Reset
-        </Button>
-        <Button
-          onClick={createNote}
-          borderRadius={8}
-          color={tokens.colors.white.original}
-          variation="primary"
-          isLoading={
-            loading === LoadingStatus.Transcribing ||
-            loading === LoadingStatus.Summarizing
-          }
-        >
-          Create Note
-        </Button>
+          {' '}
+          <ClipLoader size={20} color="#007bff" />
+          {/* <Loader size="large" color="#007bff" /> */}
+          <Text color={tokens.colors.white}>{loading}</Text>
+        </Flex>
+      )}
+      <Flex direction="column">
+        <TextField
+          isRequired={true}
+          // descriptiveText="Enter a valid note title"
+          placeholder="Enter Title"
+          label="Note Title"
+          errorMessage="There is an error"
+          value={title}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setTitle(e.target.value);
+          }}
+        />
+
+        <StorageManager
+          acceptedFileTypes={['audio/*']}
+          accessLevel="private"
+          maxFileCount={1}
+          maxFileSize={5000000}
+          processFile={processFile}
+          onFileRemove={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              const updatedFiles = { ...prevFiles };
+              delete updatedFiles[key];
+              return updatedFiles;
+            });
+          }}
+          onUploadError={(error, { key }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'error',
+                },
+              };
+            });
+          }}
+          onUploadSuccess={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'success',
+                },
+              };
+            });
+          }}
+          onUploadStart={({ key = '' }) => {
+            setFiles((prevFiles) => {
+              return {
+                ...prevFiles,
+                [key]: {
+                  status: 'uploading',
+                },
+              };
+            });
+          }}
+          ref={ref}
+          components={{
+            Container({ children }) {
+              return <Card variation="elevated">{children}</Card>;
+            },
+            DropZone({ children, displayText, inDropZone, ...rest }) {
+              return (
+                <Flex
+                  alignItems="center"
+                  direction="column"
+                  padding="medium"
+                  backgroundColor={inDropZone ? 'brand.primary.10' : ''}
+                  {...rest}
+                >
+                  <Text>Drop audio files here, and click create note</Text>
+                  <Divider size="small" label="or" maxWidth="10rem" />
+                  {children}
+                </Flex>
+              );
+            },
+          }}
+        />
+        <Flex direction="row" justifyContent="space-between">
+          <Button
+            // color={tokens.colors.white.original}
+            borderRadius="8px"
+            border="none"
+            // backgroundColor={tokens.colors.neutral[60]}
+            onClick={resetForm}
+            variation="warning"
+            isDisabled={
+              loading === LoadingStatus.Transcribing ||
+              loading === LoadingStatus.Summarizing
+            }
+          >
+            Reset
+          </Button>
+          <Button
+            onClick={createNote}
+            borderRadius="8px"
+            color={tokens.colors.white.original}
+            variation="primary"
+            isDisabled={
+              loading === LoadingStatus.Transcribing ||
+              loading === LoadingStatus.Summarizing
+            }
+          >
+            Create Note
+          </Button>
+        </Flex>
       </Flex>
-      {/* <Flex>
-        <Text>{summary}</Text>
-      </Flex> */}
-    </Flex>
+    </>
   );
 }
 

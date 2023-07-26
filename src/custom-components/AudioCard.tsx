@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Flex,
+  Heading,
   Text,
   useTheme,
   View,
@@ -40,7 +41,7 @@ function AudioCard({
       const res = await Storage.remove(fileKey, { level: 'private' });
       setIsModalOpen(false); // Close the modal after deletion
       removeFromList(fileKey);
-      toast.success('Note deleted successfully');
+      toast.success('Audio file deleted successfully');
       // Implement a function to update the list of audio files after deletion if necessary
     } catch (error) {
       console.log('Error deleting audio:', error);
@@ -54,7 +55,8 @@ function AudioCard({
   return (
     <Card
       // backgroundColor={tokens.colors.background.tertiary.value}
-      borderRadius="8px"
+      // borderRadius="0px"
+      borderRadius="16px"
       marginBottom={12}
       display="flex"
       boxShadow="0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)"
@@ -62,9 +64,13 @@ function AudioCard({
       <Flex width="100%" justifyContent="space-between" direction="row">
         <Flex direction="column">
           <View flex="1">
-            <AudioPlayer src={audioUrl} controls style={{
-              width: '100%',
-            }} />
+            <AudioPlayer
+              src={audioUrl}
+              controls
+              style={{
+                width: '100%',
+              }}
+            />
           </View>
           <View flex="2">
             <Text fontWeight="bold">File Key</Text>
@@ -100,6 +106,9 @@ function AudioCard({
         }}
         overlayClassName={'modal-overlay'}
       >
+        <Heading fontSize={25} level={3}>
+          Confirm Deletion
+        </Heading>
         <Text marginBottom={24}>
           Are you sure you want to delete this audio file?
         </Text>

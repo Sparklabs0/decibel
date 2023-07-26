@@ -12,7 +12,6 @@ export type CreateNoteInput = {
   label?: string | null,
   transcription?: string | null,
   summary?: string | null,
-  _version?: number | null,
 };
 
 export type ModelNoteConditionInput = {
@@ -27,7 +26,6 @@ export type ModelNoteConditionInput = {
   and?: Array< ModelNoteConditionInput | null > | null,
   or?: Array< ModelNoteConditionInput | null > | null,
   not?: ModelNoteConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelStringInput = {
@@ -70,13 +68,6 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type Note = {
   __typename: "Note",
   id: string,
@@ -89,9 +80,6 @@ export type Note = {
   transcription?: string | null,
   summary?: string | null,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   owner?: string | null,
 };
 
@@ -105,12 +93,10 @@ export type UpdateNoteInput = {
   label?: string | null,
   transcription?: string | null,
   summary?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteNoteInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelNoteFilterInput = {
@@ -126,7 +112,6 @@ export type ModelNoteFilterInput = {
   and?: Array< ModelNoteFilterInput | null > | null,
   or?: Array< ModelNoteFilterInput | null > | null,
   not?: ModelNoteFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelIDInput = {
@@ -149,7 +134,6 @@ export type ModelNoteConnection = {
   __typename: "ModelNoteConnection",
   items:  Array<Note | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelSubscriptionNoteFilterInput = {
@@ -164,7 +148,6 @@ export type ModelSubscriptionNoteFilterInput = {
   summary?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionNoteFilterInput | null > | null,
   or?: Array< ModelSubscriptionNoteFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -215,9 +198,6 @@ export type CreateNoteMutation = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -240,9 +220,6 @@ export type UpdateNoteMutation = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -265,9 +242,6 @@ export type DeleteNoteMutation = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -289,9 +263,6 @@ export type GetNoteQuery = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -317,45 +288,9 @@ export type ListNotesQuery = {
       transcription?: string | null,
       summary?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncNotesQueryVariables = {
-  filter?: ModelNoteFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncNotesQuery = {
-  syncNotes?:  {
-    __typename: "ModelNoteConnection",
-    items:  Array< {
-      __typename: "Note",
-      id: string,
-      title?: string | null,
-      text?: string | null,
-      audio: Array< string >,
-      createdAt: string,
-      jsonData?: string | null,
-      label?: string | null,
-      transcription?: string | null,
-      summary?: string | null,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -377,9 +312,6 @@ export type OnCreateNoteSubscription = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -402,9 +334,6 @@ export type OnUpdateNoteSubscription = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
@@ -427,9 +356,6 @@ export type OnDeleteNoteSubscription = {
     transcription?: string | null,
     summary?: string | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     owner?: string | null,
   } | null,
 };
