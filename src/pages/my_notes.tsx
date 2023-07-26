@@ -32,6 +32,7 @@ import {
   View,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
+import { off } from 'process';
 import React, {
   ChangeEvent,
   ReactElement,
@@ -54,16 +55,16 @@ function Notes() {
   const getNotes = useCallback(async () => {
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
-      limit: 10,
+      limit: 9,
     };
 
     variables.nextToken = nextTokenRef.current;
 
     if (search) {
-      variables.filter = { title: { contains: search } };
+      variables.filter = { title: { contains: search.trim() } };
       variables.nextToken = undefined;
     } else {
-      variables.nextToken = undefined;
+      variables.nextToken = nextTokenRef.current;
     }
 
     try {
@@ -130,6 +131,9 @@ function Notes() {
         value={search}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           const term = e.target.value.trim();
+          if (!term) {
+            nextTokenRef.current = undefined;
+          }
           setSearch(term);
         }}
         onClear={onClear}
