@@ -163,8 +163,8 @@ function NoteAudioUploader() {
           marginBottom={16}
           backgroundColor={tokens.colors.brand.primary[80]}
           padding={16}
+          borderRadius={8}
         >
-          {' '}
           <ClipLoader size={20} color="#007bff" />
           {/* <Loader size="large" color="#007bff" /> */}
           <Text color={tokens.colors.white}>{loading}</Text>

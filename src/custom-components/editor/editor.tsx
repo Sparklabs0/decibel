@@ -1,40 +1,83 @@
-import styles from '@/styles/Editor.module.css';
-import { Text, View } from '@aws-amplify/ui-react';
-import EditorJs from '@editorjs/editorjs';
-import React, { useEffect, useRef, useState } from 'react';
-import demoData from './defaultcontent';
+import styles from "@/styles/Editor.module.css";
+import { Text, View } from "@aws-amplify/ui-react";
+import EditorJs from "@editorjs/editorjs";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import demoData from "./defaultcontent";
+import { GetNoteQuery, GetNoteQueryVariables } from "@/API";
+import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
+import { getNote } from "@/graphql/queries";
+import { toast } from "react-hot-toast";
 
 function Editor({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef<EditorJs>();
-  const [saveStatus, setSaveStatus] = useState('Saved');
+  const [saveStatus, setSaveStatus] = useState("Saved");
+  const [notes, setNotes] = useState<GraphQLQuery<GetNoteQuery>>();
+  const [loading, setLoading] = useState(false);
+
+  const getNotes = async () => {
+    console.log(id);
+    const variables: GetNoteQueryVariables = {id};
+    console.log(variables, "variables");
+    try {
+      setLoading(true);
+      const note = await API.graphql<GraphQLQuery<GetNoteQuery>>({
+        query: getNote,
+        variables: variables,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      });
+      setNotes(note.data);
+    } catch (error) {
+      setLoading(false);
+      console.log("Error", error);
+      toast.error("Error during fetching");
+    }
+  };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setIsMounted(true);
     }
-  }, []);
+    // getNotes();
+    console.log(notes, "notes");
+  });
 
   const initializeEditor = async () => {
-    const EditorJs = (await import('@editorjs/editorjs')).default;
-    const EditorTools = (await import('./EditorTools')).EDITOR_TOOLS;
+    const EditorJs = (await import("@editorjs/editorjs")).default;
+    const EditorTools = (await import("./EditorTools")).EDITOR_TOOLS;
     if (!ref.current) {
       const editor = new EditorJs({
-        holder: 'editorjs',
+        holder: "editorjs",
         minHeight: 0,
         // autofocus: true,
         tools: EditorTools,
-        placeholder: 'Pres Tab to select a block',
+        placeholder: "Pres Tab to select a block",
 
         onChange: () => {
-          setSaveStatus('Unsaved');
+          setSaveStatus("Unsaved");
           save();
         },
         onReady: () => {
           // alert("Editor is ready to work!");
+          getNotes();
         },
-
-        data: demoData,
+        data: {
+          blocks: [
+            {
+              type: "header",
+              data: {
+                text: "transcript",
+                level: 2,
+              },
+            },
+            {
+              type: "paragraph",
+              data: {
+                text: `${notes?.getNote?.transcription}`,
+              },
+            },
+          ],
+        },
       });
       ref.current = editor;
     }
@@ -43,9 +86,9 @@ function Editor({ id }: { id: string }) {
   const save = async () => {
     if (ref.current) {
       let output = await ref.current.save().then((output) => {
-        setSaveStatus('Saving...');
+        setSaveStatus("Saving...");
         setTimeout(() => {
-          setSaveStatus('Saved');
+          setSaveStatus("Saved");
         }, 500);
         return output;
       });
