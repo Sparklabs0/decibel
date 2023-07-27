@@ -48,7 +48,7 @@ import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
   const [notes, setNotes] = useState<ListNotesQuery>();
-  const nextTokenRef = useRef<string | undefined>(undefined);
+  // const nextTokenRef = useRef<string | undefined>(undefined);
   const ViewRef = useRef<HTMLDivElement | null>(null);
   const { tokens } = useTheme();
   const [search, setSearch] = useState('');
@@ -64,11 +64,11 @@ function Notes() {
     scrollToTop();
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
-      limit: 8,
+      // limit: 10,
     };
 
     variables.filter = { title: { contains: search.trim() } };
-    variables.nextToken = nextTokenRef.current;
+    // variables.nextToken = nextTokenRef.current;
 
     try {
       const allNotes = await API.graphql<GraphQLQuery<ListNotesQuery>>({
@@ -78,9 +78,9 @@ function Notes() {
       });
 
       setNotes(allNotes.data);
-      if (nextTokenRef.current !== allNotes?.data?.listNotes?.nextToken) {
-        nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
-      }
+      // if (nextTokenRef.current !== allNotes?.data?.listNotes?.nextToken) {
+      //   nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
+      // }
       setLoading(false); // Set loading to false when search is complete
     } catch (error) {
       console.error('Error fetching notes:', error);
@@ -137,7 +137,7 @@ function Notes() {
         value={search}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           const term = e.target.value.trim();
-          nextTokenRef.current = undefined;
+          // nextTokenRef.current = undefined;
           setSearch(term);
         }}
         onClear={onClear}
@@ -150,7 +150,7 @@ function Notes() {
       <Collection
         type="grid"
         // templateColumns="1fr"
-        templateColumns="repeat(auto-fit, minmax(400px, 1fr))"
+        templateColumns="repeat(auto-fit, minmax(400px,1fr))"
         gap={20}
         items={notes?.listNotes?.items as any}
       >
@@ -192,7 +192,7 @@ function Notes() {
       <Flex marginTop={48}>
         {
           <Button borderRadius="8px" variation="primary" onClick={getNotes}>
-            next page
+            reload
           </Button>
         }
       </Flex>
