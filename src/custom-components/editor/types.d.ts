@@ -1,11 +1,11 @@
 interface BlockData {
-  id: string;
+  id?: string;
   type: string;
   data: Record<string, any>; // or a more specific type
 }
 
 interface EditorData {
-  time: number;
+  time?: number;
   blocks: BlockData[];
-  version: string;
+  version?: string;
 }
