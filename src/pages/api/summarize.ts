@@ -22,49 +22,11 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
        Each point should have a title followed by a paragraph that properly conveys the idea.
       Use at least 1,000 words. here is your transcript: ${req.body.prompt}.`;
 
-    const payload = {
-      model: "gpt-3.5-turbo-0613",
-      messages: [
-        {
-          role: "user",
-          content: prompt2,
-        },
-      ],
-      functions: [
-        {
-          name: "summerize note",
-          description:
-            "Extract the financial transactional details from the input",
-          parameters: {
-            type: "object",
-            properties: {
-              blocks: [
-                {
-                  type: "header",
-                  data: {
-                    text: "Summary Heading of the note in less than 6 words",
-                    level: "2",
-                  },
-                },
-                {
-                  type: "paragraph",
-                  data: {
-                    text: "write the whole summary of the note here, as described in the prompt",
-                  },
-                },
-              ],
-            },
-            required: ["blocks"],
-          },
-        },
-      ],
-    };
-    // Call the GPT API to generate the task description
     const response = await axios.post(
       "https://api.openai.com/v1/completions",
       {
         model: "text-davinci-003",
-        prompt,
+        prompt2,
         temperature: 0.7,
         top_p: 1,
         frequency_penalty: 0,
@@ -79,19 +41,10 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       }
     );
-  //   const response = await axios.post("https://api.openai.com/v1/chat/completions", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${process.env.OPEN_AI_KEY || " "}`,
-  //   },
-  //   body: JSON.stringify(payload),
-  // });
 
-  const { choices } = await response.data;
+  console.log("response", response.data);
 
    const summary = response.data.choices[0].text.trim();
-  //const summary = choices[0].message.function_call.arguments
 
     res.status(200).json({ summary });
   } catch (error) {

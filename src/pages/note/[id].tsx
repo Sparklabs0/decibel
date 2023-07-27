@@ -6,9 +6,13 @@ import React, { ReactElement } from "react";
 
 function NotePage() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } =  router.query;
+  console.log(id, "id from note page")
   return (
     <View>
+      <Text style={{
+        marginBottom:'40px'
+      }}>Editor</Text>
       <Editor id= {id as string} />
     </View>
   );

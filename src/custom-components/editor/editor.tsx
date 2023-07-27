@@ -27,6 +27,8 @@ function Editor({ id }: { id: string }) {
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
       setNotes(note.data);
+      setLoading(false);
+      return note;
     } catch (error) {
       setLoading(false);
       console.log("Error", error);
@@ -45,6 +47,7 @@ function Editor({ id }: { id: string }) {
   const initializeEditor = async () => {
     const EditorJs = (await import("@editorjs/editorjs")).default;
     const EditorTools = (await import("./EditorTools")).EDITOR_TOOLS;
+    const notes = await getNotes();
     if (!ref.current) {
       const editor = new EditorJs({
         holder: "editorjs",
@@ -73,7 +76,7 @@ function Editor({ id }: { id: string }) {
             {
               type: "paragraph",
               data: {
-                text: `${notes?.getNote?.transcription}`,
+                text: `${notes?.data?.getNote?.transcription}`,
               },
             },
           ],
