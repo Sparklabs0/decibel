@@ -1,12 +1,18 @@
+// @ts-nocheck
+
+import { GetNoteQuery, GetNoteQueryVariables } from '@/API';
+import { getNote } from '@/graphql/queries';
 import styles from '@/styles/Editor.module.css';
+import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import { Text, View } from '@aws-amplify/ui-react';
 import EditorJs from '@editorjs/editorjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import demoData from './defaultcontent';
 
-function Editor({ id }: { id: string }) {
+function Editor({ data }: { data: EditorData }) {
   const [isMounted, setIsMounted] = useState(false);
-  const ref = useRef<EditorJs | null>(null);
+  const ref = useRef<EditorJs>();
   const [saveStatus, setSaveStatus] = useState('Saved');
 
   useEffect(() => {
@@ -19,37 +25,37 @@ function Editor({ id }: { id: string }) {
     const EditorJs = (await import('@editorjs/editorjs')).default;
     const EditorTools = (await import('./EditorTools')).EDITOR_TOOLS;
     if (!ref.current) {
-      try {
-        const editor = new EditorJs({
-          holder: 'editorjs',
-          minHeight: 0,
-          tools: EditorTools,
-          placeholder: 'Press Tab to select a block',
-          onChange: () => {
-            setSaveStatus('Unsaved');
-            save();
-          },
-          data: demoData,
-        });
-        ref.current = editor;
-      } catch (error) {
-        console.error('Failed to initialize editor:', error);
-      }
+      const editor = new EditorJs({
+        holder: 'editorjs',
+        minHeight: 0,
+        // autofocus: true,
+        tools: EditorTools,
+        placeholder: 'Pres Tab to select a block',
+
+        onChange: () => {
+          setSaveStatus('Unsaved');
+          save();
+          console.log();
+        },
+        onReady: () => {
+          // alert("Editor is ready to work!");
+        },
+        data: data,
+      });
+      ref.current = editor;
     }
-  }, []);
+  }, [data]);
 
   const save = async () => {
     if (ref.current) {
-      try {
-        let output = await ref.current.save();
+      let output = await ref.current.save().then((output) => {
         setSaveStatus('Saving...');
         setTimeout(() => {
           setSaveStatus('Saved');
         }, 500);
-        console.log(output);
-      } catch (error) {
-        console.error('Failed to save editor content:', error);
-      }
+        return output;
+      });
+      console.log(output, 'output');
     }
   };
 

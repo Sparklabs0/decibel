@@ -90,16 +90,30 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
         <Text fontSize="16px">{formattedDate}</Text>
         <Flex padding={8} gap={12} justifyContent="flex-end" width="100%">
           <Link href={`/note/${note.id}`}>
-            <Button>
+            <Button
+              style={{
+                border: 'none',
+                boxShadow: '0px 1px 2px 0px #0000001a',
+              }}
+            >
               <BsPencilSquare size={20} color="#666" />
             </Button>
           </Link>
           <Button
-            onClick={() => {
-              setIsModalOpen(true);
+            variation="warning"
+            style={{
+              border: 'none',
+              boxShadow: '0px 1px 2px 0px #0000001a',
             }}
           >
-            <ImBin2 cursor="pointer" size={20} color="#666" />
+            <ImBin2
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+              cursor="pointer"
+              size={20}
+              color="#666"
+            />
           </Button>
         </Flex>
       </Flex>

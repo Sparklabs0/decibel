@@ -1,51 +1,50 @@
 const demoData = {
-  time: 1667495123102,
-  blocks: [
-    {
-      id: 'P6bbP3YI3E',
-      type: 'header',
-      data: {
-        text: 'Another Example',
-        level: 2,
-      },
-    },
-    {
-      id: 'XkWvC37UhV',
-      type: 'paragraph',
-      data: {
-        text: 'This is another example of content created with Editor.js. You can freely edit this text, add new blocks, and see how the editor works!',
-      },
-    },
-    {
-      id: 'RjjDcqR-Lz',
-      type: 'header',
-      data: {
-        text: 'Custom Blocks',
-        level: 3,
-      },
-    },
-    {
-      id: 'I7YK4ddRJq',
-      type: 'list',
-      data: {
-        style: 'ordered',
-        items: [
-          'Editor.js supports custom blocks',
-          'Developers can create their own blocks to suit their specific needs',
-          'These custom blocks can be seamlessly integrated into the editor',
-        ],
-      },
-    },
-    {
-      id: 'QyRp9nJWXs',
-      type: 'code',
-      data: {
-        code: 'const example = "This is a code block";\nconsole.log(example);',
-        language: 'javascript',
-      },
-    },
-  ],
-  version: '2.14.2',
-};
+    "blocks": [
+       {
+          "type": "header",
+          "data": {
+             "text": "Editor.js",
+             "level": 2
+          }
+       },
+       {
+          "type": "paragraph",
+          "data": {
+             "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration."
+          }
+       },
+       {
+          "type": "header",
+          "data": {
+             "text": "Key features",
+             "level": 3
+          }
+       },
+       {
+          "type": "list",
+          "data": {
+             "style": "unordered",
+             "items": [
+                "It is a block-styled editor",
+                "It returns clean data output in JSON",
+                "Designed to be extendable and pluggable with a simple API"
+             ]
+          }
+       },
+       {
+          "type": "header",
+          "data": {
+             "text": "What does it mean «block-styled editor»",
+             "level": 3
+          }
+       },
+       {
+          "type": "paragraph",
+          "data": {
+             "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
+          }
+       }
+    ],
+ }
 
 export default demoData;
