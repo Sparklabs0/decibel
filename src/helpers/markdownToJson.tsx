@@ -12,8 +12,18 @@ export const parseMarkdown = (text: string): EditorData => {
   lines.forEach((line: string) => {
     // Skip empty lines
     if (line.trim() === '') return;
-
-    if (line.startsWith('# ')) {  // Header 1
+    
+    if (line.startsWith('--Summary--')) {
+      jsonData.blocks.push({
+        type: 'header',
+        data: { text: 'Summary', level: 1 }
+      });
+    } else if (line.startsWith('--Additional Info--')) {
+      jsonData.blocks.push({
+        type: 'header',
+        data: { text: 'Additional Info', level: 2 }
+      });
+    } else if (line.startsWith('# ')) {  // Header 1
       jsonData.blocks.push({
         type: 'header',
         data: { text: line.substring(2), level: 1 }

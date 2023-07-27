@@ -38,25 +38,31 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
     
     --Additional Info--
     
-    ## Main Points
+    #### Main Points
     
     - point 1
     - point 2
+    - add more points here just keep on adding liek this
     
-    ## Action Items
-    
-    - point 1
-    - point 2
-    
-    ## Follow Up Questions
+    #### Action Items
     
     - point 1
     - point 2
+    - add more points here just keep on adding liek this
+
+    #### Follow Up Questions
     
+    - point 1
+    - point 2
+    - add more points here just keep on adding liek this
+
     ## Potential Arguments Against
     
     - point 1
-    - point 2`
+    - point 2
+    - add more points here just keep on adding liek this
+
+    `
 
     const response = await axios.post(
       "https://api.openai.com/v1/completions",

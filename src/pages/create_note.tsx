@@ -75,12 +75,10 @@ function NoteAudioUploader() {
         toast.error('Please upload an audio file');
         return;
       }
-
       try {
         const data = await Storage.get(Object.keys(files)[0], {
           level: 'private',
         });
-
         setLoading(LoadingStatus.Transcribing);
         // toast.loading(LoadingStatus.Transcribing);
         const transcriptionResponse = await axios.post(`/api/transcribe`, {
@@ -94,17 +92,15 @@ function NoteAudioUploader() {
         }
         setLoading(LoadingStatus.Summarizing);
         // toast.loading(LoadingStatus.Summarizing);
+        const transcription = await transcriptionResponse.data.transcript
         const summarizingResponse = await axios.post(`/api/summarize`, {
-          prompt:  transcriptionResponse.data.transcript,
+          prompt:  transcription,
         });
         toast.dismiss();
-
         console.log(summarizingResponse.data,"summary data that I am logging, its summary.data")
         // const summaryData = JSON.parse(summarizingResponse.data.summary);
         // console.log(summaryData,"summary data which is parsed")
         const summaryText = summarizingResponse.data.summary;
-
-
         if (!summaryText) {
           toast.error('Summary not available');
           setLoading('');
@@ -119,7 +115,7 @@ function NoteAudioUploader() {
             input: {
               title,
               audio: fileKeys,
-              transcription: transcriptionResponse.data.transcript,
+              transcription: transcription,
               summary: summaryText,
             },
           },

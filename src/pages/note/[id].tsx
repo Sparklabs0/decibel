@@ -31,6 +31,7 @@ function NotePage() {
       setNotes(note.data);
       setLoading(false);
       const summary = note?.data?.getNote?.summary as string;
+      const transcription = note?.data?.getNote?.transcription as string;
       const parsedData = parseMarkdown(summary);
       setInitialData(parsedData);
       console.log(summary,"summary")
