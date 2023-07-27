@@ -30,6 +30,7 @@ import {
   SearchField,
   useTheme,
   View,
+  ViewProps,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import { off } from 'process';
@@ -48,11 +49,19 @@ import * as subscriptions from '../graphql/subscriptions';
 function Notes() {
   const [notes, setNotes] = useState<ListNotesQuery>();
   const nextTokenRef = useRef<string | undefined>(undefined);
+  const ViewRef = useRef<HTMLDivElement | null>(null);
   const { tokens } = useTheme();
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const scrollToTop = () => {
+    if (ViewRef.current) {
+      ViewRef.current.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  };
+
   const getNotes = useCallback(async () => {
+    scrollToTop();
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
       limit: 9,
@@ -123,10 +132,11 @@ function Notes() {
   };
 
   return (
-    <View>
+    <View ref={ViewRef}>
       {/* <NoteCardCollection /> */}
       <SearchField
-        marginBottom={24}
+        paddingBottom={0}
+        paddingTop={24}
         label="Search"
         value={search}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {

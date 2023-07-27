@@ -28,8 +28,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             borderRadius: '0',
           },
           Button: {
-            marginLeft:'15px',
-            borderRadius: '8px',
+            borderRadius: '24px',
             fontSize: '16px',
           },
           'Wesley Peck': {

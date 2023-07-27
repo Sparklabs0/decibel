@@ -1,12 +1,12 @@
 import styles from '@/styles/Editor.module.css';
 import { Text, View } from '@aws-amplify/ui-react';
 import EditorJs from '@editorjs/editorjs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import demoData from './defaultcontent';
 
 function Editor({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
-  const ref = useRef<EditorJs>();
+  const ref = useRef<EditorJs | null>(null);
   const [saveStatus, setSaveStatus] = useState('Saved');
 
   useEffect(() => {
@@ -15,57 +15,58 @@ function Editor({ id }: { id: string }) {
     }
   }, []);
 
-  const initializeEditor = async () => {
+  const initializeEditor = useCallback(async () => {
     const EditorJs = (await import('@editorjs/editorjs')).default;
     const EditorTools = (await import('./EditorTools')).EDITOR_TOOLS;
     if (!ref.current) {
-      const editor = new EditorJs({
-        holder: 'editorjs',
-        minHeight: 0,
-        // autofocus: true,
-        tools: EditorTools,
-        placeholder: 'Pres Tab to select a block',
-
-        onChange: () => {
-          setSaveStatus('Unsaved');
-          save();
-        },
-        onReady: () => {
-          // alert("Editor is ready to work!");
-        },
-
-        data: demoData,
-      });
-      ref.current = editor;
+      try {
+        const editor = new EditorJs({
+          holder: 'editorjs',
+          minHeight: 0,
+          tools: EditorTools,
+          placeholder: 'Press Tab to select a block',
+          onChange: () => {
+            setSaveStatus('Unsaved');
+            save();
+          },
+          data: demoData,
+        });
+        ref.current = editor;
+      } catch (error) {
+        console.error('Failed to initialize editor:', error);
+      }
     }
-  };
+  }, []);
 
   const save = async () => {
     if (ref.current) {
-      let output = await ref.current.save().then((output) => {
+      try {
+        let output = await ref.current.save();
         setSaveStatus('Saving...');
         setTimeout(() => {
           setSaveStatus('Saved');
         }, 500);
-        return output;
-      });
-      console.log(output);
+        console.log(output);
+      } catch (error) {
+        console.error('Failed to save editor content:', error);
+      }
     }
   };
 
   useEffect(() => {
-    const init = async () => {
-      await initializeEditor();
-    };
     if (isMounted) {
-      init();
+      initializeEditor().catch(console.error);
       return () => {
         if (ref.current && ref.current.destroy) {
-          ref.current.destroy();
+          try {
+            ref.current.destroy();
+          } catch (error) {
+            console.error('Failed to destroy editor:', error);
+          }
         }
       };
     }
-  }, [isMounted]);
+  }, [isMounted, initializeEditor]);
 
   return (
     <View className={styles.container}>

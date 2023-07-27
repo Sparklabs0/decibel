@@ -1,16 +1,16 @@
 //./components/EditorTools.js
+import checklist from "@editorjs/checklist";
 import Code from "@editorjs/code";
 import Header from "@editorjs/header";
+import list from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 import quote from "@editorjs/quote";
-import list from "@editorjs/list";
-import checklist from "@editorjs/checklist";
 import warning from "@editorjs/warning";
 // import link from "@editorjs/link";
 import inlineCode from "@editorjs/inline-code";
-import nextedList from "@editorjs/nested-list";
-import marker from "@editorjs/marker";
 import autoCompleLink from "@editorjs/link-autocomplete";
+import marker from "@editorjs/marker";
+import nextedList from "@editorjs/nested-list";
 import spoiler from "editorjs-inline-spoiler-tool";
 
 export const EDITOR_TOOLS = {
@@ -20,7 +20,7 @@ export const EDITOR_TOOLS = {
   list: list,
   checklist: checklist,
   warning: warning,
-//   link: link,
+  //   link: link,
   inlineCode: inlineCode,
   nextedList: nextedList,
   marker: marker,
