@@ -70,7 +70,7 @@ function Editor({ id }: { id: string }) {
 
   return (
     <View className={styles.container}>
-      <Text
+      {/* <Text
         variation="primary"
         width="100%"
         textAlign="center"
@@ -87,7 +87,7 @@ function Editor({ id }: { id: string }) {
         fontSize={30}
       >
         Subtitle
-      </Text>
+      </Text> */}
       <View className={styles.statusBox}>{saveStatus}</View>
       <div id="editorjs"></div>
     </View>

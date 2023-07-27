@@ -113,7 +113,7 @@ function NoteAudioUploader() {
         });
         setLoading(LoadingStatus.Success);
         toast.success('Note created successfully');
-        router.push('/my_notes');
+        router.push(`/note/${note.data?.createNote?.id}`);
       } catch (error) {
         console.error('Error during the process:', error);
         toast.error('Error during the process');

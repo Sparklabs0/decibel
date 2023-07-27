@@ -1,58 +1,51 @@
 const demoData = {
-  time: 1550476186479,
+  time: 1667495123102,
   blocks: [
     {
-      id: 'oUq2g_tl8y',
+      id: 'P6bbP3YI3E',
       type: 'header',
       data: {
-        text: 'Editor.js',
+        text: 'Another Example',
         level: 2,
       },
     },
     {
-      id: 'zbGZFPM-iI',
+      id: 'XkWvC37UhV',
       type: 'paragraph',
       data: {
-        text: 'Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration.',
+        text: 'This is another example of content created with Editor.js. You can freely edit this text, add new blocks, and see how the editor works!',
       },
     },
     {
-      id: 'qYIGsjS5rt',
+      id: 'RjjDcqR-Lz',
       type: 'header',
       data: {
-        text: 'Key features',
+        text: 'Custom Blocks',
         level: 3,
       },
     },
     {
-      id: 'XV87kJS_H1',
+      id: 'I7YK4ddRJq',
       type: 'list',
       data: {
-        style: 'unordered',
+        style: 'ordered',
         items: [
-          'It is a block-styled editor',
-          'It returns clean data output in JSON',
-          'Designed to be extendable and pluggable with a simple API',
+          'Editor.js supports custom blocks',
+          'Developers can create their own blocks to suit their specific needs',
+          'These custom blocks can be seamlessly integrated into the editor',
         ],
       },
     },
     {
-      id: 'AOulAjL8XM',
-      type: 'header',
+      id: 'QyRp9nJWXs',
+      type: 'code',
       data: {
-        text: 'What does it mean «block-styled editor»',
-        level: 3,
-      },
-    },
-    {
-      id: 'cyZjplMOZ0',
-      type: 'paragraph',
-      data: {
-        text: 'Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class="cdx-marker">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor\'s Core.',
+        code: 'const example = "This is a code block";\nconsole.log(example);',
+        language: 'javascript',
       },
     },
   ],
-  version: '2.8.1',
+  version: '2.14.2',
 };
 
 export default demoData;
