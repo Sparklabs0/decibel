@@ -12,7 +12,6 @@ import nextedList from "@editorjs/nested-list";
 import marker from "@editorjs/marker";
 import autoCompleLink from "@editorjs/link-autocomplete";
 import spoiler from "editorjs-inline-spoiler-tool";
-import ToggleBlock from 'editorjs-toggle-block';
 
 export const EDITOR_TOOLS = {
   code: Code,

@@ -8,6 +8,7 @@ import { GetNoteQuery, GetNoteQueryVariables } from "@/API";
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
 import { getNote } from "@/graphql/queries";
 import { toast } from "react-hot-toast";
+import { parseMarkdown } from "@/helpers/markdownToJson";
 
 function NotePage() {
   const router = useRouter();
@@ -29,23 +30,11 @@ function NotePage() {
       });
       setNotes(note.data);
       setLoading(false);
-      setInitialData({
-        blocks: [
-          {
-            type: "header",
-            data: {
-              text: "transcript",
-              level: 2,
-            },
-          },
-          {
-            type: "paragraph",
-            data: {
-              text: `${note?.data?.getNote?.summary}`,
-            },
-          },
-        ],
-      });
+      const summary = note?.data?.getNote?.summary as string;
+      const parsedData = parseMarkdown(summary);
+      setInitialData(parsedData);
+      console.log(summary,"summary")
+      console.log(parsedData, "test");
     } catch (error) {
       setLoading(false);
       console.log("Error", error);

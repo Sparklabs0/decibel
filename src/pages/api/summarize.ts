@@ -23,7 +23,8 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
     Then return a list of the main points in the provided transcript. Then return a list of action items. Then return a list of follow up questions. Then return a list of potential arguments against the transcript.
     For each list, return a Heading 2 before writing the list items. Limit each list item to 100 words, and return no more than 5 points per list.
     Transcript:
-    ${req.body.prompt}`
+    dont forget to add line breaks after each paragraph, and it must contain all the feilds mentioned above.
+     ${req.body.prompt}`
     
     const context = `You are an assistant that only speaks in Markdown. Do not write text that isn't formatted as markdown.
 
@@ -61,8 +62,7 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
       "https://api.openai.com/v1/completions",
       {
         model: "text-davinci-003",
-        // prompt: `system:${context} user ${prompt2}`,
-        prompt,
+        prompt: `system:${context} user ${prompt2}`,
         temperature: 0.2,
         top_p: 1,
         frequency_penalty: 0,
@@ -81,7 +81,6 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log("response", response.data);
 
   const summary = response.data.choices[0].text.trim();
-  console.log("summary", summary);
 
     res.status(200).json({ summary });
   } catch (error) {
