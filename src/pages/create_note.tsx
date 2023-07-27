@@ -57,18 +57,6 @@ function NoteAudioUploader() {
     }
   };
 
-  const tempText = `Lessons Learned:
-
-  1. The Power of AI: AI is a powerful tool that can be used to simplify and streamline the process of creating content for social media. With the right AI tools, you can create content in just a few clicks and have it posted to social media in a matter of hours.
-  
-  2. Ideation Process: Ideation is an important part of the content creation process. It involves brainstorming ideas, researching topics, and creating a plan for how to best present the content.
-  
-  3. Benefits of a YouTube Channel: Starting a YouTube channel can be a great way to learn more while teaching. You can get feedback from viewers and share your journey with the world.
-  
-  4. Three Niches: There are three main niches that startups target: developers, creators, and social media marketers. Each of these niches has its own unique needs and challenges.
-  
-  5. Features and Ideas: When creating a startup, it`
-
   const createNote = async () => {
     try {
       if (!files || Object.keys(files).length === 0) {
@@ -90,17 +78,23 @@ function NoteAudioUploader() {
           setLoading('');
           return;
         }
+
         setLoading(LoadingStatus.Summarizing);
         // toast.loading(LoadingStatus.Summarizing);
-        const transcription = await transcriptionResponse.data.transcript
+        const transcription = await transcriptionResponse.data.transcript;
+
         const summarizingResponse = await axios.post(`/api/summarize`, {
-          prompt:  transcription,
+          prompt: transcription,
         });
         toast.dismiss();
-        console.log(summarizingResponse.data,"summary data that I am logging, its summary.data")
+        console.log(
+          summarizingResponse.data,
+          'summary data that I am logging, its summary.data'
+        );
         // const summaryData = JSON.parse(summarizingResponse.data.summary);
         // console.log(summaryData,"summary data which is parsed")
         const summaryText = summarizingResponse.data.summary;
+
         if (!summaryText) {
           toast.error('Summary not available');
           setLoading('');
@@ -131,8 +125,8 @@ function NoteAudioUploader() {
         setLoading('');
       }
     } catch (error) {
-      console.error('Error while getting audio:', error);
-      toast.error('Error while getting audio');
+      console.error('Error while creating note:', error);
+      toast.error('Error while creating note');
     }
   };
 

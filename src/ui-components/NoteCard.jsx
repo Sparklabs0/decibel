@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import * as React from "react";
 export default function NoteCard(props) {
   const { note, audioElem, actionElem, overrides, ...rest } = props;
   return (
@@ -82,7 +82,7 @@ export default function NoteCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children={note?.summary}
+        children={note?.transcription}
         {...getOverrideProps(overrides, "note_text")}
       ></Text>
       <View
