@@ -144,7 +144,7 @@ function Notes() {
         placeholder="Search notes with title"
       />
       <Heading marginBottom={24} marginTop={48} level={4}>
-        Your Notes
+        {`Your Notes (${notes?.listNotes?.items.length})`}
       </Heading>
       {loading && <ClipLoader size={20} color="#007bff" />}
       <Collection
