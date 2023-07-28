@@ -32,16 +32,10 @@ function NotePage() {
       setNoteData(note.data);
       console.log(note);
       setLoading(false);
-      // const summary = note?.data?.getNote?.summary as string;
-      // const transcription = note?.data?.getNote?.transcription as string;
-      // const parsedData = parseMarkdown(summary);
-      // setInitialData(parsedData);
-      // console.log(summary, 'summary');
-      // console.log(parsedData, 'test');
     } catch (error) {
       setLoading(false);
       console.log('Error', error);
-      toast.error('Error during fetching');
+      // toast.error('Error during fetching');
     }
   }, [id]);
 
@@ -49,14 +43,15 @@ function NotePage() {
     getNotes();
   }, [getNotes]);
 
-  if (loading) {
-    return <ClipLoader size={30} />;
-  }
-
   return (
     <View>
+      {loading && <ClipLoader size={30} />}
       {noteData?.getNote?.summary && (
-        <Editor data={noteData?.getNote?.summary} />
+        <Editor
+          data={noteData?.getNote?.summary}
+          title={noteData?.getNote?.title as string}
+          id={id as string}
+        />
       )}
     </View>
   );

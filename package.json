@@ -40,8 +40,6 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "framer-motion": "^10.13.0",
-    "markdown-it": "^13.0.1",
-    "markdown-it-front-matter": "^0.2.3",
     "next": "13.4.10",
     "react": "18.2.0",
     "react-audio-player": "^0.17.0",
@@ -55,6 +53,7 @@
     "tailwind-merge": "^1.14.0",
     "typescript": "5.1.6",
     "use-debounce": "^9.0.4",
+    "usehooks-ts": "^2.9.1",
     "wavesurfer.js": "^7.0.3"
   },
   "devDependencies": {
