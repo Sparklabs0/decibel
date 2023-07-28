@@ -14,6 +14,7 @@ import {
   Grid,
   Icon,
   ScrollView,
+  SwitchField,
   Text,
   TextAreaField,
   TextField,
@@ -200,6 +201,7 @@ export default function NoteUpdateForm(props) {
     label: "",
     transcription: "",
     summary: "",
+    favorited: false,
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [audio, setAudio] = React.useState(initialValues.audio);
@@ -209,6 +211,7 @@ export default function NoteUpdateForm(props) {
     initialValues.transcription
   );
   const [summary, setSummary] = React.useState(initialValues.summary);
+  const [favorited, setFavorited] = React.useState(initialValues.favorited);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
@@ -225,6 +228,7 @@ export default function NoteUpdateForm(props) {
         ? cleanValues.summary
         : JSON.stringify(cleanValues.summary)
     );
+    setFavorited(cleanValues.favorited);
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -247,6 +251,7 @@ export default function NoteUpdateForm(props) {
     label: [],
     transcription: [],
     summary: [{ type: "JSON" }],
+    favorited: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -280,6 +285,7 @@ export default function NoteUpdateForm(props) {
           label,
           transcription,
           summary,
+          favorited,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -341,6 +347,7 @@ export default function NoteUpdateForm(props) {
               label,
               transcription,
               summary,
+              favorited,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -366,6 +373,7 @@ export default function NoteUpdateForm(props) {
               label,
               transcription,
               summary,
+              favorited,
             };
             const result = onChange(modelFields);
             values = result?.audio ?? values;
@@ -417,6 +425,7 @@ export default function NoteUpdateForm(props) {
               label,
               transcription,
               summary,
+              favorited,
             };
             const result = onChange(modelFields);
             value = result?.createdAt ?? value;
@@ -446,6 +455,7 @@ export default function NoteUpdateForm(props) {
               label: value,
               transcription,
               summary,
+              favorited,
             };
             const result = onChange(modelFields);
             value = result?.label ?? value;
@@ -475,6 +485,7 @@ export default function NoteUpdateForm(props) {
               label,
               transcription: value,
               summary,
+              favorited,
             };
             const result = onChange(modelFields);
             value = result?.transcription ?? value;
@@ -504,6 +515,7 @@ export default function NoteUpdateForm(props) {
               label,
               transcription,
               summary: value,
+              favorited,
             };
             const result = onChange(modelFields);
             value = result?.summary ?? value;
@@ -518,6 +530,36 @@ export default function NoteUpdateForm(props) {
         hasError={errors.summary?.hasError}
         {...getOverrideProps(overrides, "summary")}
       ></TextAreaField>
+      <SwitchField
+        label="Favorited"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={favorited}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              title,
+              audio,
+              createdAt,
+              label,
+              transcription,
+              summary,
+              favorited: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.favorited ?? value;
+          }
+          if (errors.favorited?.hasError) {
+            runValidationTasks("favorited", value);
+          }
+          setFavorited(value);
+        }}
+        onBlur={() => runValidationTasks("favorited", favorited)}
+        errorMessage={errors.favorited?.errorMessage}
+        hasError={errors.favorited?.hasError}
+        {...getOverrideProps(overrides, "favorited")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

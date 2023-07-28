@@ -1,12 +1,10 @@
 import {
   GetNoteQueryVariables,
   ListNotesQuery,
-  ListNotesQueryVariables, Note,
-  // ModelSortDirection,
-  // NotesByDateQuery,
-  // NotesByDateQueryVariables,
+  ListNotesQueryVariables,
+  Note,
   OnCreateNoteSubscription,
-  OnDeleteNoteSubscription
+  OnDeleteNoteSubscription,
 } from '@/API';
 import AudioForNoteCard from '@/custom-components/AudioForNoteCard';
 import Layout from '@/custom-components/Layout';
@@ -18,7 +16,7 @@ import {
   graphqlOperation,
   GraphQLQuery,
   GraphQLSubscription,
-  GRAPHQL_AUTH_MODE
+  GRAPHQL_AUTH_MODE,
 } from '@aws-amplify/api';
 import {
   Button,
@@ -29,7 +27,7 @@ import {
   SearchField,
   useTheme,
   View,
-  ViewProps
+  ViewProps,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import { off } from 'process';
@@ -39,13 +37,13 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { ClipLoader } from 'react-spinners';
 
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
-function Notes() {
+function FavoriteNotes() {
   const [notes, setNotes] = useState<ListNotesQuery>();
   // const nextTokenRef = useRef<string | undefined>(undefined);
   const ViewRef = useRef<HTMLDivElement | null>(null);
@@ -59,14 +57,17 @@ function Notes() {
     }
   };
 
-  const getNotes = useCallback(async () => {
+  const getFavoriteNotes = useCallback(async () => {
     scrollToTop();
     setLoading(true); // Set loading to true when starting search
     const variables: ListNotesQueryVariables = {
       // limit: 10,
     };
 
-    variables.filter = { title: { contains: search.trim() } };
+    variables.filter = {
+      title: { contains: search.trim() },
+      favorited: { eq: true },
+    };
     // variables.nextToken = nextTokenRef.current;
 
     try {
@@ -88,8 +89,8 @@ function Notes() {
   }, [search]); // Add search as a dependency to the useCallback hook
 
   useEffect(() => {
-    getNotes();
-  }, [search, getNotes]);
+    getFavoriteNotes();
+  }, [search, getFavoriteNotes]);
 
   //subscribe to delete note event
   useEffect(() => {
@@ -143,7 +144,7 @@ function Notes() {
         placeholder="Search notes with title"
       />
       <Heading marginBottom={24} marginTop={48} level={4}>
-        {`Your Notes (${notes?.listNotes?.items.length || 0})`}
+        {`Favorite Notes (${notes?.listNotes?.items.length || 0})`}
       </Heading>
       {loading && <ClipLoader size={20} color="#007bff" />}
       <Collection
@@ -193,7 +194,11 @@ function Notes() {
       </Collection>
       <Flex marginTop={48}>
         {
-          <Button borderRadius="8px" variation="primary" onClick={getNotes}>
+          <Button
+            borderRadius="8px"
+            variation="primary"
+            onClick={getFavoriteNotes}
+          >
             reload
           </Button>
         }
@@ -202,8 +207,8 @@ function Notes() {
   );
 }
 
-Notes.getLayout = function getLayout(page: ReactElement) {
+FavoriteNotes.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export default Notes;
+export default FavoriteNotes;

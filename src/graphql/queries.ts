@@ -12,6 +12,7 @@ export const getNote = /* GraphQL */ `
       label
       transcription
       summary
+      favorited
       updatedAt
       owner
       __typename
@@ -33,6 +34,7 @@ export const listNotes = /* GraphQL */ `
         label
         transcription
         summary
+        favorited
         updatedAt
         owner
         __typename

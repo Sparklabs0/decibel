@@ -10,6 +10,7 @@ export type CreateNoteInput = {
   label?: string | null,
   transcription?: string | null,
   summary?: string | null,
+  favorited?: boolean | null,
 };
 
 export type ModelNoteConditionInput = {
@@ -19,6 +20,7 @@ export type ModelNoteConditionInput = {
   label?: ModelStringInput | null,
   transcription?: ModelStringInput | null,
   summary?: ModelStringInput | null,
+  favorited?: ModelBooleanInput | null,
   and?: Array< ModelNoteConditionInput | null > | null,
   or?: Array< ModelNoteConditionInput | null > | null,
   not?: ModelNoteConditionInput | null,
@@ -64,6 +66,13 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Note = {
   __typename: "Note",
   id: string,
@@ -73,6 +82,7 @@ export type Note = {
   label?: string | null,
   transcription?: string | null,
   summary?: string | null,
+  favorited?: boolean | null,
   updatedAt: string,
   owner?: string | null,
 };
@@ -85,6 +95,7 @@ export type UpdateNoteInput = {
   label?: string | null,
   transcription?: string | null,
   summary?: string | null,
+  favorited?: boolean | null,
 };
 
 export type DeleteNoteInput = {
@@ -99,6 +110,7 @@ export type ModelNoteFilterInput = {
   label?: ModelStringInput | null,
   transcription?: ModelStringInput | null,
   summary?: ModelStringInput | null,
+  favorited?: ModelBooleanInput | null,
   and?: Array< ModelNoteFilterInput | null > | null,
   or?: Array< ModelNoteFilterInput | null > | null,
   not?: ModelNoteFilterInput | null,
@@ -134,6 +146,7 @@ export type ModelSubscriptionNoteFilterInput = {
   label?: ModelSubscriptionStringInput | null,
   transcription?: ModelSubscriptionStringInput | null,
   summary?: ModelSubscriptionStringInput | null,
+  favorited?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionNoteFilterInput | null > | null,
   or?: Array< ModelSubscriptionNoteFilterInput | null > | null,
 };
@@ -168,6 +181,11 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
 export type CreateNoteMutationVariables = {
   input: CreateNoteInput,
   condition?: ModelNoteConditionInput | null,
@@ -183,6 +201,7 @@ export type CreateNoteMutation = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -203,6 +222,7 @@ export type UpdateNoteMutation = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -223,6 +243,7 @@ export type DeleteNoteMutation = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -242,6 +263,7 @@ export type GetNoteQuery = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -265,6 +287,7 @@ export type ListNotesQuery = {
       label?: string | null,
       transcription?: string | null,
       summary?: string | null,
+      favorited?: boolean | null,
       updatedAt: string,
       owner?: string | null,
     } | null >,
@@ -287,6 +310,7 @@ export type OnCreateNoteSubscription = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -307,6 +331,7 @@ export type OnUpdateNoteSubscription = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,
@@ -327,6 +352,7 @@ export type OnDeleteNoteSubscription = {
     label?: string | null,
     transcription?: string | null,
     summary?: string | null,
+    favorited?: boolean | null,
     updatedAt: string,
     owner?: string | null,
   } | null,

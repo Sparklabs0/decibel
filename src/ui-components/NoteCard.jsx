@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Flex, Text, View } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function NoteCard(props) {
   const { note, audioElem, actionElem, overrides, ...rest } = props;
   return (

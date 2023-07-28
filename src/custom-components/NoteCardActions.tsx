@@ -1,5 +1,9 @@
-import { DeleteNoteMutation } from '@/API';
-import { Note } from '@/models';
+import {
+  DeleteNoteMutation,
+  GetNoteQuery,
+  Note,
+  UpdateNoteMutation,
+} from '@/API';
 import { API, GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
 import {
   Button,
@@ -17,21 +21,23 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BiEdit, BiLink } from 'react-icons/bi';
-import { BsPencilSquare } from 'react-icons/bs';
+import { BsHeartFill, BsPencilSquare } from 'react-icons/bs';
 import { ImBin2 } from 'react-icons/im';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
+import * as query from '../graphql/queries';
 const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
   const { tokens } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [localFavorite, setLocalFavorite] = useState<boolean>(
+    Boolean(note.favorited)
+  );
   const createdAtDate = dayjs(note.createdAt).toDate();
 
   const formattedDate = dayjs(createdAtDate).format('MMM D, YYYY h:mm A');
 
   const deleteHandler = async (id: string) => {
     try {
-      console.log(note);
       const res = await API.graphql<GraphQLQuery<DeleteNoteMutation>>({
         query: mutations.deleteNote,
         //@ts-ignore
@@ -39,6 +45,32 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
       toast.success('Note deleted successfully');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsModalOpen(false);
+    }
+  };
+
+  const favoriteToggle = async (id: string) => {
+    try {
+      const status = await API.graphql<GraphQLQuery<GetNoteQuery>>({
+        query: query.getNote,
+        variables: { id: id as string },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      });
+      const res = await API.graphql<GraphQLQuery<UpdateNoteMutation>>({
+        query: mutations.updateNote,
+        variables: { input: { id, favorited: !note.favorited } },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+      });
+      if (status.data?.getNote?.favorited) {
+        setLocalFavorite(false);
+        toast.success('Note removed from favorites');
+      } else {
+        setLocalFavorite(true);
+        toast.success('Note added to favorites');
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -80,39 +112,58 @@ const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
 
   return (
     <>
-      <Flex
+      <View
         padding={8}
         marginTop={12}
-        justifyContent="space-between"
+        // justifyContent="space-between"
         width="100%"
         style={{ whiteSpace: 'nowrap' }}
       >
-        <Text fontSize="16px">{formattedDate}</Text>
-        <Flex padding={8} gap={12} justifyContent="flex-end" width="100%">
-          <Link href={`/note/${note.id}`}>
-            <Button
-              style={{
-                border: 'none',
-                boxShadow: '0px 1px 2px 0px #0000001a',
-              }}
-            >
-              <BsPencilSquare size={20} color="#666" />
-            </Button>
-          </Link>
+        <Text marginBottom={24}>
+          <span style={{ fontWeight: 'bold' }}>Created</span> {formattedDate}
+        </Text>
+        <Flex gap={12} justifyContent="space-between" width="100%">
           <Button
             onClick={() => {
-              setIsModalOpen(true);
+              favoriteToggle(note.id);
             }}
-            variation="warning"
             style={{
               border: 'none',
               boxShadow: '0px 1px 2px 0px #0000001a',
             }}
           >
-            <ImBin2 cursor="pointer" size={20} color="#666" />
+            <BsHeartFill
+              cursor="pointer"
+              size={20}
+              color={localFavorite ? tokens.colors.red[60].original : '#666'}
+            />
           </Button>
+          <Flex gap={8}>
+            <Link href={`/note/${note.id}`}>
+              <Button
+                style={{
+                  border: 'none',
+                  boxShadow: '0px 1px 2px 0px #0000001a',
+                }}
+              >
+                <BsPencilSquare size={20} color="#666" />
+              </Button>
+            </Link>
+            <Button
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+              variation="warning"
+              style={{
+                border: 'none',
+                boxShadow: '0px 1px 2px 0px #0000001a',
+              }}
+            >
+              <ImBin2 cursor="pointer" size={20} color="#666" />
+            </Button>
+          </Flex>
         </Flex>
-      </Flex>
+      </View>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}

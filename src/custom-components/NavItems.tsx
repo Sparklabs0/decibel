@@ -2,8 +2,8 @@ import { Button, Flex, Text, useTheme, View } from '@aws-amplify/ui-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { BiSolidDashboard } from 'react-icons/bi';
-import { BsPencilSquare, BsPlus } from 'react-icons/bs';
+import { BiHeartSquare, BiSolidDashboard } from 'react-icons/bi';
+import { BsHeartFill, BsPencilSquare, BsPlus } from 'react-icons/bs';
 import { FaNoteSticky } from 'react-icons/fa6';
 import { SiAudiomack } from 'react-icons/si';
 import styles from '../styles/NavItems.module.css';
@@ -24,6 +24,12 @@ const NavItems = () => {
       desc: '',
       path: '/my_notes',
       icon: <FaNoteSticky size="20px" />,
+    },
+    {
+      name: 'Favorite Notes',
+      desc: '',
+      path: '/favorite_notes',
+      icon: <BsHeartFill size="20px" />,
     },
     // {
     //   name: 'Create Note',
