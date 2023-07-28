@@ -33,8 +33,8 @@ function Editor({
 
   const [noteEditorData, setNoteEditorData] = useState<string>(data);
   const [noteTitle, setNoteTitle] = useState<string>(title);
-  const debouncedTitle = useDebounce<string>(noteTitle, 1200);
-  const debouncedEditorData = useDebounce<string>(noteEditorData, 1200);
+  const debouncedTitle = useDebounce<string>(noteTitle, 500);
+  const debouncedEditorData = useDebounce<string>(noteEditorData, 500);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
