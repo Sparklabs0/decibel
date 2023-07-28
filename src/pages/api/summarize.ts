@@ -11,24 +11,35 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
     
     Your JSON object should have the following structure:
     {
-        "blocks": [
-          {
-            "type": "header",
-            "data": {
-              "text": "Your Heading Text",
-              "level": 1
-            }
-          },
-          {
-            "type": "paragraph",
-            "data": {
-              "text": "Your paragraph content goes here. Be concise and keep it informative."
-            }
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Your Heading Text",
+            "level": 1
           }
-        ]
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Your paragraph content goes here. Be concise and keep it informative."
+          }
+        },
+        {
+          "type": "list",
+          "data": {
+            "style": "unordered",
+            "items": [
+              "List item 1",
+              "List item 2",
+              "List item 3"
+            ]
+          }
+        }
+      ]
     }
     
-    Please use the provided transcript to populate the header and paragraph in the JSON object. Make sure to retain all the key pieces and important information while creating the note for Editor.js.`;
+    Please use the provided transcript to populate the header, parapraph and the list in the JSON object. Make sure to retain all the key pieces and important information while creating a note out of it to increase productivity and use it for Editor.js. The JSON Object:`;
 
     const response = await axios.post(
       'https://api.openai.com/v1/completions',
