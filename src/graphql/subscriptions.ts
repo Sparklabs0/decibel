@@ -10,10 +10,8 @@ export const onCreateNote = /* GraphQL */ `
     onCreateNote(filter: $filter, owner: $owner) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary
@@ -31,10 +29,8 @@ export const onUpdateNote = /* GraphQL */ `
     onUpdateNote(filter: $filter, owner: $owner) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary
@@ -52,10 +48,8 @@ export const onDeleteNote = /* GraphQL */ `
     onDeleteNote(filter: $filter, owner: $owner) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary

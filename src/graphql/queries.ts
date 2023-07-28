@@ -7,10 +7,8 @@ export const getNote = /* GraphQL */ `
     getNote(id: $id) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary
@@ -30,10 +28,8 @@ export const listNotes = /* GraphQL */ `
       items {
         id
         title
-        text
         audio
         createdAt
-        jsonData
         label
         transcription
         summary

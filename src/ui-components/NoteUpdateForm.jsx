@@ -195,19 +195,15 @@ export default function NoteUpdateForm(props) {
   } = props;
   const initialValues = {
     title: "",
-    text: "",
     audio: [],
     createdAt: "",
-    jsonData: "",
     label: "",
     transcription: "",
     summary: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
-  const [text, setText] = React.useState(initialValues.text);
   const [audio, setAudio] = React.useState(initialValues.audio);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
-  const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
   const [label, setLabel] = React.useState(initialValues.label);
   const [transcription, setTranscription] = React.useState(
     initialValues.transcription
@@ -219,18 +215,16 @@ export default function NoteUpdateForm(props) {
       ? { ...initialValues, ...noteRecord }
       : initialValues;
     setTitle(cleanValues.title);
-    setText(cleanValues.text);
     setAudio(cleanValues.audio ?? []);
     setCurrentAudioValue("");
     setCreatedAt(cleanValues.createdAt);
-    setJsonData(
-      typeof cleanValues.jsonData === "string"
-        ? cleanValues.jsonData
-        : JSON.stringify(cleanValues.jsonData)
-    );
     setLabel(cleanValues.label);
     setTranscription(cleanValues.transcription);
-    setSummary(cleanValues.summary);
+    setSummary(
+      typeof cleanValues.summary === "string"
+        ? cleanValues.summary
+        : JSON.stringify(cleanValues.summary)
+    );
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -247,14 +241,12 @@ export default function NoteUpdateForm(props) {
   const [currentAudioValue, setCurrentAudioValue] = React.useState("");
   const audioRef = React.createRef();
   const validations = {
-    title: [],
-    text: [],
+    title: [{ type: "Required" }],
     audio: [{ type: "Required" }],
     createdAt: [{ type: "Required" }],
-    jsonData: [{ type: "JSON" }],
     label: [],
     transcription: [],
-    summary: [],
+    summary: [{ type: "JSON" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -283,10 +275,8 @@ export default function NoteUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           title,
-          text,
           audio,
           createdAt,
-          jsonData,
           label,
           transcription,
           summary,
@@ -338,7 +328,7 @@ export default function NoteUpdateForm(props) {
     >
       <TextField
         label="Title"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={title}
         onChange={(e) => {
@@ -346,10 +336,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title: value,
-              text,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription,
               summary,
@@ -367,47 +355,14 @@ export default function NoteUpdateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
-      <TextField
-        label="Text"
-        isRequired={false}
-        isReadOnly={false}
-        value={text}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title,
-              text: value,
-              audio,
-              createdAt,
-              jsonData,
-              label,
-              transcription,
-              summary,
-            };
-            const result = onChange(modelFields);
-            value = result?.text ?? value;
-          }
-          if (errors.text?.hasError) {
-            runValidationTasks("text", value);
-          }
-          setText(value);
-        }}
-        onBlur={() => runValidationTasks("text", text)}
-        errorMessage={errors.text?.errorMessage}
-        hasError={errors.text?.hasError}
-        {...getOverrideProps(overrides, "text")}
-      ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
           if (onChange) {
             const modelFields = {
               title,
-              text,
               audio: values,
               createdAt,
-              jsonData,
               label,
               transcription,
               summary,
@@ -457,10 +412,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title,
-              text,
               audio,
               createdAt: value,
-              jsonData,
               label,
               transcription,
               summary,
@@ -478,37 +431,6 @@ export default function NoteUpdateForm(props) {
         hasError={errors.createdAt?.hasError}
         {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
-      <TextAreaField
-        label="Json data"
-        isRequired={false}
-        isReadOnly={false}
-        value={jsonData}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title,
-              text,
-              audio,
-              createdAt,
-              jsonData: value,
-              label,
-              transcription,
-              summary,
-            };
-            const result = onChange(modelFields);
-            value = result?.jsonData ?? value;
-          }
-          if (errors.jsonData?.hasError) {
-            runValidationTasks("jsonData", value);
-          }
-          setJsonData(value);
-        }}
-        onBlur={() => runValidationTasks("jsonData", jsonData)}
-        errorMessage={errors.jsonData?.errorMessage}
-        hasError={errors.jsonData?.hasError}
-        {...getOverrideProps(overrides, "jsonData")}
-      ></TextAreaField>
       <TextField
         label="Label"
         isRequired={false}
@@ -519,10 +441,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title,
-              text,
               audio,
               createdAt,
-              jsonData,
               label: value,
               transcription,
               summary,
@@ -550,10 +470,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title,
-              text,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription: value,
               summary,
@@ -571,7 +489,7 @@ export default function NoteUpdateForm(props) {
         hasError={errors.transcription?.hasError}
         {...getOverrideProps(overrides, "transcription")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Summary"
         isRequired={false}
         isReadOnly={false}
@@ -581,10 +499,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               title,
-              text,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription,
               summary: value,
@@ -601,7 +517,7 @@ export default function NoteUpdateForm(props) {
         errorMessage={errors.summary?.errorMessage}
         hasError={errors.summary?.hasError}
         {...getOverrideProps(overrides, "summary")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

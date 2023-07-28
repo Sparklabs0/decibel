@@ -10,10 +10,8 @@ export const createNote = /* GraphQL */ `
     createNote(input: $input, condition: $condition) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary
@@ -31,10 +29,8 @@ export const updateNote = /* GraphQL */ `
     updateNote(input: $input, condition: $condition) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary
@@ -52,10 +48,8 @@ export const deleteNote = /* GraphQL */ `
     deleteNote(input: $input, condition: $condition) {
       id
       title
-      text
       audio
       createdAt
-      jsonData
       label
       transcription
       summary

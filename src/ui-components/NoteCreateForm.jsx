@@ -33,7 +33,6 @@ export default function NoteCreateForm(props) {
     title: "",
     audio: [],
     createdAt: "",
-    jsonData: "",
     label: "",
     transcription: "",
     summary: "",
@@ -41,7 +40,6 @@ export default function NoteCreateForm(props) {
   const [title, setTitle] = React.useState(initialValues.title);
   const [audio, setAudio] = React.useState(initialValues.audio);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
-  const [jsonData, setJsonData] = React.useState(initialValues.jsonData);
   const [label, setLabel] = React.useState(initialValues.label);
   const [transcription, setTranscription] = React.useState(
     initialValues.transcription
@@ -52,20 +50,18 @@ export default function NoteCreateForm(props) {
     setTitle(initialValues.title);
     setAudio(initialValues.audio);
     setCreatedAt(initialValues.createdAt);
-    setJsonData(initialValues.jsonData);
     setLabel(initialValues.label);
     setTranscription(initialValues.transcription);
     setSummary(initialValues.summary);
     setErrors({});
   };
   const validations = {
-    title: [],
+    title: [{ type: "Required" }],
     audio: [{ type: "Required" }],
     createdAt: [{ type: "Required" }],
-    jsonData: [{ type: "JSON" }],
     label: [],
     transcription: [],
-    summary: [],
+    summary: [{ type: "JSON" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -96,7 +92,6 @@ export default function NoteCreateForm(props) {
           title,
           audio,
           createdAt,
-          jsonData,
           label,
           transcription,
           summary,
@@ -146,8 +141,13 @@ export default function NoteCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Title"
-        isRequired={false}
+        label={
+          <span style={{ display: "inline-flex" }}>
+            <span>Title</span>
+            <span style={{ color: "red" }}>*</span>
+          </span>
+        }
+        isRequired={true}
         isReadOnly={false}
         value={title}
         onChange={(e) => {
@@ -157,7 +157,6 @@ export default function NoteCreateForm(props) {
               title: value,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription,
               summary,
@@ -196,7 +195,6 @@ export default function NoteCreateForm(props) {
                   title,
                   audio: value,
                   createdAt,
-                  jsonData,
                   label,
                   transcription,
                   summary,
@@ -215,7 +213,6 @@ export default function NoteCreateForm(props) {
                   title,
                   audio: value,
                   createdAt,
-                  jsonData,
                   label,
                   transcription,
                   summary,
@@ -253,7 +250,6 @@ export default function NoteCreateForm(props) {
               title,
               audio,
               createdAt: value,
-              jsonData,
               label,
               transcription,
               summary,
@@ -271,35 +267,6 @@ export default function NoteCreateForm(props) {
         hasError={errors.createdAt?.hasError}
         {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
-      <TextAreaField
-        label="Json data"
-        isRequired={false}
-        isReadOnly={false}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title,
-              audio,
-              createdAt,
-              jsonData: value,
-              label,
-              transcription,
-              summary,
-            };
-            const result = onChange(modelFields);
-            value = result?.jsonData ?? value;
-          }
-          if (errors.jsonData?.hasError) {
-            runValidationTasks("jsonData", value);
-          }
-          setJsonData(value);
-        }}
-        onBlur={() => runValidationTasks("jsonData", jsonData)}
-        errorMessage={errors.jsonData?.errorMessage}
-        hasError={errors.jsonData?.hasError}
-        {...getOverrideProps(overrides, "jsonData")}
-      ></TextAreaField>
       <TextField
         label="Label"
         isRequired={false}
@@ -312,7 +279,6 @@ export default function NoteCreateForm(props) {
               title,
               audio,
               createdAt,
-              jsonData,
               label: value,
               transcription,
               summary,
@@ -342,7 +308,6 @@ export default function NoteCreateForm(props) {
               title,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription: value,
               summary,
@@ -360,11 +325,10 @@ export default function NoteCreateForm(props) {
         hasError={errors.transcription?.hasError}
         {...getOverrideProps(overrides, "transcription")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Summary"
         isRequired={false}
         isReadOnly={false}
-        value={summary}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -372,7 +336,6 @@ export default function NoteCreateForm(props) {
               title,
               audio,
               createdAt,
-              jsonData,
               label,
               transcription,
               summary: value,
@@ -389,7 +352,7 @@ export default function NoteCreateForm(props) {
         errorMessage={errors.summary?.errorMessage}
         hasError={errors.summary?.hasError}
         {...getOverrideProps(overrides, "summary")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -15,20 +15,16 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NoteUpdateFormInputValues = {
     title?: string;
-    text?: string;
     audio?: string[];
     createdAt?: string;
-    jsonData?: string;
     label?: string;
     transcription?: string;
     summary?: string;
 };
 export declare type NoteUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
-    text?: ValidationFunction<string>;
     audio?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
-    jsonData?: ValidationFunction<string>;
     label?: ValidationFunction<string>;
     transcription?: ValidationFunction<string>;
     summary?: ValidationFunction<string>;
@@ -37,13 +33,11 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type NoteUpdateFormOverridesProps = {
     NoteUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
-    text?: PrimitiveOverrideProps<TextFieldProps>;
     audio?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
-    jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
     label?: PrimitiveOverrideProps<TextFieldProps>;
     transcription?: PrimitiveOverrideProps<TextFieldProps>;
-    summary?: PrimitiveOverrideProps<TextFieldProps>;
+    summary?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteUpdateFormProps = React.PropsWithChildren<{
     overrides?: NoteUpdateFormOverridesProps | undefined | null;

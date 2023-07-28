@@ -17,7 +17,6 @@ export declare type NoteCreateFormInputValues = {
     title?: string;
     audio?: string[];
     createdAt?: string;
-    jsonData?: string;
     label?: string;
     transcription?: string;
     summary?: string;
@@ -26,7 +25,6 @@ export declare type NoteCreateFormValidationValues = {
     title?: ValidationFunction<string>;
     audio?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
-    jsonData?: ValidationFunction<string>;
     label?: ValidationFunction<string>;
     transcription?: ValidationFunction<string>;
     summary?: ValidationFunction<string>;
@@ -37,10 +35,9 @@ export declare type NoteCreateFormOverridesProps = {
     title?: PrimitiveOverrideProps<TextFieldProps>;
     audio?: PrimitiveOverrideProps<StorageManagerProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
-    jsonData?: PrimitiveOverrideProps<TextAreaFieldProps>;
     label?: PrimitiveOverrideProps<TextFieldProps>;
     transcription?: PrimitiveOverrideProps<TextFieldProps>;
-    summary?: PrimitiveOverrideProps<TextFieldProps>;
+    summary?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteCreateFormProps = React.PropsWithChildren<{
     overrides?: NoteCreateFormOverridesProps | undefined | null;

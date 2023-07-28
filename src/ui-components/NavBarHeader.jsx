@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Flex, Image } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Flex, Image } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function NavBarHeader(props) {
   const { overrides, ...rest } = props;
@@ -68,7 +68,7 @@ export default function NavBarHeader(props) {
           type="notification"
           {...getOverrideProps(overrides, "MyIcon")}
         ></MyIcon>
-        {/* <Image
+        <Image
           width="45px"
           height="45px"
           display="block"
@@ -81,7 +81,7 @@ export default function NavBarHeader(props) {
           padding="0px 0px 0px 0px"
           objectFit="cover"
           {...getOverrideProps(overrides, "image")}
-        ></Image> */}
+        ></Image>
       </Flex>
     </Flex>
   );
