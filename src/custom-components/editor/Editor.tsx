@@ -10,10 +10,10 @@ import { toast } from 'react-hot-toast';
 import { useDebounce } from 'usehooks-ts';
 import * as mutations from '../../graphql/mutations';
 // import demoData from './defaultcontent';
-
+import { useTheme } from '@aws-amplify/ui-react';
 enum SaveStatus {
   Saved = 'Saved',
-  Saving = 'Saving',
+  Saving = 'Saving...',
   Failed = 'Failed',
   Unsaved = 'Unsaved',
 }
@@ -30,11 +30,12 @@ function Editor({
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef<EditorJs>();
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(SaveStatus.Saved);
-
+  const { tokens } = useTheme();
   const [noteEditorData, setNoteEditorData] = useState<string>(data);
   const [noteTitle, setNoteTitle] = useState<string>(title);
   const debouncedTitle = useDebounce<string>(noteTitle, 500);
   const debouncedEditorData = useDebounce<string>(noteEditorData, 500);
+  const [backgroundColor, setBackgroundColor] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -138,6 +139,20 @@ function Editor({
     }
   }, [isMounted, initializeEditor]);
 
+  useEffect(() => {
+    if (saveStatus === SaveStatus.Saved) {
+      setBackgroundColor(tokens.colors.green[40]);
+    } else if (saveStatus === SaveStatus.Saving) {
+      setBackgroundColor(tokens.colors.blue[40]);
+    } else if (saveStatus === SaveStatus.Failed) {
+      setBackgroundColor(tokens.colors.red[40]);
+    } else if (saveStatus === SaveStatus.Unsaved) {
+      setBackgroundColor(tokens.colors.neutral[40]);
+    } else {
+      setBackgroundColor(tokens.colors.neutral[40]);
+    }
+  }, [saveStatus, tokens]);
+
   return (
     <View className={styles.container}>
       <TextField
@@ -154,7 +169,13 @@ function Editor({
         }}
         placeholder="Title"
       ></TextField>
-      <View className={styles.statusBox}>{saveStatus}</View>
+      <View
+        backgroundColor={backgroundColor}
+        color="white"
+        className={styles.statusBox}
+      >
+        {saveStatus}
+      </View>
       <div id="editorjs"></div>
     </View>
   );
