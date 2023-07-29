@@ -5,13 +5,13 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  getOverrideProps,
-  getOverridesFromVariants,
-  mergeVariantsAndOverrides,
-} from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
+import {
+    getOverrideProps,
+    getOverridesFromVariants,
+    mergeVariantsAndOverrides
+} from "@aws-amplify/ui-react/internal";
+import * as React from "react";
 export default function HeroLayout2(props) {
   const { overrides: overridesProp, ...rest } = props;
   const variants = [
@@ -81,7 +81,7 @@ export default function HeroLayout2(props) {
         {...getOverrideProps(overrides, "Type Lock Up")}
       >
         <Text
-          fontFamily="Inter"
+          fontFamily=""
           fontSize="16px"
           fontWeight="700"
           color="rgba(4,52,149,1)"
@@ -117,7 +117,7 @@ export default function HeroLayout2(props) {
           {...getOverrideProps(overrides, "Main Body")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="24px"
             fontWeight="600"
             color="rgba(13,26,38,1)"
@@ -142,7 +142,7 @@ export default function HeroLayout2(props) {
             )}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"

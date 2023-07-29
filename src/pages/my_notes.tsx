@@ -1,12 +1,13 @@
 import {
   GetNoteQueryVariables,
   ListNotesQuery,
-  ListNotesQueryVariables, Note,
+  ListNotesQueryVariables,
+  Note,
   // ModelSortDirection,
   // NotesByDateQuery,
   // NotesByDateQueryVariables,
   OnCreateNoteSubscription,
-  OnDeleteNoteSubscription
+  OnDeleteNoteSubscription,
 } from '@/API';
 import AudioForNoteCard from '@/custom-components/AudioForNoteCard';
 import Layout from '@/custom-components/Layout';
@@ -18,7 +19,7 @@ import {
   graphqlOperation,
   GraphQLQuery,
   GraphQLSubscription,
-  GRAPHQL_AUTH_MODE
+  GRAPHQL_AUTH_MODE,
 } from '@aws-amplify/api';
 import {
   Button,
@@ -29,7 +30,7 @@ import {
   SearchField,
   useTheme,
   View,
-  ViewProps
+  ViewProps,
 } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import { off } from 'process';
@@ -39,7 +40,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { ClipLoader } from 'react-spinners';
 
@@ -169,6 +170,7 @@ function Notes() {
               },
               note_text: {
                 /* Show ellipsis after 4 lines */
+
                 overflow: 'hidden',
                 height: '100px',
                 position: 'relative',

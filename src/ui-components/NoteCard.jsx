@@ -40,7 +40,7 @@ export default function NoteCard(props) {
         {...getOverrideProps(overrides, "Frame 438")}
       >
         <Text
-          fontFamily="Roboto"
+          fontFamily=""
           fontSize="24px"
           fontWeight="600"
           color="rgba(13,26,38,1)"
@@ -77,7 +77,7 @@ export default function NoteCard(props) {
           {...getOverrideProps(overrides, "Frame 439")}
         >
           <Text
-            fontFamily="Roboto"
+            fontFamily=""
             fontSize="12px"
             fontWeight="400"
             color="rgba(0,0,0,1)"
@@ -114,7 +114,7 @@ export default function NoteCard(props) {
         {...getOverrideProps(overrides, "audioElem")}
       ></View>
       <Text
-        fontFamily="Roboto"
+        fontFamily=""
         fontSize="16px"
         fontWeight="400"
         color="rgba(48,64,80,1)"

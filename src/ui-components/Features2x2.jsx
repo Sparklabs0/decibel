@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import MyIcon from "./MyIcon";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import * as React from "react";
+import MyIcon from "./MyIcon";
 export default function Features2x2(props) {
   const { overrides, ...rest } = props;
   return (
@@ -98,7 +98,7 @@ export default function Features2x2(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="24px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -120,7 +120,7 @@ export default function Features2x2(props) {
               {...getOverrideProps(overrides, "Feature A")}
             ></Text>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="16px"
               fontWeight="400"
               color="rgba(48,64,80,1)"
@@ -193,7 +193,7 @@ export default function Features2x2(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="24px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -215,7 +215,7 @@ export default function Features2x2(props) {
               {...getOverrideProps(overrides, "Feature B")}
             ></Text>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="16px"
               fontWeight="400"
               color="rgba(48,64,80,1)"
@@ -303,7 +303,7 @@ export default function Features2x2(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="24px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -325,7 +325,7 @@ export default function Features2x2(props) {
               {...getOverrideProps(overrides, "Feature C")}
             ></Text>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="16px"
               fontWeight="400"
               color="rgba(48,64,80,1)"
@@ -398,7 +398,7 @@ export default function Features2x2(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="24px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -420,7 +420,7 @@ export default function Features2x2(props) {
               {...getOverrideProps(overrides, "Feature D")}
             ></Text>
             <Text
-              fontFamily="Inter"
+              fontFamily=""
               fontSize="16px"
               fontWeight="400"
               color="rgba(48,64,80,1)"

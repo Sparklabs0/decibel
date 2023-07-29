@@ -5,13 +5,13 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 import {
   getOverrideProps,
   useAuth,
-  useAuthSignOutAction,
+  useAuthSignOutAction
 } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
+import * as React from "react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};
@@ -216,7 +216,7 @@ export default function NavBarSide(props) {
               {...getOverrideProps(overrides, "Frame 32129767140")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily=""
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(13,26,38,1)"

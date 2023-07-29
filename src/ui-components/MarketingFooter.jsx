@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Divider, Flex, Text, TextField } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import * as React from "react";
 import LogoWithText from "./LogoWithText";
 export default function MarketingFooter(props) {
   const { overrides, ...rest } = props;
@@ -51,7 +51,7 @@ export default function MarketingFooter(props) {
           {...getOverrideProps(overrides, "Frame 434")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="20px"
             fontWeight="600"
             color="rgba(48,64,80,1)"
@@ -72,7 +72,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Sign up for our newsletter")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -164,7 +164,7 @@ export default function MarketingFooter(props) {
           {...getOverrideProps(overrides, "Frame 403")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="600"
             color="rgba(48,64,80,1)"
@@ -186,7 +186,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Products")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -208,7 +208,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Libraries")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -230,7 +230,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "CLI")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -252,7 +252,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Studio")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -287,7 +287,7 @@ export default function MarketingFooter(props) {
           {...getOverrideProps(overrides, "Frame 404")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="600"
             color="rgba(48,64,80,1)"
@@ -309,7 +309,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Resources")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -331,7 +331,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Docs")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -353,7 +353,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Learn")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -375,7 +375,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Examples")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -410,7 +410,7 @@ export default function MarketingFooter(props) {
           {...getOverrideProps(overrides, "Frame 40539413972")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="600"
             color="rgba(48,64,80,1)"
@@ -432,7 +432,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Company")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -454,7 +454,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "About us")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -476,7 +476,7 @@ export default function MarketingFooter(props) {
             {...getOverrideProps(overrides, "Contact")}
           ></Text>
           <Text
-            fontFamily="Inter"
+            fontFamily=""
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"
@@ -535,7 +535,7 @@ export default function MarketingFooter(props) {
           {...getOverrideProps(overrides, "LogoWithText")}
         ></LogoWithText>
         <Text
-          fontFamily="Inter"
+          fontFamily=""
           fontSize="16px"
           fontWeight="400"
           color="rgba(102,112,133,1)"
