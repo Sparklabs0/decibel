@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Badge, Flex, Text } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Badge, Flex, Text } from "@aws-amplify/ui-react";
 export default function Stat(props) {
   const { overrides, ...rest } = props;
   return (
@@ -26,7 +26,7 @@ export default function Stat(props) {
       {...rest}
     >
       <Text
-        fontFamily=""
+        fontFamily="Inter"
         fontSize="16px"
         fontWeight="400"
         color="rgba(92,102,112,1)"
@@ -59,7 +59,7 @@ export default function Stat(props) {
         {...getOverrideProps(overrides, "Frame 424")}
       >
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="24px"
           fontWeight="400"
           color="rgba(13,26,38,1)"

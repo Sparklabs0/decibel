@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Text } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 export default function DataRow(props) {
   const { overrides, ...rest } = props;
   return (
@@ -24,7 +24,7 @@ export default function DataRow(props) {
       {...rest}
     >
       <Text
-        fontFamily=""
+        fontFamily="Inter"
         fontSize="16px"
         fontWeight="600"
         color="rgba(13,26,38,1)"
@@ -45,7 +45,7 @@ export default function DataRow(props) {
         {...getOverrideProps(overrides, "label")}
       ></Text>
       <Text
-        fontFamily=""
+        fontFamily="Inter"
         fontSize="16px"
         fontWeight="400"
         color="rgba(48,64,80,1)"

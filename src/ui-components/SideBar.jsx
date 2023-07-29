@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Flex, Text } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import MyIcon from "./MyIcon";
+import { Flex, Text } from "@aws-amplify/ui-react";
 export default function SideBar(props) {
   const { overrides, ...rest } = props;
   return (
@@ -108,7 +108,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -144,7 +144,7 @@ export default function SideBar(props) {
             {...getOverrideProps(overrides, "Section39493363")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(92,102,112,1)"
@@ -206,7 +206,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -270,7 +270,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -334,7 +334,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -370,7 +370,7 @@ export default function SideBar(props) {
             {...getOverrideProps(overrides, "Section39493377")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(92,102,112,1)"
@@ -432,7 +432,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -496,7 +496,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"
@@ -560,7 +560,7 @@ export default function SideBar(props) {
                 ></MyIcon>
               </Flex>
               <Text
-                fontFamily=""
+                fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="400"
                 color="rgba(4,52,149,1)"

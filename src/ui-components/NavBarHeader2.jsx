@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarHeader2(props) {
   const { overrides, ...rest } = props;
   return (
@@ -79,7 +79,7 @@ export default function NavBarHeader2(props) {
           ></Icon>
         </View>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(13,26,38,1)"
@@ -100,7 +100,7 @@ export default function NavBarHeader2(props) {
           {...getOverrideProps(overrides, "Home")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(13,26,38,1)"
@@ -121,7 +121,7 @@ export default function NavBarHeader2(props) {
           {...getOverrideProps(overrides, "Products")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(13,26,38,1)"
@@ -142,7 +142,7 @@ export default function NavBarHeader2(props) {
           {...getOverrideProps(overrides, "Pricing")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(13,26,38,1)"

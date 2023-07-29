@@ -5,16 +5,16 @@
  **************************************************************************/
 
 /* eslint-disable */
+import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
   CheckboxField,
   Flex,
   Text,
   TextAreaField,
-  TextField
+  TextField,
 } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import * as React from "react";
 import MyIcon from "./MyIcon";
 export default function ContactUs(props) {
   const { overrides, ...rest } = props;
@@ -164,7 +164,7 @@ export default function ContactUs(props) {
             {...getOverrideProps(overrides, "MyIcon39193120")}
           ></MyIcon>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="14px"
             fontWeight="400"
             color="rgba(92,102,112,1)"
@@ -212,7 +212,7 @@ export default function ContactUs(props) {
             {...getOverrideProps(overrides, "MyIcon39193123")}
           ></MyIcon>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="14px"
             fontWeight="400"
             color="rgba(92,102,112,1)"

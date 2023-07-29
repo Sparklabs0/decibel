@@ -5,13 +5,13 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
-import {
-    getOverrideProps,
-    getOverridesFromVariants,
-    mergeVariantsAndOverrides
-} from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import {
+  getOverrideProps,
+  getOverridesFromVariants,
+  mergeVariantsAndOverrides,
+} from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function HeroLayout1(props) {
   const { overrides: overridesProp, ...rest } = props;
   const variants = [
@@ -109,7 +109,7 @@ export default function HeroLayout1(props) {
             {...getOverrideProps(overrides, "Message")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="700"
               color="rgba(64,106,191,1)"
@@ -131,7 +131,7 @@ export default function HeroLayout1(props) {
               {...getOverrideProps(overrides, "Eyebrow")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="24px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -153,7 +153,7 @@ export default function HeroLayout1(props) {
               {...getOverrideProps(overrides, "Heading")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(48,64,80,1)"

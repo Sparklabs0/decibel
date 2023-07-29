@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import MyIcon from "./MyIcon";
+import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
 export default function EditProfile(props) {
   const { overrides, ...rest } = props;
   return (
@@ -66,7 +66,7 @@ export default function EditProfile(props) {
             {...getOverrideProps(overrides, "MyIcon")}
           ></MyIcon>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="16px"
             fontWeight="700"
             color="rgba(13,26,38,1)"
@@ -115,7 +115,7 @@ export default function EditProfile(props) {
             {...getOverrideProps(overrides, "image")}
           ></Image>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="16px"
             fontWeight="400"
             color="rgba(13,26,38,1)"

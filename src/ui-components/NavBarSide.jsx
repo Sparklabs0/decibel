@@ -5,13 +5,13 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
+import * as React from "react";
 import {
   getOverrideProps,
   useAuth,
-  useAuthSignOutAction
+  useAuthSignOutAction,
 } from "@aws-amplify/ui-react/internal";
-import * as React from "react";
+import { Button, Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function NavBarSide(props) {
   const { children, overrides, ...rest } = props;
   const authAttributes = useAuth().user?.attributes ?? {};

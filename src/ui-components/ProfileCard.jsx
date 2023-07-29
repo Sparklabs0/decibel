@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function ProfileCard(props) {
   const { overrides, ...rest } = props;
@@ -52,7 +52,7 @@ export default function ProfileCard(props) {
         {...getOverrideProps(overrides, "Name")}
       >
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="20px"
           fontWeight="700"
           color="rgba(13,26,38,1)"
@@ -73,7 +73,7 @@ export default function ProfileCard(props) {
           {...getOverrideProps(overrides, "Melinda Marcus")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(48,64,80,1)"
@@ -122,7 +122,7 @@ export default function ProfileCard(props) {
           {...getOverrideProps(overrides, "MyIcon")}
         ></MyIcon>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(48,64,80,1)"
