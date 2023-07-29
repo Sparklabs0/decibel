@@ -8,7 +8,7 @@ import EditorJs from '@editorjs/editorjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDebounce } from 'usehooks-ts';
-import * as mutations from '../../graphql/mutations';
+import * as mutations from '../graphql/mutations';
 // import demoData from './defaultcontent';
 import { useTheme } from '@aws-amplify/ui-react';
 enum SaveStatus {
@@ -96,7 +96,7 @@ function Editor({
 
   const initializeEditor = useCallback(async () => {
     const EditorJs = (await import('@editorjs/editorjs')).default;
-    const EditorTools = (await import('./EditorTools')).EDITOR_TOOLS;
+    const EditorTools = (await import('./edit/EditorTools')).EDITOR_TOOLS;
     if (!ref.current) {
       const editor = new EditorJs({
         holder: 'editorjs',
