@@ -59,7 +59,7 @@ export default function NoteCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="note.title"
+          children={note?.title}
           {...getOverrideProps(overrides, "note_title")}
         ></Text>
         <Flex
@@ -94,7 +94,7 @@ export default function NoteCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="note.Noteslable"
+            children={note?.label}
             {...getOverrideProps(overrides, "label")}
           ></Text>
         </Flex>

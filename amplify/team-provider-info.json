@@ -20,6 +20,24 @@
       },
       "api": {
         "hackathon00": {}
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "hackathon00-staging",
+          "Id": "a485255bd76c4bb3a737d692e57a4f5c",
+          "Region": "ap-south-1"
+        }
+      },
+      "analytics": {
+        "Pinpoint": {
+          "Name": "hackathon00-staging",
+          "Id": "a485255bd76c4bb3a737d692e57a4f5c",
+          "Region": "ap-south-1"
+        },
+        "hackathon00": {}
+      },
+      "predictions": {
+        "transcription1fe080fb": {}
       }
     }
   }
