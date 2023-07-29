@@ -158,6 +158,7 @@ function Editor({
       <TextField
         margin="auto"
         width="60%"
+        maxWidth="720px"
         variation="quiet"
         overflow="visible"
         resize="vertical"
@@ -176,7 +177,10 @@ function Editor({
       >
         {saveStatus}
       </View>
-      <div id="editorjs"></div>
+      <div
+        id="editorjs"
+        style={{ width: '60%', maxWidth: '720px', margin: 'auto' }}
+      ></div>
     </View>
   );
 }
