@@ -13,5 +13,5 @@ type Note @model @auth(rules: [{allow: owner}]) {
   transcription: String
   summary: AWSJSON
   favorited: Boolean
-  labelID: ID! @index(name: "byLabel")
+  labelID: ID @index(name: "byLabel")
 } 
