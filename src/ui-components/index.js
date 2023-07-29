@@ -9,6 +9,7 @@ export { default as MarketingFooter } from "./MarketingFooter";
 export { default as MyIcon } from "./MyIcon";
 export { default as NavBarHeader2 } from "./NavBarHeader2";
 export { default as ContactUs } from "./ContactUs";
+export { default as Decibel } from "./Decibel";
 export { default as SideBar } from "./SideBar";
 export { default as MarketingPricing } from "./MarketingPricing";
 export { default as Logo } from "./Logo";

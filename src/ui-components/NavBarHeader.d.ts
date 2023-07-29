@@ -6,12 +6,16 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps, ImageProps } from "@aws-amplify/ui-react";
+import { FlexProps, IconProps, ImageProps, ViewProps } from "@aws-amplify/ui-react";
 import { MyIconProps } from "./MyIcon";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NavBarHeaderOverridesProps = {
     NavBarHeader?: PrimitiveOverrideProps<FlexProps>;
-    "decibel-1 (1) 1"?: PrimitiveOverrideProps<ImageProps>;
+    logo?: PrimitiveOverrideProps<ViewProps>;
+    Group?: PrimitiveOverrideProps<ViewProps>;
+    "Layer 1"?: PrimitiveOverrideProps<ViewProps>;
+    Vector40741113?: PrimitiveOverrideProps<IconProps>;
+    Vector40741115?: PrimitiveOverrideProps<IconProps>;
     "Frame 321"?: PrimitiveOverrideProps<FlexProps>;
     MyIcon?: MyIconProps;
     image?: PrimitiveOverrideProps<ImageProps>;

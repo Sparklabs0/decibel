@@ -1,3 +1,9 @@
+type Label @model @auth(rules: [{allow: public}, {allow: owner}]) {
+  id: ID!
+  label: String
+  Notes: [Note] @manyToMany(relationName: "LabelNote")
+}
+
 type Note @model @auth(rules: [{allow: owner}]) {
   id: ID!
   title: String!
@@ -7,5 +13,7 @@ type Note @model @auth(rules: [{allow: owner}]) {
   transcription: String
   summary: AWSJSON
   favorited: Boolean
+  NotesLabel: Label @hasOne
+  labels: [Label] @manyToMany(relationName: "LabelNote")
 }
  

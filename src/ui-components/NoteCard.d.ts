@@ -11,7 +11,10 @@ import { FlexProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteCardOverridesProps = {
     NoteCard?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 438"?: PrimitiveOverrideProps<FlexProps>;
     note_title?: PrimitiveOverrideProps<TextProps>;
+    "Frame 439"?: PrimitiveOverrideProps<FlexProps>;
+    label?: PrimitiveOverrideProps<TextProps>;
     audioElem?: PrimitiveOverrideProps<ViewProps>;
     note_text?: PrimitiveOverrideProps<TextProps>;
     actionElem?: PrimitiveOverrideProps<ViewProps>;

@@ -6,14 +6,18 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, ImageProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NavBarSideOverridesProps = {
     NavBarSide?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767087"?: PrimitiveOverrideProps<FlexProps>;
     "Frame 32129767088"?: PrimitiveOverrideProps<FlexProps>;
     "Slice 1"?: PrimitiveOverrideProps<ViewProps>;
-    "decibel-1 (1) 1"?: PrimitiveOverrideProps<ImageProps>;
+    "logoArtboard 1 1"?: PrimitiveOverrideProps<ViewProps>;
+    Group?: PrimitiveOverrideProps<ViewProps>;
+    "Layer 1"?: PrimitiveOverrideProps<ViewProps>;
+    Vector40741193?: PrimitiveOverrideProps<IconProps>;
+    Vector40741195?: PrimitiveOverrideProps<IconProps>;
     "Slice 2"?: PrimitiveOverrideProps<ViewProps>;
     "Frame 437"?: PrimitiveOverrideProps<ViewProps>;
     "Frame 416"?: PrimitiveOverrideProps<FlexProps>;

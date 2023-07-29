@@ -26,28 +26,79 @@ export default function NoteCard(props) {
       {...getOverrideProps(overrides, "NoteCard")}
       {...rest}
     >
-      <Text
-        fontFamily="Roboto"
-        fontSize="24px"
-        fontWeight="600"
-        color="rgba(13,26,38,1)"
-        lineHeight="30px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
+      <Flex
+        gap="16px"
+        direction="row"
         width="unset"
         height="unset"
-        gap="unset"
-        alignItems="unset"
+        justifyContent="flex-start"
+        alignItems="flex-start"
         shrink="0"
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children={note?.title}
-        {...getOverrideProps(overrides, "note_title")}
-      ></Text>
+        {...getOverrideProps(overrides, "Frame 438")}
+      >
+        <Text
+          fontFamily="Roboto"
+          fontSize="24px"
+          fontWeight="600"
+          color="rgba(13,26,38,1)"
+          lineHeight="30px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          grow="1"
+          shrink="1"
+          basis="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="note.title"
+          {...getOverrideProps(overrides, "note_title")}
+        ></Text>
+        <Flex
+          gap="10px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="center"
+          alignItems="center"
+          shrink="0"
+          position="relative"
+          borderRadius="10px"
+          padding="0px 25px 0px 25px"
+          backgroundColor="rgba(230,238,254,1)"
+          {...getOverrideProps(overrides, "Frame 439")}
+        >
+          <Text
+            fontFamily="Roboto"
+            fontSize="12px"
+            fontWeight="400"
+            color="rgba(0,0,0,1)"
+            lineHeight="30px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="note.Noteslable"
+            {...getOverrideProps(overrides, "label")}
+          ></Text>
+        </Flex>
+      </Flex>
       <View
         width="272px"
         height="46px"

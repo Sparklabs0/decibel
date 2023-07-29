@@ -84,8 +84,9 @@ function Layout({ children }: { children: React.ReactNode }) {
             borderRadius: "0",
           },
           Button: {
-            borderRadius: "24px",
-            fontSize: "16px",
+            borderRadius: "10px",
+            fontSize: "16px",  
+            marginLeft: "10px",          
           },
           "Wesley Peck": {
             textTransform: "uppercase",

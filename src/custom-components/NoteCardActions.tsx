@@ -26,6 +26,7 @@ import { ImBin2 } from 'react-icons/im';
 import Modal from 'react-modal';
 import * as mutations from '../graphql/mutations';
 import * as query from '../graphql/queries';
+import CustomMultiSelect from './mutliselect';
 const NoteCardActions: React.FC<{ note: Note }> = ({ note }) => {
   const { tokens } = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
