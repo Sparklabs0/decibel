@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Flex, Icon, View } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Flex, Icon, View } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function NavBarHeader(props) {
   const { profile, overrides, ...rest } = props;
