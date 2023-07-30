@@ -143,8 +143,9 @@ function Layout({ children }: { children: React.ReactNode }) {
       >
         <Button
           border="none"
-          borderRadius="24px"
+          borderRadius="50%"
           marginBottom={20}
+          padding={12}
           variation="primary"
           onClick={() => {
             router.back();
