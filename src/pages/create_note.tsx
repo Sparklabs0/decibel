@@ -166,23 +166,23 @@ function NoteAudioUploader() {
     key: string;
   }
 
-  const processFile = async ({
-    file,
-  }: {
-    file: File;
-  }): Promise<ProcessedFile> => {
-    const fileExtension = file.name.split('.').pop();
-    return file
-      .arrayBuffer()
-      .then((filebuffer) => window.crypto.subtle.digest('SHA-1', filebuffer))
-      .then((hashBuffer) => {
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray
-          .map((a) => a.toString(16).padStart(2, '0'))
-          .join('');
-        return { file, key: `${hashHex}.${fileExtension}` };
-      });
-  };
+  // const processFile = async ({
+  //   file,
+  // }: {
+  //   file: File;
+  // }): Promise<ProcessedFile> => {
+  //   const fileExtension = file.name.split('.').pop();
+  //   return file
+  //     .arrayBuffer()
+  //     .then((filebuffer) => window.crypto.subtle.digest('SHA-1', filebuffer))
+  //     .then((hashBuffer) => {
+  //       const hashArray = Array.from(new Uint8Array(hashBuffer));
+  //       const hashHex = hashArray
+  //         .map((a) => a.toString(16).padStart(2, '0'))
+  //         .join('');
+  //       return { file, key: `${hashHex}.${fileExtension}` };
+  //     });
+  // };
 
   return (
     <>
@@ -224,14 +224,14 @@ function NoteAudioUploader() {
           accessLevel="private"
           maxFileCount={1}
           maxFileSize={5000000}
-          processFile={processFile}
+          // processFile={processFile}
           onFileRemove={({ key = '' }) => {
-            // setFiles((prevFiles) => {
-            //   const updatedFiles: Files = Object.fromEntries(
-            //     Object.entries(prevFiles).filter(([fileKey]) => fileKey !== key)
-            //   );
-            //   return updatedFiles;
-            // });
+            setFiles((prevFiles) => {
+              const updatedFiles: Files = Object.fromEntries(
+                Object.entries(prevFiles).filter(([fileKey]) => fileKey !== key)
+              );
+              return updatedFiles;
+            });
           }}
           onUploadError={(error, { key }) => {
             setFiles((prevFiles) => {
