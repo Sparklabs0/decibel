@@ -141,7 +141,7 @@ function Notes() {
           setSearch(term);
         }}
         onClear={onClear}
-        placeholder="Search notes with title"
+        placeholder="Search notes with title ( case sensitive )"
       />
       <Heading marginBottom={24} marginTop={48} level={4}>
         {`Your Notes (${notes?.listNotes?.items.length || 0})`}
