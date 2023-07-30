@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "hackathon00": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "hackathon00": {
       "dependsOn": [
@@ -70,6 +76,14 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "notifications": {
+    "hackathon00": {
+      "channels": [
+        "InAppMessaging"
+      ],
+      "service": "Pinpoint"
     }
   },
   "parameters": {

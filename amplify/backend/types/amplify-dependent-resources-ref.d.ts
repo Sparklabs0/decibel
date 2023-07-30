@@ -1,4 +1,11 @@
 export type AmplifyDependentResourcesAttributes = {
+  "analytics": {
+    "hackathon00": {
+      "Id": "string",
+      "Region": "string",
+      "appName": "string"
+    }
+  },
   "api": {
     "hackathon00": {
       "GraphQLAPIEndpointOutput": "string",

@@ -12,6 +12,7 @@
     "@aws-amplify/auth": "^5.5.4",
     "@aws-amplify/datastore": "^4.6.4",
     "@aws-amplify/ui-react": "^5.0.4",
+    "@aws-amplify/ui-react-notifications": "^1.0.7",
     "@aws-amplify/ui-react-storage": "^2.0.4",
     "@editorjs/checklist": "^1.5.0",
     "@editorjs/code": "^2.8.0",

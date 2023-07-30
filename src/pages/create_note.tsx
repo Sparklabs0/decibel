@@ -23,14 +23,19 @@ import {
 } from '@aws-amplify/ui-react-storage';
 import { StorageManagerHandle } from '@aws-amplify/ui-react-storage/dist/types/components/StorageManager/types';
 import { tokens } from '@aws-amplify/ui/dist/types/theme/tokens';
-import { Predictions, Storage } from 'aws-amplify';
+import { Notifications, Predictions, Storage } from 'aws-amplify';
 import axios from 'axios';
 import { REFUSED } from 'dns';
-import { ClipLoader } from 'react-spinners'; // Import the ClipLoader
-
 import { useRouter } from 'next/router';
-import React, { ChangeEvent, ReactElement, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { toast } from 'react-hot-toast';
+import { ClipLoader } from 'react-spinners'; // Import the ClipLoader
 import * as mutations from '../graphql/mutations';
 interface Files {
   [key: string]: any; // Or you can specify the specific type of the files if known
@@ -40,6 +45,8 @@ enum LoadingStatus {
   Summarizing = 'generating note...',
   Success = 'note creation successful...',
 }
+const { InAppMessaging } = Notifications;
+
 function NoteAudioUploader() {
   const router = useRouter();
   const [title, setTitle] = useState('');
@@ -56,6 +63,12 @@ function NoteAudioUploader() {
       ref.current.clearFiles();
     }
   };
+
+  useEffect(() => {
+    Notifications.InAppMessaging.dispatchEvent({
+      name: 'note_title',
+    });
+  }, []);
 
   const createNote = async () => {
     try {
@@ -177,6 +190,13 @@ function NoteAudioUploader() {
       <Flex direction="column">
         <TextField
           isRequired={true}
+          onBlur={() => {
+            if (title && Object.keys(files).length === 0) {
+              Notifications.InAppMessaging.dispatchEvent({
+                name: 'audio_upload',
+              });
+            }
+          }}
           // descriptiveText="Enter a valid note title"
           placeholder="Enter Title"
           label="Note Title"
@@ -218,6 +238,9 @@ function NoteAudioUploader() {
                   status: 'success',
                 },
               };
+            });
+            Notifications.InAppMessaging.dispatchEvent({
+              name: 'create_note_button',
             });
           }}
           onUploadStart={({ key = '' }) => {

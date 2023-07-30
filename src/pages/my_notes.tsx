@@ -32,6 +32,7 @@ import {
   View,
   ViewProps,
 } from '@aws-amplify/ui-react';
+import { Notifications } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { off } from 'process';
 import React, {
@@ -43,7 +44,6 @@ import React, {
   useState,
 } from 'react';
 import { ClipLoader } from 'react-spinners';
-
 import * as queries from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 function Notes() {

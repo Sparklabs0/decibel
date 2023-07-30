@@ -24,14 +24,14 @@
       "notifications": {
         "Pinpoint": {
           "Name": "hackathon00-staging",
-          "Id": "a485255bd76c4bb3a737d692e57a4f5c",
+          "Id": "2634140aa82a4e14ac8eb51943858b26",
           "Region": "ap-south-1"
         }
       },
       "analytics": {
         "Pinpoint": {
           "Name": "hackathon00-staging",
-          "Id": "a485255bd76c4bb3a737d692e57a4f5c",
+          "Id": "2634140aa82a4e14ac8eb51943858b26",
           "Region": "ap-south-1"
         },
         "hackathon00": {}
