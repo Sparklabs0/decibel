@@ -68,7 +68,7 @@ function AudioCard({
               src={audioUrl}
               controls
               style={{
-                width: '100%',
+                width: '360px',
               }}
             />
           </View>
