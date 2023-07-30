@@ -35,15 +35,17 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   }, []);
 
   return (
-    <AmplifyProvider theme={studioTheme}>
-      <Authenticator.Provider>
-        <Toaster position="bottom-center" reverseOrder={false} />
-        <main className={roboto.className}>
-          {' '}
-          {getLayout(<Component {...pageProps} />)}
-        </main>
-      </Authenticator.Provider>
-    </AmplifyProvider>
+    <>
+      <AmplifyProvider theme={studioTheme}>
+        <Authenticator.Provider>
+          <Toaster position="bottom-center" reverseOrder={false} />
+          <main className={roboto.className}>
+            {' '}
+            {getLayout(<Component {...pageProps} />)}
+          </main>
+        </Authenticator.Provider>
+      </AmplifyProvider>
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
 import { GetNoteQuery, GetNoteQueryVariables } from '@/API';
-import { EditorData } from '@/custom-components/edit/types';
 import Editor from '@/custom-components/Editor';
 import Layout from '@/custom-components/Layout';
 import { getNote } from '@/graphql/queries';
