@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Text, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Text, TextField } from "@aws-amplify/ui-react";
 export default function CTASection(props) {
   const { overrides, ...rest } = props;
   return (
@@ -51,7 +51,7 @@ export default function CTASection(props) {
           {...getOverrideProps(overrides, "Frame 436")}
         >
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="16px"
             fontWeight="700"
             color="rgba(137,148,159,1)"
@@ -72,7 +72,7 @@ export default function CTASection(props) {
             {...getOverrideProps(overrides, "Newsletter")}
           ></Text>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="24px"
             fontWeight="600"
             color="rgba(13,26,38,1)"
@@ -96,7 +96,7 @@ export default function CTASection(props) {
             )}
           ></Text>
           <Text
-            fontFamily=""
+            fontFamily="Inter"
             fontSize="16px"
             fontWeight="400"
             color="rgba(48,64,80,1)"

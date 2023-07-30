@@ -70,6 +70,24 @@ function NoteAudioUploader() {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(Object.keys(files));
+    if (title && Object.keys(files).length === 0) {
+      Notifications.InAppMessaging.dispatchEvent({
+        name: 'audio_upload',
+      });
+    } else if (title && Object.keys(files).length > 0) {
+      Notifications.InAppMessaging.dispatchEvent({
+        name: 'create_note_button',
+      });
+    } else if (!title) {
+      Notifications.InAppMessaging.dispatchEvent({
+        name: 'note_title',
+      });
+    }
+    return () => {};
+  }, [title, files]);
+
   const createNote = async () => {
     try {
       if (!files || Object.keys(files).length === 0) {
@@ -190,13 +208,7 @@ function NoteAudioUploader() {
       <Flex direction="column">
         <TextField
           isRequired={true}
-          onBlur={() => {
-            if (title && Object.keys(files).length === 0) {
-              Notifications.InAppMessaging.dispatchEvent({
-                name: 'audio_upload',
-              });
-            }
-          }}
+          onBlur={() => {}}
           // descriptiveText="Enter a valid note title"
           placeholder="Enter Title"
           label="Note Title"
@@ -214,11 +226,12 @@ function NoteAudioUploader() {
           maxFileSize={5000000}
           processFile={processFile}
           onFileRemove={({ key = '' }) => {
-            setFiles((prevFiles) => {
-              const updatedFiles = { ...prevFiles };
-              delete updatedFiles[key];
-              return updatedFiles;
-            });
+            // setFiles((prevFiles) => {
+            //   const updatedFiles: Files = Object.fromEntries(
+            //     Object.entries(prevFiles).filter(([fileKey]) => fileKey !== key)
+            //   );
+            //   return updatedFiles;
+            // });
           }}
           onUploadError={(error, { key }) => {
             setFiles((prevFiles) => {
@@ -238,9 +251,6 @@ function NoteAudioUploader() {
                   status: 'success',
                 },
               };
-            });
-            Notifications.InAppMessaging.dispatchEvent({
-              name: 'create_note_button',
             });
           }}
           onUploadStart={({ key = '' }) => {

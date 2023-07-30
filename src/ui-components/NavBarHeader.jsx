@@ -7,10 +7,10 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Icon, Image, View } from "@aws-amplify/ui-react";
+import { Flex, Icon, View } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function NavBarHeader(props) {
-  const { overrides, ...rest } = props;
+  const { frame321, overrides, ...rest } = props;
   return (
     <Flex
       gap="40px"
@@ -154,21 +154,20 @@ export default function NavBarHeader(props) {
           type="notification"
           {...getOverrideProps(overrides, "MyIcon")}
         ></MyIcon>
-        <Image
-          width="45px"
-          height="45px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          shrink="0"
-          position="relative"
-          borderRadius="160px"
-          padding="0px 0px 0px 0px"
-          objectFit="cover"
-          {...getOverrideProps(overrides, "image")}
-        ></Image>
       </Flex>
+      <View
+        width="50px"
+        height="50px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        overflow="hidden"
+        shrink="0"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "profile")}
+      ></View>
     </Flex>
   );
 }

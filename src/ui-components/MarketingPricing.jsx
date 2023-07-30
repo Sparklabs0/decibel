@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { Button, Flex, Text } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import * as React from "react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function MarketingPricing(props) {
   const { overrides, ...rest } = props;
@@ -39,7 +39,7 @@ export default function MarketingPricing(props) {
         {...getOverrideProps(overrides, "Frame 432")}
       >
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="600"
           color="rgba(4,52,149,1)"
@@ -60,7 +60,7 @@ export default function MarketingPricing(props) {
           {...getOverrideProps(overrides, "Pricing")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="32px"
           fontWeight="600"
           color="rgba(13,26,38,1)"
@@ -81,7 +81,7 @@ export default function MarketingPricing(props) {
           {...getOverrideProps(overrides, "Choose your plan")}
         ></Text>
         <Text
-          fontFamily=""
+          fontFamily="Inter"
           fontSize="16px"
           fontWeight="400"
           color="rgba(92,102,112,1)"
@@ -148,7 +148,7 @@ export default function MarketingPricing(props) {
             {...getOverrideProps(overrides, "Frame 42939393278")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(4,52,149,1)"
@@ -169,7 +169,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "Free plan")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="32px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -190,7 +190,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "$0/mo")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(92,102,112,1)"
@@ -254,7 +254,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -324,7 +324,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -394,7 +394,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -464,7 +464,7 @@ export default function MarketingPricing(props) {
             {...getOverrideProps(overrides, "Frame 42939393392")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(4,52,149,1)"
@@ -485,7 +485,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "Basic plan")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="32px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -506,7 +506,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "$20/mo")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(92,102,112,1)"
@@ -570,7 +570,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -640,7 +640,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -710,7 +710,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -780,7 +780,7 @@ export default function MarketingPricing(props) {
             {...getOverrideProps(overrides, "Frame 42939393608")}
           >
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(4,52,149,1)"
@@ -801,7 +801,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "Pro plan")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="32px"
               fontWeight="600"
               color="rgba(13,26,38,1)"
@@ -822,7 +822,7 @@ export default function MarketingPricing(props) {
               {...getOverrideProps(overrides, "$100/mo")}
             ></Text>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="600"
               color="rgba(92,102,112,1)"
@@ -886,7 +886,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -956,7 +956,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
@@ -1026,7 +1026,7 @@ export default function MarketingPricing(props) {
               ></MyIcon>
             </Flex>
             <Text
-              fontFamily=""
+              fontFamily="Inter"
               fontSize="16px"
               fontWeight="400"
               color="rgba(13,26,38,1)"
