@@ -199,7 +199,7 @@ function FavoriteNotes() {
             variation="primary"
             onClick={getFavoriteNotes}
           >
-            reload
+            Reload
           </Button>
         }
       </Flex>

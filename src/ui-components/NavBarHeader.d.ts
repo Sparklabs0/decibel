@@ -21,7 +21,7 @@ export declare type NavBarHeaderOverridesProps = {
     profile?: PrimitiveOverrideProps<ViewProps>;
 } & EscapeHatchProps;
 export declare type NavBarHeaderProps = React.PropsWithChildren<Partial<FlexProps> & {
-    frame321?: React.ReactNode;
+    profile?: React.ReactNode;
 } & {
     overrides?: NavBarHeaderOverridesProps | undefined | null;
 }>;

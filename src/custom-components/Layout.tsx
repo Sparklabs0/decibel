@@ -1,25 +1,26 @@
-import { NavBarHeader, NavBarSide } from "@/ui-components";
+import { NavBarHeader, NavBarSide } from '@/ui-components';
 import {
   Button,
   Card,
   Flex,
   Grid,
+  Text,
   useTheme,
   View,
   withAuthenticator,
-  Text,
-} from "@aws-amplify/ui-react";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { BiLeftArrow, BiLeftArrowAlt } from "react-icons/bi";
-import { BsBack } from "react-icons/bs";
-import { IoIosArrowBack } from "react-icons/io";
-import styles from "../styles/Layout.module.css";
-import NavItems from "./NavItems";
-import { AnimatePresence, motion } from "framer-motion";
-import { HiMiniBars2 } from "react-icons/hi2";
-import { MdOutlineClose } from "react-icons/md";
-import Image from "next/image";
+} from '@aws-amplify/ui-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { BiLeftArrow, BiLeftArrowAlt } from 'react-icons/bi';
+import { BsBack } from 'react-icons/bs';
+import { HiMiniBars2 } from 'react-icons/hi2';
+import { IoIosArrowBack } from 'react-icons/io';
+import { MdOutlineClose } from 'react-icons/md';
+import styles from '../styles/Layout.module.css';
+import NavItems from './NavItems';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { tokens } = useTheme();
@@ -28,7 +29,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     window.addEventListener(
-      "resize",
+      'resize',
       () => window.innerWidth >= 960 && setIsNavOpen(false)
     );
   }, []);
@@ -38,9 +39,9 @@ function Layout({ children }: { children: React.ReactNode }) {
     const handleRouteChange = () => {
       setIsNavOpen(false);
     };
-    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on('routeChangeStart', handleRouteChange);
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off('routeChangeStart', handleRouteChange);
     };
   }, [router.events]);
 
@@ -67,9 +68,9 @@ function Layout({ children }: { children: React.ReactNode }) {
           <motion.div
             className={styles.mobileNav}
             initial={{ height: 0 }}
-            animate={{ height: "auto" }}
+            animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
             <NavItems />
           </motion.div>
@@ -80,17 +81,18 @@ function Layout({ children }: { children: React.ReactNode }) {
         backgroundColor={tokens.colors.brand.secondary[10]}
         overrides={{
           NavBarSide: {
-            height: "100vh",
-            borderRadius: "0",
+            height: '100vh',
+            borderRadius: '0',
           },
           Button: {
-            borderRadius: "10px",
-            fontSize: "16px",  
-            marginLeft: "10px",          
+            borderRadius: '8px',
+            fontSize: '16px',
+            marginLeft: '10px',
+            backgroundColor: tokens.colors.red[60],
           },
-          "Wesley Peck": {
-            textTransform: "uppercase",
-            fontWeight: "bold",
+          'Wesley Peck': {
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
           },
         }}
         columnStart="1"
@@ -98,7 +100,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         position="fixed"
         left="0"
         overflow="auto"
-        width={{ base: "0px", medium: "300px" }}
+        width={{ base: '0px', medium: '300px' }}
         maxWidth="320px"
         className={styles.sidebar}
       >
@@ -110,16 +112,29 @@ function Layout({ children }: { children: React.ReactNode }) {
         position="fixed"
         backgroundColor={tokens.colors.neutral[20]}
         right="0"
-        height="80px"
+        height={80}
         width="calc(100vw - 300px)"
         left="300px"
         boxShadow="none"
+        overrides={{
+          profile: {
+            height: 'fit-content',
+            width: 'fit-content',
+          },
+        }}
+        profile={
+          <Link href={`/profile`}>
+            <Flex>
+              <Button>My Profile</Button>
+            </Flex>
+          </Link>
+        }
       />
       <View
         top="80px"
         bottom="0"
         right="0"
-        left={{ base: "0", medium: "300px" }}
+        left={{ base: '0', medium: '300px' }}
         position="fixed"
         className={styles.content}
         style={{
@@ -144,7 +159,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default withAuthenticator(Layout, {
-  loginMechanisms: ["email"],
-  signUpAttributes: ["name", "email"],
-  socialProviders: ["google"],
+  loginMechanisms: ['email'],
+  signUpAttributes: ['name', 'email'],
+  socialProviders: ['google'],
 });

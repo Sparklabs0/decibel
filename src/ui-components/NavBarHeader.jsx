@@ -5,12 +5,12 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Icon, View } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import * as React from "react";
 import MyIcon from "./MyIcon";
 export default function NavBarHeader(props) {
-  const { frame321, overrides, ...rest } = props;
+  const { profile, overrides, ...rest } = props;
   return (
     <Flex
       gap="40px"
@@ -166,6 +166,7 @@ export default function NavBarHeader(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
+        children={profile}
         {...getOverrideProps(overrides, "profile")}
       ></View>
     </Flex>

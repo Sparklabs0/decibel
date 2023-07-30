@@ -196,7 +196,7 @@ function Notes() {
       <Flex marginTop={48}>
         {
           <Button borderRadius="8px" variation="primary" onClick={getNotes}>
-            reload
+            Reload
           </Button>
         }
       </Flex>
