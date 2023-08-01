@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Text } from '@aws-amplify/ui-react';
+import { Button, Card, Flex, Image, Text } from '@aws-amplify/ui-react';
 import { MdClose } from 'react-icons/md';
 
 export default function Notification({ header, body, onClose }: any) {
@@ -6,7 +6,9 @@ export default function Notification({ header, body, onClose }: any) {
     <Card
       variation="elevated"
       maxWidth="300px"
-      padding={16}
+      padding={8}
+      paddingLeft={16}
+      paddingRight={16}
       position="fixed"
       right={40}
       top={100}
@@ -29,6 +31,7 @@ export default function Notification({ header, body, onClose }: any) {
         </Button>
       </Flex>
       <Text>{body.content}</Text>
+      <Image marginTop={8} alt="arrow" height={64} src="/arrow.png"></Image>
     </Card>
   );
 }

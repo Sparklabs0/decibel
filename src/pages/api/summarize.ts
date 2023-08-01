@@ -1,7 +1,14 @@
+import { Amplify, Auth, withSSRContext } from 'aws-amplify';
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
+import awsExports from '../../aws-exports';
+
+Amplify.configure({ ...awsExports });
+Auth.configure({ ...awsExports });
 
 const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { API, Auth } = withSSRContext({ req });
+
   try {
     const prompt = `
     You are given a machine-generated transcript of an audio file, and your task is to use the OpenAI model to create a valid JSON object for Editor.js.
@@ -60,6 +67,13 @@ const getNoteSummary = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       }
     );
+
+    const user = await Auth.currentAuthenticatedUser();
+    const is_authenticated = !!user;
+
+    if (!is_authenticated) {
+      return res.status(401).json({ error: 'User is not authenticated' });
+    }
 
     const summary = response.data.choices[0].text.trim();
 

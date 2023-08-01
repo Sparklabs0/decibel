@@ -4,7 +4,7 @@ import { studioTheme } from '@/ui-components/';
 import { AmplifyProvider, Authenticator, View } from '@aws-amplify/ui-react';
 import { withInAppMessaging } from '@aws-amplify/ui-react-notifications';
 import '@aws-amplify/ui-react/styles.css';
-import { Amplify, Notifications } from 'aws-amplify';
+import { Amplify, Auth, Notifications } from 'aws-amplify';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
@@ -13,7 +13,8 @@ import { Toaster } from 'react-hot-toast';
 import awsExports from '../aws-exports';
 import '../styles/globals.css';
 
-Amplify.configure({ ...awsExports });
+Amplify.configure({ ...awsExports, ssr: true });
+Auth.configure({ ...awsExports, ssr: true });
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

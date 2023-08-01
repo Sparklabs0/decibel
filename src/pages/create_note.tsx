@@ -223,7 +223,7 @@ function NoteAudioUploader() {
           acceptedFileTypes={['audio/*']}
           accessLevel="private"
           maxFileCount={1}
-          maxFileSize={5000000}
+          maxFileSize={2000000}
           // processFile={processFile}
           onFileRemove={({ key = '' }) => {
             setFiles((prevFiles) => {

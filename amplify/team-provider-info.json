@@ -12,14 +12,12 @@
       "AmplifyAppId": "d32r5lkmc00pvf"
     },
     "categories": {
-      "auth": {
-        "hackathon00": {}
-      },
-      "storage": {
-        "s3hackathon00storage8fb1b21c": {}
-      },
-      "api": {
-        "hackathon00": {}
+      "analytics": {
+        "Pinpoint": {
+          "Name": "hackathon00-staging",
+          "Id": "2634140aa82a4e14ac8eb51943858b26",
+          "Region": "ap-south-1"
+        }
       },
       "notifications": {
         "Pinpoint": {
@@ -28,16 +26,11 @@
           "Region": "ap-south-1"
         }
       },
-      "analytics": {
-        "Pinpoint": {
-          "Name": "hackathon00-staging",
-          "Id": "2634140aa82a4e14ac8eb51943858b26",
-          "Region": "ap-south-1"
-        },
+      "auth": {
         "hackathon00": {}
       },
-      "predictions": {
-        "transcription1fe080fb": {}
+      "storage": {
+        "s3hackathon00storage8fb1b21c": {}
       }
     }
   }

@@ -77,6 +77,10 @@ function Notes() {
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       });
 
+      allNotes?.data?.listNotes?.items.sort((a: any, b: any) =>
+        a.createdAt > b.createdAt ? -1 : 1
+      );
+
       setNotes(allNotes.data);
       // if (nextTokenRef.current !== allNotes?.data?.listNotes?.nextToken) {
       //   nextTokenRef.current = allNotes?.data?.listNotes?.nextToken as string;
@@ -136,7 +140,7 @@ function Notes() {
         label="Search"
         value={search}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          const term = e.target.value.trim();
+          const term = e.target.value;
           // nextTokenRef.current = undefined;
           setSearch(term);
         }}
