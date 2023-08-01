@@ -35,7 +35,7 @@ yarn-error.log*
 next-env.d.ts
 
 #amplify-do-not-edit-begin
-amplify/\#current-cloud-backend
+amplify/#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
 amplify/mock-data
