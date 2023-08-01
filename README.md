@@ -1,38 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Decibel - Convert Audio Files to Editable Notes
 
-## Getting Started
+Decibel is a powerful audio tool that allows you to effortlessly convert audio files into editable notes. With a user-friendly WSIWYG editor based on Editor.js, you can easily edit and customize your notes to perfection.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+-   Convert audio files to editable notes.
+-   Use the intuitive Editor.js-based WYSIWYG editor to edit and format your notes.
+-   Supports audio files under 60 seconds for the time being.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1.  **Convert Audio to Notes**: Upload your audio file to Decibel, and it will automatically convert it into editable notes using advanced algorithms.
+    
+2.  **Edit in WYSIWYG**: The Editor.js-based WYSIWYG editor allows you to modify your notes with ease. Add headings, paragraphs, lists, and more using a simple drag-and-drop interface.
+    
+3.  **Amplify Studio Integration**: Our UI components, designed in Figma through Amplify Studio, ensure an intuitive and visually pleasing experience.
+    
+4.  **Guided Note Creation**: Amplify Auth, Storage, and In-App Messaging collaborate with Amazon Pinpoint to guide users through the note creation process effectively.
+    
+5.  **Amplify UI React Library**: We leverage Amplify UI React library to streamline storage management and utilize native components for a more efficient application.
+    
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+    
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Note
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Please be aware that Decibel currently supports audio files under 60 seconds. Larger files may not be processed correctly.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Hackathon
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Decibel is created as part of the Amplify Hackathon on Hashnode. We are excited to showcase our innovative solution and are constantly striving to improve and expand the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributors
 
-## Deploy on Vercel
+-   Aryan Kumar - [GitHub](https://github.com/aryan877)
+-   Swaraj Bachu - [GitHub](https://github.com/swarajbachu)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License 
+
+----------
+
+We hope you enjoy using Decibel to convert your audio files into amazing notes! Feel free to contribute, share feedback, and spread the word about our project. Happy hacking! 🚀
